@@ -9,10 +9,12 @@ export default function Index() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        gap: 20,
       }}
     >
       <Text>This is Screen 1</Text>
-      <Button title="Go to Screen 2" onPress={() => router.navigate('details111')} />
+      {/* <Button title="Go to Screen 2" onPress={() => router.push("details")} /> */}
+      {/* <Button title="Delhi Metro Transit" onPress={() => router.push("transit")} /> */}
     </View>
   );
 }

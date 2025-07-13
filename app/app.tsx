@@ -12,8 +12,9 @@ export default function RootLayout() {
           fontWeight: 'bold',
         },
       }}>
-      <Stack.Screen name="details111" />
-      <Stack.Screen name="index"/>
+      <Stack.Screen name="index" />
+      <Stack.Screen name="details" />
+      <Stack.Screen name="transit" options={{ title: 'Delhi Metro' }} />
     </Stack>
   );
 }
