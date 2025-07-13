@@ -1,9 +1,14 @@
 import { useRouter } from "expo-router";
 import { useEffect } from "react";
 import { Button, Text, View } from "react-native";
+import graphGeneration from "./utils/graphGeneration/graphGeneration";
 
 export default function Index() {
   const router = useRouter();
+
+  const { stopMap, metroGraph, tripMap, weightedGraph } = graphGeneration();
+
+  console.log(weightedGraph);
 
 
   return (
