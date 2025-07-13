@@ -1,6 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, Platform, StatusBar, Text, View } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useScreenWrapperLogic } from './useScreenWrapperLogic';
 import { Colors } from '@/app/constants/colors/colors';
 import { LoadingComponent } from '@/app/components/loadingComponent';
@@ -20,7 +20,6 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
   screenName,
   children,
 }) => {
-  const insets = useSafeAreaInsets();
   useScreenWrapperLogic(screenName);
 
   return (
@@ -28,14 +27,12 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
       style={{
         flex: 1,
         backgroundColor: statusBarColor,
-        paddingTop: insets.top,
-        paddingBottom: insets.bottom,
       }}
     >
       <StatusBar
         backgroundColor={statusBarColor}
         barStyle={statusBarTheme}
-        translucent={Platform.OS === 'android'}
+        // translucent={Platform.OS === 'android'}
       />
       
       {loading ? (

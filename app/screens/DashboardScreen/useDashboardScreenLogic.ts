@@ -9,5 +9,6 @@ export function useDashboardScreenLogic() {
 
     return {
         loading,
+        route,
     };
 }

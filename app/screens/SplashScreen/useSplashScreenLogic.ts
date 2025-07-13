@@ -31,7 +31,7 @@ export function useSplashScreenLogic() {
 
   useEffect(() => {
     if (!loading) {
-      navigation.navigate('DashboardScreen');
+      navigation.replace('DashboardScreen');
     }
   }, [loading])
 
