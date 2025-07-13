@@ -1,3 +1,4 @@
+import { setStops } from '@/app/redux/features/stops/stops';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
@@ -11,20 +12,26 @@ export function useSplashScreenLogic() {
   const dispatch = useAppDispatch();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const { metroGraph, weightedGraph, trips } = useAppSelector(state => state.generatedGraphs);
+  const { metroGraph, weightedGraph, trips, } = useAppSelector(state => state.generatedGraphs);
+  const { stops } = useAppSelector(state => state.stops)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!Object.keys(metroGraph).length || !Object.keys(weightedGraph).length) {
+    if (!Object.keys(metroGraph).length || !Object.keys(weightedGraph).length || !Object.keys(stops).length) {
       const generated = graphGeneration();
+
       const metroGraphObj = Object.fromEntries(
         Array.from(generated.metroGraph.entries()).map(([k, v]) => [k, Array.from(v)])
       );
       const weightedGraphObj = Object.fromEntries(
         Array.from(generated.weightedGraph.entries()).map(([k, v]) => [k, Object.fromEntries(v)])
       );
+      const stopMapObj = Object.fromEntries(
+        Array.from(generated.stopMap.entries()).map(([k, v]) => [k, v])
+      )
       dispatch(setMetroGraph(metroGraphObj));
       dispatch(setWeightedGraph(weightedGraphObj));
+      dispatch(setStops(Object.values(stopMapObj)))
     }
     setLoading(false);
   }, [metroGraph, weightedGraph, trips, dispatch]);

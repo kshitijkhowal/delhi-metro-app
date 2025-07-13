@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: Dimensions.TEXT.lg,
-    fontFamily: Fonts.regular
+    fontFamily: Fonts.semiBold
   },
   subTitle: {
     lineHeight: 14,

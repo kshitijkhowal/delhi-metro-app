@@ -26,7 +26,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
       <View style={styles.leftSection}>
         {!noBackButton ? (
           <Pressable onPress={handleOnBack} style={styles.backButton}>
-            <BackArrowIcon strokeColor={theme === 'white' ? Colors.text.primary : Colors.text.inverse}/>
+            <BackArrowIcon strokeColor={theme === 'white' ? Colors.text.primary : Colors.text.inverse} size={22}/>
           </Pressable>
         ) : (
           <View style={styles.backButton} />

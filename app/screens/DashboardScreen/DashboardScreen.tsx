@@ -1,29 +1,28 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import styles from './styles';
-import { useDashboardScreenLogic } from './useDashboardScreenLogic';
-import ScreenWrapper from '@/app/wrapper/ScreenWrapper/ScreenWrapper';
 import { HeaderComponent } from '@/app/components/headerComponent';
+import ScreenWrapper from '@/app/wrapper/ScreenWrapper/ScreenWrapper';
+import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { Button, Text } from 'react-native';
+import { useDashboardScreenLogic } from './useDashboardScreenLogic';
 
 const DashboardScreen = () => {
-    const {
-        route,
-    } = useDashboardScreenLogic();
+    const { route } = useDashboardScreenLogic();
+    const navigation = useNavigation();
 
     return (
-        <ScreenWrapper
-            screenName={route.name}
-        >
+        <ScreenWrapper screenName={route.name}>
             <HeaderComponent
-                // noBackButton={true}
-                values={{
-                    title:'Home'
-                }}
+                values={{ title: 'Home' }}
                 iconMap={[]}
-                theme= 'primary'
-
+                theme='primary'
+                noBackButton={true}
             />
             <Text>Dashboard Screen</Text>
+            <Button
+                title="Go to Station Selection"
+                //@ts-ignore
+                onPress={() => navigation.navigate('StationSelectionScreen')}
+            />
         </ScreenWrapper>
     );
 };

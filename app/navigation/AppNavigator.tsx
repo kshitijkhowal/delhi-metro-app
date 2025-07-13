@@ -2,10 +2,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import DashboardScreen from '../screens/DashboardScreen';
 import SplashScreen from '../screens/SplashScreen';
+import StationPickerScreen from '../screens/StationPickerScreen';
+import StationSelectionScreen from '../screens/StationSelectionScreen';
 import type { RootStackParamList } from './types';
-import { NavigationContainer } from '@react-navigation/native';
-import { Provider } from 'react-redux';
-import { store } from '../redux/store';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -20,6 +19,16 @@ const AppNavigator = () => (
         <Stack.Screen
             name="DashboardScreen"
             component={DashboardScreen}
+            options={{ headerShown: false }}
+        />
+        <Stack.Screen
+            name="StationSelectionScreen"
+            component={StationSelectionScreen}
+            options={{ headerShown: false }}
+        />
+        <Stack.Screen
+            name="StationPickerScreen"
+            component={StationPickerScreen}
             options={{ headerShown: false }}
         />
         {/* Add more screens here */}
