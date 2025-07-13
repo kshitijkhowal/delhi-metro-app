@@ -1,7 +1,8 @@
 import * as SQLite from 'expo-sqlite';
 
-const db = await SQLite.openDatabaseAsync('delhi_metro.db');
+export async function getDb() {
+  return await SQLite.openDatabaseAsync('delhi_metro.db');
+}
 
-export default db;
 
-
+export default getDb;
