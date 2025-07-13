@@ -1,0 +1,51 @@
+import React from 'react';
+import { ActivityIndicator, Platform, StatusBar, Text, View } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useScreenWrapperLogic } from './useScreenWrapperLogic';
+import { Colors } from '@/app/constants/colors/colors';
+
+interface ScreenWrapperProps {
+  statusBarColor?: string;
+  statusBarTheme?: 'light-content' | 'dark-content';
+  loading?: boolean;
+  screenName?: string;
+  children: React.ReactNode;
+}
+
+const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
+  statusBarColor = Colors.background.primary,
+  statusBarTheme = 'dark-content',
+  loading = false,
+  screenName,
+  children,
+}) => {
+  const insets = useSafeAreaInsets();
+  useScreenWrapperLogic(screenName);
+
+  return (
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: statusBarColor,
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+      }}
+    >
+      <StatusBar
+        backgroundColor={statusBarColor}
+        barStyle={statusBarTheme}
+        translucent={Platform.OS === 'android'}
+      />
+      
+      {loading ? (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <ActivityIndicator size="large" color="#007AFF" />
+        </View>
+      ) : (
+        children
+      )}
+    </SafeAreaView>
+  );
+};
+
+export default ScreenWrapper;
