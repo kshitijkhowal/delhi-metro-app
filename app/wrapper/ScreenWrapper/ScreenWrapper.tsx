@@ -3,6 +3,7 @@ import { ActivityIndicator, Platform, StatusBar, Text, View } from 'react-native
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useScreenWrapperLogic } from './useScreenWrapperLogic';
 import { Colors } from '@/app/constants/colors/colors';
+import { LoadingComponent } from '@/app/components/loadingComponent';
 
 interface ScreenWrapperProps {
   statusBarColor?: string;
@@ -38,9 +39,7 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
       />
       
       {loading ? (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <ActivityIndicator size="large" color="#007AFF" />
-        </View>
+        <LoadingComponent message="Loading Metro Data..." />
       ) : (
         children
       )}
