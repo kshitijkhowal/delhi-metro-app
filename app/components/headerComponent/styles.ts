@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Colors } from '../../constants/colors/colors';
 import { Dimensions } from '../../constants/dimensions/dimensions';
+import { Fonts } from '@/app/constants/fonts/fonts';
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: Dimensions.TEXT.lg,
-    fontWeight: 'bold',
+    fontFamily: Fonts.regular
   },
   subTitle: {
     lineHeight: 14,

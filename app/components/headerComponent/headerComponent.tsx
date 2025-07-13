@@ -9,10 +9,7 @@ import { Colors } from '@/app/constants/colors/colors';
 
 const HeaderComponent: React.FC<HeaderComponentProps> = ({
   values,
-  actions,
   iconMap,
-  style = {},
-  transparent,
   onLayout,
   noBackButton = false,
   theme = 'white',
@@ -22,10 +19,10 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
     titleColor,
     subTitleColor,
     handleOnBack,
-  } = useHeaderComponentLogic({ actions, transparent, theme });
+  } = useHeaderComponentLogic({ theme });
 
   return (
-    <View style={[styles.headerContainer, { backgroundColor }, style]} onLayout={onLayout}>
+    <View style={[styles.headerContainer, { backgroundColor }]} onLayout={onLayout}>
       <View style={styles.leftSection}>
         {!noBackButton ? (
           <Pressable onPress={handleOnBack} style={styles.backButton}>

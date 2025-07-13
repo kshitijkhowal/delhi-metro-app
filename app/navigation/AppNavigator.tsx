@@ -10,25 +10,20 @@ import { store } from '../redux/store';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => (
-    <Provider store={store}>
 
-        <NavigationContainer>
-
-            <Stack.Navigator initialRouteName="SplashScreen">
-                <Stack.Screen
-                    name="SplashScreen"
-                    component={SplashScreen}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name="DashboardScreen"
-                    component={DashboardScreen}
-                    options={{ headerShown: false }}
-                />
-                {/* Add more screens here */}
-            </Stack.Navigator>
-        </NavigationContainer>
-    </Provider>
+    <Stack.Navigator initialRouteName="SplashScreen">
+        <Stack.Screen
+            name="SplashScreen"
+            component={SplashScreen}
+            options={{ headerShown: false }}
+        />
+        <Stack.Screen
+            name="DashboardScreen"
+            component={DashboardScreen}
+            options={{ headerShown: false }}
+        />
+        {/* Add more screens here */}
+    </Stack.Navigator>
 );
 
 export default AppNavigator; 
