@@ -28,11 +28,29 @@ export function useStationSelectionScreenLogic() {
         });
     };
 
+    const handleShowRoute = () => {
+        if (fromStation && toStation) {
+            // Navigate to route screen or handle route display
+            console.log('Show route from', fromStation.stop_name, 'to', toStation.stop_name);
+        }
+    };
+
+    // Button state logic
+    const isButtonDisabled = !fromStation || !toStation;
+    const buttonText = !fromStation 
+        ? 'Select Departure Station' 
+        : !toStation 
+        ? 'Select Destination Station' 
+        : 'Show Route';
+
     return {
         route,
         loading,
         fromStation,
         toStation,
         navigateToStationPicker,
+        handleShowRoute,
+        isButtonDisabled,
+        buttonText,
     };
 }

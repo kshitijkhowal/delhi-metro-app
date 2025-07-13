@@ -1,9 +1,12 @@
+import AppButton from '@/app/components/AppButton';
+import { AppButtonProps } from '@/app/components/AppButton/AppButton';
+import { LoadingComponent } from '@/app/components/loadingComponent';
+import { Colors } from '@/app/constants/colors/colors';
+import { Dimensions } from '@/app/constants/dimensions/dimensions';
 import React from 'react';
-import { ActivityIndicator, Platform, StatusBar, Text, View } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useScreenWrapperLogic } from './useScreenWrapperLogic';
-import { Colors } from '@/app/constants/colors/colors';
-import { LoadingComponent } from '@/app/components/loadingComponent';
 
 interface ScreenWrapperProps {
   statusBarColor?: string;
@@ -11,6 +14,7 @@ interface ScreenWrapperProps {
   loading?: boolean;
   screenName?: string;
   children: React.ReactNode;
+  bottomButtonProps?: AppButtonProps;
 }
 
 const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
@@ -19,6 +23,7 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
   loading = false,
   screenName,
   children,
+  bottomButtonProps,
 }) => {
   useScreenWrapperLogic(screenName);
 
@@ -39,6 +44,23 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
         <LoadingComponent message="Loading Metro Data..." />
       ) : (
         children
+      )}
+      {bottomButtonProps && (
+        <View
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: Colors.background.secondary,
+            paddingVertical: Dimensions.PADDING.lg,
+            paddingHorizontal: Dimensions.PADDING.lg,
+            borderTopWidth: Dimensions.BORDER_WIDTH.regular,
+            borderColor: Colors.border.primary,
+            zIndex: 100,
+          }}>
+          <AppButton {...bottomButtonProps} />
+        </View>
       )}
     </SafeAreaView>
   );

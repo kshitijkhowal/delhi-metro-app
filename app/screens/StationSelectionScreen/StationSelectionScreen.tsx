@@ -2,15 +2,37 @@ import AppTextInput from '@/app/components/AppTextInput';
 import { HeaderComponent } from '@/app/components/headerComponent';
 import ScreenWrapper from '@/app/wrapper/ScreenWrapper/ScreenWrapper';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import { useStationSelectionScreenLogic } from './useStationSelectionScreenLogic';
 
 const StationSelectionScreen = () => {
-    const { route, fromStation, toStation, navigateToStationPicker } = useStationSelectionScreenLogic();
+    const { 
+        route, 
+        fromStation, 
+        toStation, 
+        navigateToStationPicker, 
+        handleShowRoute, 
+        isButtonDisabled, 
+        buttonText 
+    } = useStationSelectionScreenLogic();
     
     return (
-        <ScreenWrapper screenName={route.name}>
+        <ScreenWrapper 
+            screenName={route.name}
+            bottomButtonProps={{
+                title: buttonText,
+                onPress: handleShowRoute,
+                disabled: isButtonDisabled,
+                type: 'primary',
+                elevation: {
+                    enabled: true,
+                },
+                haptic: {
+                    enabled: true,
+                }
+            }}
+        >
             <HeaderComponent
                 values={{ title: 'Select Stations' }}
                 iconMap={[]}
