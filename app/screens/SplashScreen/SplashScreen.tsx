@@ -8,7 +8,7 @@ const SplashScreen = () => {
   const { loading } = useSplashScreenLogic();
 
   return (
-    <ScreenWrapper loading={true} screenName="Splash Screen">
+    <ScreenWrapper loading={loading} screenName="Splash Screen">
       <View/>
     </ScreenWrapper>
   );
