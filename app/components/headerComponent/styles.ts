@@ -1,14 +1,13 @@
+import { Fonts } from '@/app/constants/fonts/fonts';
 import { StyleSheet } from 'react-native';
 import { Colors } from '../../constants/colors/colors';
 import { Dimensions } from '../../constants/dimensions/dimensions';
-import { Fonts } from '@/app/constants/fonts/fonts';
 
 const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
     height: 54,
     flexDirection: 'row',
-    paddingRight: Dimensions.PADDING.lg,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
@@ -41,6 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
+    padding: Dimensions.PADDING.md
   },
   iconButton: {
     alignContent: 'center',
@@ -77,6 +77,31 @@ const styles = StyleSheet.create({
     fontSize: 9,
     color: Colors.text.inverse,
     fontWeight: 'bold',
+  },
+  // Animated search bar overlay
+  searchOverlay: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width: '100%',
+    height: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.background.primary,
+    zIndex: 10,
+  },
+  searchInput: {
+    flex: 1,
+    height: 40,
+  },
+  searchBackButton: {
+    marginRight: 0,
+    paddingHorizontal: Dimensions.PADDING.lg,
+    paddingVertical: Dimensions.PADDING.sm,
+  },
+  searchIcon: {
+    marginLeft: Dimensions.MARGIN.xs,
+    padding: Dimensions.PADDING.sm,
   },
 });
 

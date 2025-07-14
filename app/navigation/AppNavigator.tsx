@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import DashboardScreen from '../screens/DashboardScreen';
+import RouteListScreen from '../screens/RouteListScreen';
 import SplashScreen from '../screens/SplashScreen';
 import StationPickerScreen from '../screens/StationPickerScreen';
 import StationSelectionScreen from '../screens/StationSelectionScreen';
@@ -29,6 +30,11 @@ const AppNavigator = () => (
         <Stack.Screen
             name="StationPickerScreen"
             component={StationPickerScreen}
+            options={{ headerShown: false }}
+        />
+        <Stack.Screen
+            name="RouteListScreen"
+            component={RouteListScreen}
             options={{ headerShown: false }}
         />
         {/* Add more screens here */}

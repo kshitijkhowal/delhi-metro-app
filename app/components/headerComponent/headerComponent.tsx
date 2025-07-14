@@ -1,11 +1,15 @@
+import BackArrowIcon from '@/app/assets/icons/arrowIcons/backArrowIcon';
+import MagnifineGlassIcon from '@/app/assets/icons/searchIcons/magnifineGlassIcon';
+import AppTextInput from '@/app/components/AppTextInput';
+import { Colors } from '@/app/constants/colors/colors';
 import React from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { Dimensions } from '../../constants/dimensions/dimensions';
 import styles from './styles';
 import type { HeaderComponentProps, HeaderIconMapItem } from './types';
 import { useHeaderComponentLogic } from './useheaderComponentLogic';
-import BackArrowIcon from '@/app/assets/icons/arrowIcons/backArrowIcon';
-import { Colors } from '@/app/constants/colors/colors';
+
 
 const HeaderComponent: React.FC<HeaderComponentProps> = ({
   values,
@@ -13,16 +17,28 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
   onLayout,
   noBackButton = false,
   theme = 'white',
+  enableSearch = false,
+  onSearchChange,
+  onSearchOpen,
+  onSearchClose,
+  searchPlaceholder = 'Search...',
+  searchValue = '',
 }) => {
   const {
     backgroundColor,
     titleColor,
     subTitleColor,
     handleOnBack,
-  } = useHeaderComponentLogic({ theme });
+    searchActive,
+    openSearch,
+    closeSearch,
+    inputRef,
+    animatedSearchStyle,
+    HeaderOnLayout,
+  } = useHeaderComponentLogic({ theme, enableSearch, onSearchOpen, onSearchClose, onLayout });
 
   return (
-    <View style={[styles.headerContainer, { backgroundColor }]} onLayout={onLayout}>
+    <View style={[styles.headerContainer, { backgroundColor }]} onLayout={HeaderOnLayout}>
       <View style={styles.leftSection}>
         {!noBackButton ? (
           <Pressable onPress={handleOnBack} style={styles.backButton}>
@@ -44,7 +60,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
         {iconMap.map((item: HeaderIconMapItem, index) => (
           <Pressable
             key={index.toString()}
-            style={[styles.iconButton, { marginRight: index === iconMap.length - 1 ? 0 : Dimensions.MARGIN.xs }]}
+            style={[styles.iconButton, { marginRight: index === iconMap.length - 1 && !enableSearch ? 0 : Dimensions.MARGIN.xs }]}
             onPress={item.onPress}
           >
             {item.imageFile ? (
@@ -68,7 +84,29 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
             )}
           </Pressable>
         ))}
+        {/* Search icon */}
+        {enableSearch && (
+          <Pressable style={styles.iconButton} onPress={openSearch}>
+            <MagnifineGlassIcon strokeColor={theme === 'white' ? Colors.text.primary : Colors.text.inverse} size={22} rotation={270}/>
+          </Pressable>
+        )}
       </View>
+      {/* Animated search bar overlay */}
+      {enableSearch && searchActive && (
+        <Animated.View style={[styles.searchOverlay, animatedSearchStyle, {backgroundColor}]}>
+          <Pressable style={styles.searchBackButton} onPress={closeSearch}>
+            <BackArrowIcon strokeColor={theme === 'white' ? Colors.text.primary : Colors.text.inverse} size={22} rotation={180}/>
+          </Pressable>
+          <AppTextInput
+            value={searchValue}
+            onChangeText={onSearchChange}
+            placeholder={searchPlaceholder}
+            style={styles.searchInput}
+            ref={inputRef}
+            returnKeyType="search"
+          />
+        </Animated.View>
+      )}
     </View>
   );
 };

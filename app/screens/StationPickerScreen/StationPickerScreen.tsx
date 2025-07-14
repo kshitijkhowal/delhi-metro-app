@@ -31,8 +31,8 @@ const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
       activeOpacity={0.7}
     >
       <Text style={styles.stationName}>{item.stop_name}</Text>
-      {item.stop_code && (
-        <Text style={styles.stationCode}>Code: {item.stop_code}</Text>
+      {item.stop_id && (
+        <Text style={styles.stationCode}>Code: {item.stop_id}</Text>
       )}
     </TouchableOpacity>
   );
@@ -64,6 +64,7 @@ const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
         theme="primary"
         noBackButton={false}
         actions={{ onLeftPress: handleBackPress }}
+        enableSearch={true}
       />
       
       <View style={styles.searchContainer}>

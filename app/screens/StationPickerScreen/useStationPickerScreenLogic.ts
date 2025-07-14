@@ -7,8 +7,6 @@ import { StationPickerScreenParams } from './types';
 export function useStationPickerScreenLogic(route: { params: StationPickerScreenParams }) {
   const navigation = useNavigation();
   const { stops } = useAppSelector(state => state.stops);
-
-  console.log('[stopssss]', stops)
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredStops = useMemo(() => {

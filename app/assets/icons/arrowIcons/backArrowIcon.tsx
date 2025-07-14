@@ -5,13 +5,15 @@ import Svg, { Path, SvgProps } from "react-native-svg";
 interface BackArrowIconProps extends SvgProps {
   size?: number;
   strokeColor?: string;
+  rotation?: number;
 }
 
-const BackArrowIcon = ({ size = 24, strokeColor = Colors.text.primary , ...props }: BackArrowIconProps) => (
+const BackArrowIcon = ({ size = 24, strokeColor = Colors.text.primary, rotation = 0, ...props }: BackArrowIconProps) => (
   <Svg
     width={size}
     height={size}
     viewBox="0 0 1024 1024"
+    style={[props.style, rotation ? { transform: [{ rotate: `${rotation}deg` }] } : undefined]}
     {...props}
   >
     <Path

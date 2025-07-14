@@ -30,8 +30,10 @@ export function useStationSelectionScreenLogic() {
 
     const handleShowRoute = () => {
         if (fromStation && toStation) {
-            // Navigate to route screen or handle route display
-            console.log('Show route from', fromStation.stop_name, 'to', toStation.stop_name);
+            navigation.navigate('RouteListScreen', {
+                fromStation,
+                toStation,
+            });
         }
     };
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import type BackArrowIcon from '../../assets/icons/arrowIcons/backArrowIcon';
 
 export interface HeaderIconMapItem {
   imageFile?: React.ReactNode;
@@ -24,4 +23,11 @@ export interface HeaderComponentProps {
   onLayout?: () => void;
   noBackButton?: boolean;
   theme?: 'white' | 'primary';
+  // Search bar props
+  enableSearch?: boolean;
+  onSearchChange?: (text: string) => void;
+  onSearchOpen?: () => void;
+  onSearchClose?: () => void;
+  searchPlaceholder?: string;
+  searchValue?: string;
 }
