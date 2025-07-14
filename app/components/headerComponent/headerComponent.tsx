@@ -3,7 +3,7 @@ import MagnifineGlassIcon from '@/app/assets/icons/searchIcons/magnifineGlassIco
 import AppTextInput from '@/app/components/AppTextInput';
 import { Colors } from '@/app/constants/colors/colors';
 import React from 'react';
-import { Image, Pressable, Text, View } from 'react-native';
+import { Image, Pressable, Text, TextInput, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { Dimensions } from '../../constants/dimensions/dimensions';
 import styles from './styles';
@@ -101,7 +101,15 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
             value={searchValue}
             onChangeText={onSearchChange}
             placeholder={searchPlaceholder}
-            style={styles.searchInput}
+            style={[
+              styles.searchInput,
+              {
+                borderColor: theme === 'primary' ? Colors.text.inverse : Colors.border.input,
+                borderWidth: Dimensions.BORDER_WIDTH.thin,
+                color: theme === 'primary' ? Colors.text.inverse : Colors.text.primary,
+              },
+            ]}
+            placeholderTextColor={theme === 'primary' ? Colors.text.inverse : Colors.text.primary}
             ref={inputRef}
             returnKeyType="search"
           />

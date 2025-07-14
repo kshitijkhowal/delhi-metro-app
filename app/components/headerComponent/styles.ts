@@ -89,14 +89,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.background.primary,
     zIndex: 10,
+    paddingLeft: Dimensions.PADDING.lg,
+    paddingRight: Dimensions.PADDING.lg,
   },
   searchInput: {
-    flex: 1,
-    height: 40,
+    marginTop: 1,
+    marginLeft: Dimensions.MARGIN.xs,
+    marginRight: 0,
   },
   searchBackButton: {
-    marginRight: 0,
-    paddingHorizontal: Dimensions.PADDING.lg,
     paddingVertical: Dimensions.PADDING.sm,
   },
   searchIcon: {

@@ -48,7 +48,7 @@ export function useHeaderComponentLogic({
   }, [searchActive, headerWidth.value]);
 
   const openSearch = useCallback(() => {
-    if (headerWidth.value === 0) return; // Wait for layout
+    if (headerWidth.value === 0) return;
     setSearchActive(true);
     onSearchOpen && onSearchOpen();
   }, [onSearchOpen, headerWidth.value]);

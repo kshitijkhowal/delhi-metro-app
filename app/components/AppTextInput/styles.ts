@@ -6,11 +6,9 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginBottom: Dimensions.MARGIN.sm,
   },
   input: {
     width: '100%',
-    padding: Dimensions.PADDING.md,
     borderRadius: Dimensions.BORDER_RADIUS.md,
     borderWidth: Dimensions.BORDER_WIDTH.regular,
     borderColor: Colors.border.input,
@@ -26,6 +24,5 @@ export const styles = StyleSheet.create({
     color: Colors.status.error.default,
     fontFamily: Fonts.regular,
     fontSize: Dimensions.TEXT.xs,
-    marginTop: Dimensions.MARGIN.xxs,
   },
 });
