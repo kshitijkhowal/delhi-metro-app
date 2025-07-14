@@ -93,9 +93,10 @@ const styles = StyleSheet.create({
     paddingRight: Dimensions.PADDING.lg,
   },
   searchInput: {
-    marginTop: 1,
     marginLeft: Dimensions.MARGIN.xs,
-    marginRight: 0,
+    borderWidth: Dimensions.BORDER_WIDTH.thin,
+    borderRadius: Dimensions.BORDER_RADIUS.sm,
+
   },
   searchBackButton: {
     paddingVertical: Dimensions.PADDING.sm,

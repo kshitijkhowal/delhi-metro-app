@@ -22,7 +22,6 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
   onSearchOpen,
   onSearchClose,
   searchPlaceholder = 'Search...',
-  searchValue = '',
 }) => {
   const {
     backgroundColor,
@@ -98,20 +97,18 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
             <BackArrowIcon strokeColor={theme === 'white' ? Colors.text.primary : Colors.text.inverse} size={22} rotation={180}/>
           </Pressable>
           <AppTextInput
-            value={searchValue}
+            ref={inputRef}
             onChangeText={onSearchChange}
             placeholder={searchPlaceholder}
+            placeholderTextColor={theme === 'primary' ? Colors.text.inverse : Colors.text.primary}
+            returnKeyType="search"
             style={[
               styles.searchInput,
               {
                 borderColor: theme === 'primary' ? Colors.text.inverse : Colors.border.input,
-                borderWidth: Dimensions.BORDER_WIDTH.thin,
                 color: theme === 'primary' ? Colors.text.inverse : Colors.text.primary,
               },
             ]}
-            placeholderTextColor={theme === 'primary' ? Colors.text.inverse : Colors.text.primary}
-            ref={inputRef}
-            returnKeyType="search"
           />
         </Animated.View>
       )}

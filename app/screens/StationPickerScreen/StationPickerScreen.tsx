@@ -1,18 +1,17 @@
+import ScreenWrapper from '@/app/wrapper/ScreenWrapper/ScreenWrapper';
 import React from 'react';
 import {
-    ActivityIndicator,
-    FlatList,
-    Text,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import AppTextInput from '../../components/AppTextInput';
 import { HeaderComponent } from '../../components/headerComponent';
 import { Stop } from '../../types/gtfs.types';
 import { styles } from './styles';
 import { StationPickerScreenProps } from './types';
 import { useStationPickerScreenLogic } from './useStationPickerScreenLogic';
-import ScreenWrapper from '@/app/wrapper/ScreenWrapper/ScreenWrapper';
 
 const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
   const {
@@ -65,17 +64,10 @@ const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
         noBackButton={false}
         actions={{ onLeftPress: handleBackPress }}
         enableSearch={true}
+        searchValue={searchQuery}
+        onSearchChange={setSearchQuery}
+        searchPlaceholder="Search stations..."
       />
-      
-      <View style={styles.searchContainer}>
-        <AppTextInput
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          placeholder="Search stations..."
-          autoCapitalize="words"
-          autoCorrect={false}
-        />
-      </View>
 
       <FlatList
         style={styles.listContainer}
