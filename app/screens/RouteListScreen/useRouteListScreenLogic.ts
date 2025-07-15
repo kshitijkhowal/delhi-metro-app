@@ -3,101 +3,21 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useMemo, useState } from 'react';
 import { RootStackParamList } from '../../navigation/types';
 import { useAppSelector } from '../../redux/hook';
-import { RouteListScreenParams, RouteSegment } from './types';
+import { Stop } from '../../types/gtfs.types';
+import { bfs } from '../../utils/Algorithms/bfs';
+import { RouteListScreenParams } from './types';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
-interface DijkstraResult {
-  path: string[];
-  distance: number;
-}
-
-// Dijkstra's algorithm implementation
-function dijkstra(
-  graph: Map<string, Map<string, number>>,
-  start: string,
-  end: string
-): DijkstraResult | null {
-  const distances = new Map<string, number>();
-  const previous = new Map<string, string | null>();
-  const visited = new Set<string>();
-  const queue: string[] = [];
-
-  // Initialize distances
-  for (const node of graph.keys()) {
-    distances.set(node, Infinity);
-    queue.push(node);
-  }
-  distances.set(start, 0);
-
-  while (queue.length > 0) {
-    // Find node with minimum distance
-    let minNode = queue[0];
-    let minDistance = distances.get(minNode) || Infinity;
-    
-    for (const node of queue) {
-      const distance = distances.get(node) || Infinity;
-      if (distance < minDistance) {
-        minDistance = distance;
-        minNode = node;
-      }
-    }
-
-    if (minDistance === Infinity) break;
-
-    // Remove from queue
-    const index = queue.indexOf(minNode);
-    queue.splice(index, 1);
-    visited.add(minNode);
-
-    // If we reached the destination
-    if (minNode === end) break;
-
-    // Update distances to neighbors
-    const neighbors = graph.get(minNode);
-    if (neighbors) {
-      for (const [neighbor, weight] of neighbors) {
-        if (!visited.has(neighbor)) {
-          const newDistance = minDistance + weight;
-          const currentDistance = distances.get(neighbor) || Infinity;
-          
-          if (newDistance < currentDistance) {
-            distances.set(neighbor, newDistance);
-            previous.set(neighbor, minNode);
-          }
-        }
-      }
-    }
-  }
-
-  // Reconstruct path
-  const path: string[] = [];
-  let current: string | null = end;
-  
-  while (current !== null) {
-    path.unshift(current);
-    const prev = previous.get(current);
-    current = prev !== undefined ? prev : null;
-  }
-
-  const finalDistance = distances.get(end);
-  if (finalDistance === Infinity || finalDistance === undefined) {
-    return null;
-  }
-
-  return {
-    path,
-    distance: finalDistance,
-  };
-}
 
 export function useRouteListScreenLogic(route: { params: RouteListScreenParams }) {
   const navigation = useNavigation<NavigationProp>();
   const { weightedGraph } = useAppSelector(state => state.generatedGraphs);
   const { stops } = useAppSelector(state => state.stops);
-  const [routeSegments, setRouteSegments] = useState<RouteSegment[]>([]);
+  const [routeSegments, setRouteSegments] = useState<Stop[]>([]);
   const [totalDuration, setTotalDuration] = useState<number>(0);
+  const [totalStops, setTotalStops] = useState<number>(0);
   const [loading, setLoading] = useState(true);
+
 
   const { fromStation, toStation } = route.params;
 
@@ -122,40 +42,26 @@ export function useRouteListScreenLogic(route: { params: RouteListScreenParams }
     }
 
     setLoading(true);
-    
+
     try {
-      const result = dijkstra(
+      const path = bfs(
         graphMap,
         String(fromStation.stop_id),
         String(toStation.stop_id)
       );
 
-      if (result) {
-        // Convert path to route segments
-        const segments: RouteSegment[] = [];
-        for (let i = 0; i < result.path.length - 1; i++) {
-          const fromStopId = result.path[i];
-          const toStopId = result.path[i + 1];
-          
-          const fromStop = stops.find(s => String(s.stop_id) === fromStopId);
-          const toStop = stops.find(s => String(s.stop_id) === toStopId);
-          
-          if (fromStop && toStop) {
-            const duration = graphMap.get(fromStopId)?.get(toStopId) || 0;
-            segments.push({
-              fromStop,
-              toStop,
-              lineColors: [], // TODO: Get line colors from graph data
-              duration,
-            });
-          }
-        }
-        
-        setRouteSegments(segments);
-        setTotalDuration(result.distance);
+      if (path) {
+        const stopsPath: Stop[] = path
+          .map(stop_id => stops.find(stop => String(stop.stop_id) === stop_id))
+          .filter((s): s is Stop => !!s);
+
+        setRouteSegments(stopsPath);
+        setTotalDuration(stopsPath.length);
+        setTotalStops(stopsPath.length);
       } else {
         setRouteSegments([]);
         setTotalDuration(0);
+        setTotalStops(0);
       }
     } catch (error) {
       console.error('Error finding route:', error);
@@ -173,7 +79,7 @@ export function useRouteListScreenLogic(route: { params: RouteListScreenParams }
   const formatDuration = (seconds: number): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
-    
+
     if (hours > 0) {
       return `${hours}h ${minutes}m`;
     }
@@ -183,6 +89,7 @@ export function useRouteListScreenLogic(route: { params: RouteListScreenParams }
   return {
     routeSegments,
     totalDuration,
+    totalStops,
     loading,
     handleBackPress,
     formatDuration,

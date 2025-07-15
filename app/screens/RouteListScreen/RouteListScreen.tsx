@@ -1,19 +1,21 @@
 import React from 'react';
 import {
-    ActivityIndicator,
-    FlatList,
-    Text,
-    View,
+  ActivityIndicator,
+  FlatList,
+  Text,
+  View,
 } from 'react-native';
 import { HeaderComponent } from '../../components/headerComponent';
+import { Stop } from '../../types/gtfs.types';
 import { styles } from './styles';
-import { RouteListScreenProps, RouteSegment } from './types';
+import { RouteListScreenProps } from './types';
 import { useRouteListScreenLogic } from './useRouteListScreenLogic';
 
 const RouteListScreen: React.FC<RouteListScreenProps> = ({ route }) => {
   const {
     routeSegments,
     totalDuration,
+    totalStops,
     loading,
     handleBackPress,
     formatDuration,
@@ -21,22 +23,23 @@ const RouteListScreen: React.FC<RouteListScreenProps> = ({ route }) => {
     toStation,
   } = useRouteListScreenLogic(route);
 
-  const renderRouteSegment = ({ item, index }: { item: RouteSegment; index: number }) => (
+  const renderRouteStop = ({ item, index }: { item: Stop; index: number }) => (
     <View style={styles.segmentItem}>
       <View style={styles.segmentHeader}>
         <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
           <View style={styles.lineIndicator} />
           <Text style={styles.stationName}>
-            {index === 0 ? fromStation.stop_name : item.fromStop.stop_name}
+            {item.stop_name}
           </Text>
         </View>
-        <Text style={styles.duration}>
-          {formatDuration(item.duration)}
-        </Text>
+        {/* No duration for BFS/Stop */}
       </View>
-      <Text style={styles.routeSubtitle}>
-        to {item.toStop.stop_name}
-      </Text>
+      {/* Show next stop if not last */}
+      {index < routeSegments.length - 1 && (
+        <Text style={styles.routeSubtitle}>
+          to {routeSegments[index + 1].stop_name}
+        </Text>
+      )}
     </View>
   );
 
@@ -71,7 +74,7 @@ const RouteListScreen: React.FC<RouteListScreenProps> = ({ route }) => {
             {fromStation.stop_name} → {toStation.stop_name}
           </Text>
           <Text style={styles.routeSubtitle}>
-            {routeSegments.length} segments
+            Total Stops: {totalStops}
           </Text>
         </View>
         
@@ -88,8 +91,8 @@ const RouteListScreen: React.FC<RouteListScreenProps> = ({ route }) => {
         <FlatList
           style={styles.listContainer}
           data={routeSegments}
-          renderItem={renderRouteSegment}
-          keyExtractor={(item, index) => `${item.fromStop.stop_id}-${item.toStop.stop_id}-${index}`}
+          renderItem={renderRouteStop}
+          keyExtractor={(item, index) => `${item.stop_id}-${index}`}
           ListEmptyComponent={renderEmptyList}
           showsVerticalScrollIndicator={false}
         />

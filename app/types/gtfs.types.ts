@@ -1,5 +1,5 @@
 export interface Stop {
-    stop_id: number;
+    stop_id: string;
     stop_code: string | null;
     stop_name: string;
     stop_desc: string | null;
