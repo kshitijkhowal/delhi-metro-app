@@ -5,7 +5,7 @@ import { Fonts } from '../../constants/fonts/fonts';
 
 export const styles = StyleSheet.create({
     primaryContainer: {
-        backgroundColor: Colors.theme.primary.default,
+        backgroundColor: Colors.theme.secondary,
         height: Dimensions.PADDING.xl*2,
         width: '100%', 
         justifyContent: 'center',
@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     primaryText: {
         fontFamily: Fonts.medium,
         fontSize: Dimensions.TEXT.md,
-        color: Colors.text.inverse,
+        color: Colors.text.primary,
     },
     secondaryContainer: {
         backgroundColor: Colors.background.primary,

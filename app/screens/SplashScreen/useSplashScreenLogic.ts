@@ -17,7 +17,7 @@ export function useSplashScreenLogic() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (1 || !Object.keys(metroGraph).length || !Object.keys(weightedGraph).length || !Object.keys(stops).length) {
+    if (!Object.keys(metroGraph).length || !Object.keys(weightedGraph).length || !Object.keys(stops).length) {
       const generated = graphGeneration();
 
       const metroGraphObj = Object.fromEntries(

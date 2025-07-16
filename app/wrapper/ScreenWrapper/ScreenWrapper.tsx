@@ -11,6 +11,7 @@ import { useScreenWrapperLogic } from './useScreenWrapperLogic';
 interface ScreenWrapperProps {
   statusBarColor?: string;
   statusBarTheme?: 'light-content' | 'dark-content';
+  backgroundColor?: string;
   loading?: boolean;
   screenName?: string;
   children: React.ReactNode;
@@ -20,6 +21,7 @@ interface ScreenWrapperProps {
 const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
   statusBarColor = Colors.background.primary,
   statusBarTheme = 'dark-content',
+  backgroundColor = Colors.background.primary,
   loading = false,
   screenName,
   children,
@@ -31,7 +33,7 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: statusBarColor,
+        backgroundColor: backgroundColor,
       }}
     >
       <StatusBar

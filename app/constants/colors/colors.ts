@@ -1,19 +1,19 @@
 import { MetroLineColorsMap } from '../../types/color.types';
 
 export const ThemeColors = {
-    primary: {
-      default: '#473391',
-      dark: '#6147FF',
-      light: '#885FEC',
-      lighter: '#F7F4FF',
-      90: '#473391DD',
-      60: '#47339160',
-      20: '#6147FF',
-      10: '#47339110',
-    },
-    secondary: '#473391',
-    gold: '#FFD700',
-  } as const;
+  primary: {
+    default: '#000000', // Pitch black
+    dark: '#141518',
+    light: '#202125',
+    lighter: '#ffffff',
+    90: '#000000E6',
+    60: '#00000099',
+    20: '#20212533',
+    10: '#1415181A',
+  },
+  secondary: '#f2c800',
+  gold: '#FFD700',
+} as const;
   
   // Status Colors
   export const StatusColors = {
@@ -43,9 +43,9 @@ export const ThemeColors = {
   
   // Background Colors
   export const BackgroundColors = {
-    primary: '#ffffff',
-    secondary: '#F5F5F5',
-    tertiary: '#EBF5FF',
+    primary: '#000000',
+    secondary: '#141518',
+    tertiary: '#202125',
     card: '#ffffff',
     search: '#EBF5FF',
     profile: '#BAC9FF',

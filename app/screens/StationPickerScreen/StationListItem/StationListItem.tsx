@@ -1,8 +1,9 @@
+import { metroLineColorsMap } from '@/app/constants/colors/colors';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { metroLineColorsMap } from '../../../constants/colors/colors';
+import { Text, View } from 'react-native';
+import AppView from '../../../components/AppView';
 import { Stop } from '../../../types/gtfs.types';
-import * as styles from './styles';
+import {styles} from './styles';
 
 export interface StationListItemProps {
   stop: Stop;
@@ -11,23 +12,27 @@ export interface StationListItemProps {
 
 const StationListItem: React.FC<StationListItemProps> = ({ stop, onPress }) => {
   return (
-    <TouchableOpacity style={styles.styles.container} onPress={() => onPress(stop)} activeOpacity={0.7}>
-      <View style={styles.styles.infoContainer}>
-        <Text style={styles.styles.stationName}>{stop.stop_name}</Text>
-        {stop.hindi_name && <Text style={styles.styles.hindiName}>{stop.hindi_name}</Text>}
-        {stop.stop_id && <Text style={styles.styles.stationCode}>Code: {stop.stop_id}</Text>}
+    <AppView
+      onPress={() => onPress(stop)}
+      style={styles.container}
+      elevation={{ enabled: true }}
+    >
+      <View style={[styles.infoContainer]}>
+        <Text style={styles.stationName}>{stop.stop_name}</Text>
+        {stop.hindi_name && <Text style={styles.hindiName}>{stop.hindi_name}</Text>}
+        {stop.stop_id && <Text style={styles.stationCode}>Code: {stop.stop_id}</Text>}
       </View>
-      <View style={styles.styles.linesContainer}>
+      <View style={styles.linesContainer}>
         {stop.lines?.map((line) => {
           const lineColor = metroLineColorsMap[line];
           return (
-            <View key={line} style={[styles.styles.lineChip, { backgroundColor: lineColor?.color ?? 'black' }]}> 
-              <Text style={styles.styles.lineChipText}>{lineColor?.displayName ?? 'helloooo'}</Text>
+            <View key={line} style={[styles.lineChip, { backgroundColor: lineColor?.color ?? 'black' }]}> 
+              <Text style={styles.lineChipText}>{lineColor?.displayName ?? 'helloooo'}</Text>
             </View>
           );
         })}
       </View>
-    </TouchableOpacity>
+    </AppView>
   );
 };
 

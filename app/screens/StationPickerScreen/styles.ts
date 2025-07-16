@@ -6,7 +6,6 @@ import { Fonts } from '../../constants/fonts/fonts';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background.primary,
   },
   searchContainer: {
     padding: Dimensions.PADDING.md,

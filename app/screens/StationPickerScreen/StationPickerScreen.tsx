@@ -12,6 +12,7 @@ import StationListItem from './StationListItem';
 import { styles } from './styles';
 import { StationPickerScreenProps } from './types';
 import { useStationPickerScreenLogic } from './useStationPickerScreenLogic';
+import { Colors } from '@/app/constants/colors/colors';
 
 const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
   const {
@@ -45,7 +46,10 @@ const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
   );
 
   return (
-    <ScreenWrapper>
+    <ScreenWrapper
+      screenName='StationPickerScreen'
+      backgroundColor={Colors.background.earn}
+    >
 
     <View style={styles.container}>
       <HeaderComponent
