@@ -1,3 +1,5 @@
+import { MetroLineColorsMap } from '../../types/color.types';
+
 export const ThemeColors = {
     primary: {
       default: '#473391',
@@ -110,4 +112,16 @@ export const ThemeColors = {
     accent: AccentColors,
     metro: MetroLineColors,
 } as const;
+
+export const metroLineColorsMap: MetroLineColorsMap = {
+  Red: { id: 'Red', displayName: 'Red Line', color: '#D32F2F' },
+  Pink: { id: 'Pink', displayName: 'Pink Line', color: '#C2185B' },
+  Yellow: { id: 'Yellow', displayName: 'Yellow Line', color: '#FBC02D' },
+  Violet: { id: 'Violet', displayName: 'Violet Line', color: '#7B1FA2' },
+  Green: { id: 'Green', displayName: 'Green Line', color: '#388E3C' },
+  Blue: { id: 'Blue', displayName: 'Blue Line', color: '#1976D2' },
+  Orange: { id: 'Orange', displayName: 'Orange Line', color: '#F57C00' },
+  Magenta: { id: 'Magenta', displayName: 'Magenta Line', color: '#8E24AA' },
+  Aqua: { id: 'Aqua', displayName: 'Aqua Line', color: '#00BCD4' }, // Picked a standard aqua color
+};
   

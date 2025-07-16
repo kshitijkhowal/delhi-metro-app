@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from '../../redux/hook';
 import { Stop } from '../../types/gtfs.types';
 import { StationPickerScreenParams } from './types';
@@ -30,6 +30,10 @@ export function useStationPickerScreenLogic(route: { params: StationPickerScreen
   const handleBackPress = () => {
     navigation.goBack();
   };
+
+  useEffect(() => {
+
+  },[])
 
   return {
     searchQuery,

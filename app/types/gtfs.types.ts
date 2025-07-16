@@ -1,3 +1,5 @@
+import { MetroLineColorId } from './color.types';
+
 export interface Stop {
     stop_id: string;
     stop_code: string | null;
@@ -5,7 +7,7 @@ export interface Stop {
     stop_desc: string | null;
     stop_lat: number;
     stop_lon: number;
-    lines?: string[];
+    lines?: MetroLineColorId[];
     synonyms?: string[];
     hindi_name?: string;
   }
