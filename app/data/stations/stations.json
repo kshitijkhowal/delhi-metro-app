@@ -1522,7 +1522,8 @@
             "hindi": "द्वारका"
         },
         "lines": [
-            "Blue"
+            "Blue",
+            "Grey"
         ],
         "synonyms": [
             "Dwarka"
@@ -1984,6 +1985,85 @@
         ]
     },
     {
+        "id": 148,
+        "name": {
+            "english": "Sikanderpur (Rapid Metro)",
+            "hindi": ""
+        },
+        "lines": [
+            "Violet",
+            "Rapid_Metro"
+        ],
+        "synonyms": [
+            "Sikanderpur (Rapid Metro)"
+        ]
+    },
+    {
+        "id": 149,
+        "name": {
+            "english": "Phase 2 (Rapid Metro)",
+            "hindi": ""
+        },
+        "lines": [
+            "Rapid_Metro"
+        ],
+        "synonyms": [
+            "Phase 2 (Rapid Metro)"
+        ]
+    },
+    {
+        "id": 150,
+        "name": {
+            "english": "Belvedere Towers (Rapid Metro)",
+            "hindi": ""
+        },
+        "lines": [
+            "Rapid_Metro"
+        ],
+        "synonyms": [
+            "Belvedere Towers (Rapid Metro)"
+        ]
+    },
+    {
+        "id": 151,
+        "name": {
+            "english": "Cyber City",
+            "hindi": ""
+        },
+        "lines": [
+            "Rapid_Metro"
+        ],
+        "synonyms": [
+            "Cyber City (Rapid Metro)"
+        ]
+    },
+    {
+        "id": 152,
+        "name": {
+            "english": "Moulsari Avenue",
+            "hindi": ""
+        },
+        "lines": [
+            "Rapid_Metro"
+        ],
+        "synonyms": [
+            "Moulsari Avenue (Rapid Metro)"
+        ]
+    },
+    {
+        "id": 153,
+        "name": {
+            "english": "Phase 3",
+            "hindi": ""
+        },
+        "lines": [
+            "Rapid_Metro"
+        ],
+        "synonyms": [
+            "Phase 3 (Rapid Metro)"
+        ]
+    },
+    {
         "id": 154,
         "name": {
             "english": "Airport",
@@ -1993,7 +2073,8 @@
             "Orange"
         ],
         "synonyms": [
-            "Airport"
+            "Airport",
+            "IGI Airport"
         ]
     },
     {
@@ -2168,6 +2249,71 @@
         ],
         "synonyms": [
             "Okhla NSIC"
+        ]
+    },
+    {
+        "id": 168,
+        "name": {
+            "english": "Phase-I",
+            "hindi": ""
+        },
+        "lines": [
+            "Rapid_Metro"
+        ],
+        "synonyms": [
+            "Phase-I (Rapid Metro)"
+        ]
+    },
+    {
+        "id": 169,
+        "name": {
+            "english": "Sector 42-43",
+            "hindi": ""
+        },
+        "lines": [
+            "Rapid_Metro"
+        ],
+        "synonyms": [
+            "Sector 42-43 (Rapid Metro)"
+        ]
+    },
+    {
+        "id": 170,
+        "name": {
+            "english": "Sector 53-54",
+            "hindi": ""
+        },
+        "lines": [
+            "Rapid_Metro"
+        ],
+        "synonyms": [
+            "Sector 53-54 (Rapid Metro)"
+        ]
+    },
+    {
+        "id": 171,
+        "name": {
+            "english": "Sector 54 Chowk",
+            "hindi": ""
+        },
+        "lines": [
+            "Rapid_Metro"
+        ],
+        "synonyms": [
+            "Sector 54 Chowk (Rapid Metro)"
+        ]
+    },
+    {
+        "id": 172,
+        "name": {
+            "english": "Sector 55-56 (Rapid Metro)",
+            "hindi": ""
+        },
+        "lines": [
+            "Rapid_Metro"
+        ],
+        "synonyms": [
+            "Sector 55-56 (Rapid Metro)"
         ]
     },
     {
@@ -3087,6 +3233,45 @@
         ],
         "synonyms": [
             "Noida Electronic City"
+        ]
+    },
+    {
+        "id": 239,
+        "name": {
+            "english": "Nangli",
+            "hindi": ""
+        },
+        "lines": [
+            "Grey"
+        ],
+        "synonyms": [
+            "Nangli"
+        ]
+    },
+    {
+        "id": 240,
+        "name": {
+            "english": "Najafgarh",
+            "hindi": ""
+        },
+        "lines": [
+            "Grey"
+        ],
+        "synonyms": [
+            "Najafgarh"
+        ]
+    },
+    {
+        "id": 241,
+        "name": {
+            "english": "Dhansa Bus Stand",
+            "hindi": ""
+        },
+        "lines": [
+            "Grey"
+        ],
+        "synonyms": [
+            "Dhansa Bus Stand"
         ]
     },
     {

@@ -8,7 +8,9 @@ export type MetroLineColorId =
   | 'Blue'
   | 'Orange'
   | 'Magenta'
-  | 'Aqua';
+  | 'Aqua'
+  | 'Grey'
+  | 'Rapid_Metro';
 
 export interface MetroLineColor {
   id: MetroLineColorId;

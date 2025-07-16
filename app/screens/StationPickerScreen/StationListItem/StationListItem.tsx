@@ -21,8 +21,8 @@ const StationListItem: React.FC<StationListItemProps> = ({ stop, onPress }) => {
         {stop.lines?.map((line) => {
           const lineColor = metroLineColorsMap[line];
           return (
-            <View key={line} style={[styles.styles.lineChip, { backgroundColor: lineColor.color }]}> 
-              <Text style={styles.styles.lineChipText}>{lineColor.displayName}</Text>
+            <View key={line} style={[styles.styles.lineChip, { backgroundColor: lineColor?.color ?? 'black' }]}> 
+              <Text style={styles.styles.lineChipText}>{lineColor?.displayName ?? 'helloooo'}</Text>
             </View>
           );
         })}

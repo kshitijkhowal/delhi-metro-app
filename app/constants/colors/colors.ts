@@ -123,5 +123,7 @@ export const metroLineColorsMap: MetroLineColorsMap = {
   Orange: { id: 'Orange', displayName: 'Orange Line', color: '#F57C00' },
   Magenta: { id: 'Magenta', displayName: 'Magenta Line', color: '#8E24AA' },
   Aqua: { id: 'Aqua', displayName: 'Aqua Line', color: '#00BCD4' }, // Picked a standard aqua color
+  Grey: { id: 'Grey', displayName: 'Grey Line', color: 'grey' }, // Picked a standard aqua color
+  Rapid_Metro: { id: 'Rapid_Metro', displayName: 'Rapid Metro Line', color: '#00008B' }, // Picked a standard aqua color
 };
   
