@@ -20,7 +20,7 @@ const graphGeneration = () => {
   const stopMap = new Map<string, Stop>();
   (stops as any[]).forEach((stop, idx) => {
     const station = (stations as any[])[idx];
-    stopMap.set(String(stop.stop_id), {
+    const stopObj = {
       ...stop,
       stop_id: String(stop.stop_id),
       stop_name: String(stop.stop_name),
@@ -29,7 +29,9 @@ const graphGeneration = () => {
       lines: station?.lines || [],
       synonyms: station?.synonyms || [],
       hindi_name: station?.name?.hindi || '',
-    });
+    };
+    console.log('Adding stop to stopMap:',station);
+    stopMap.set(String(stop.stop_id), stopObj);
   });
 
 

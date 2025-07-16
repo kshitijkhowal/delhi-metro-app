@@ -4,11 +4,11 @@ import {
   ActivityIndicator,
   FlatList,
   Text,
-  TouchableOpacity,
-  View,
+  View
 } from 'react-native';
 import { HeaderComponent } from '../../components/headerComponent';
 import { Stop } from '../../types/gtfs.types';
+import StationListItem from './StationListItem';
 import { styles } from './styles';
 import { StationPickerScreenProps } from './types';
 import { useStationPickerScreenLogic } from './useStationPickerScreenLogic';
@@ -24,16 +24,7 @@ const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
   } = useStationPickerScreenLogic(route);
 
   const renderStationItem = ({ item }: { item: Stop }) => (
-    <TouchableOpacity
-      style={styles.stationItem}
-      onPress={() => handleStationSelect(item)}
-      activeOpacity={0.7}
-    >
-      <Text style={styles.stationName}>{item.stop_name}</Text>
-      {item.stop_id && (
-        <Text style={styles.stationCode}>Code: {item.stop_id}</Text>
-      )}
-    </TouchableOpacity>
+    <StationListItem stop={item} onPress={handleStationSelect} />
   );
 
   const renderEmptyList = () => (

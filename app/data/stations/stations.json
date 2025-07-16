@@ -447,7 +447,6 @@
             "hindi": "अशोक पार्क मेन"
         },
         "lines": [
-            "Green",
             "Green"
         ],
         "synonyms": [
@@ -525,16 +524,16 @@
         ]
     },
     {
-        "id": 39,
+        "id": 40,
         "name": {
-            "english": "Pragati Maidan",
-            "hindi": "प्रगति मैदान"
+            "english": "Adarsh Nagar",
+            "hindi": ""
         },
         "lines": [
-            "Blue"
+            "Yellow"
         ],
         "synonyms": [
-            "Pragati Maidan"
+            "Adarsh Nagar"
         ]
     },
     {
@@ -1201,7 +1200,6 @@
             "hindi": "यमुना बैंक"
         },
         "lines": [
-            "Blue",
             "Blue"
         ],
         "synonyms": [
@@ -1219,6 +1217,20 @@
         ],
         "synonyms": [
             "Indraprastha"
+        ]
+    },
+    {
+        "id": 91,
+        "name": {
+            "english": "Pragati Maidan",
+            "hindi": "प्रगति मैदान"
+        },
+        "lines": [
+            "Blue"
+        ],
+        "synonyms": [
+            "Pragati Maidane",
+            "Supreme Court"
         ]
     },
     {

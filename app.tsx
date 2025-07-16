@@ -9,8 +9,6 @@ import AppNavigator from './app/navigation/AppNavigator';
 export default function App() {
   const [loaded, error] = useFonts(FontsFiles);
 
-  console.log(loaded,error,'[fontsDebugggg]')
-
   if (!loaded) {
     return null;
   }
