@@ -1,6 +1,7 @@
 
 import stopTimes from '../../data/gtfsJSON/stop_times.json';
 import stops from '../../data/gtfsJSON/stops.json';
+import stations from '../../data/stations/stations.json';
 import { Stop, StopTime } from '../../types/gtfs.types';
 
 // Type for the graph: adjacency list
@@ -15,16 +16,22 @@ function parseTimeToSeconds(time: string): number {
 
 const graphGeneration = () => {
   // Step 1: Build a map of stop details
+  // Optimization: Assume stops and stations are in the same order and have matching indices
   const stopMap = new Map<string, Stop>();
-  (stops as any[]).forEach((stop) => {
+  (stops as any[]).forEach((stop, idx) => {
+    const station = (stations as any[])[idx];
     stopMap.set(String(stop.stop_id), {
       ...stop,
       stop_id: String(stop.stop_id),
       stop_name: String(stop.stop_name),
       stop_lat: Number(stop.stop_lat),
       stop_lon: Number(stop.stop_lon),
+      lines: station?.lines || [],
+      synonyms: station?.synonyms || [],
+      hindi_name: station?.name?.hindi || '',
     });
   });
+
 
   // Step 2: Group stop_times by trip_id and sort by stop_sequence
   const tripMap = new Map<string, StopTime[]>();

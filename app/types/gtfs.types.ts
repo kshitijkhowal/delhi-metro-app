@@ -5,6 +5,9 @@ export interface Stop {
     stop_desc: string | null;
     stop_lat: number;
     stop_lon: number;
+    lines?: string[];
+    synonyms?: string[];
+    hindi_name?: string;
   }
   
   export interface StopTime {
