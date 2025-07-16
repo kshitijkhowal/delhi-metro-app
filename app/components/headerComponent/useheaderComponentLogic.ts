@@ -13,7 +13,7 @@ export function useHeaderComponentLogic({
   onLayout,
 }: {
   actions?: { onLeftPress?: () => void };
-  theme?: 'white' | 'primary';
+  theme?: 'secondary' | 'primary';
   LeftIcon?: React.ComponentType;
   enableSearch?: boolean;
   onSearchOpen?: () => void;

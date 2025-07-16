@@ -16,7 +16,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
   iconMap,
   onLayout,
   noBackButton = false,
-  theme = 'white',
+  theme = 'secondary',
   enableSearch = false,
   onSearchChange,
   onSearchOpen,
@@ -41,7 +41,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
       <View style={styles.leftSection}>
         {!noBackButton ? (
           <Pressable onPress={handleOnBack} style={styles.backButton}>
-            <BackArrowIcon strokeColor={theme === 'white' ? Colors.text.primary : Colors.text.inverse} size={22}/>
+            <BackArrowIcon strokeColor={theme === 'secondary' ? Colors.text.primary : Colors.text.inverse} size={22}/>
           </Pressable>
         ) : (
           <View style={styles.backButton} />
@@ -86,7 +86,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
         {/* Search icon */}
         {enableSearch && (
           <Pressable style={styles.iconButton} onPress={openSearch}>
-            <MagnifineGlassIcon strokeColor={theme === 'white' ? Colors.text.primary : Colors.text.inverse} size={22} rotation={270}/>
+            <MagnifineGlassIcon strokeColor={theme === 'secondary' ? Colors.text.primary : Colors.text.inverse} size={22} rotation={270}/>
           </Pressable>
         )}
       </View>
@@ -94,7 +94,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
       {enableSearch && searchActive && (
         <Animated.View style={[styles.searchOverlay, animatedSearchStyle, {backgroundColor}]}>
           <Pressable style={styles.searchBackButton} onPress={closeSearch}>
-            <BackArrowIcon strokeColor={theme === 'white' ? Colors.text.primary : Colors.text.inverse} size={22} rotation={180}/>
+            <BackArrowIcon strokeColor={theme === 'secondary' ? Colors.text.primary : Colors.text.inverse} size={22} rotation={180}/>
           </Pressable>
           <AppTextInput
             ref={inputRef}
