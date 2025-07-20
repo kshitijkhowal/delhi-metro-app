@@ -1,14 +1,11 @@
 import AppTextInput from '@/app/components/AppTextInput';
 import { HeaderComponent } from '@/app/components/headerComponent';
-import { useAppSelector } from '@/app/redux/hook';
 import ScreenWrapper from '@/app/wrapper/ScreenWrapper/ScreenWrapper';
 import React from 'react';
-import { FlatList, TouchableOpacity, View } from 'react-native';
+import { FlatList, Pressable, View } from 'react-native';
 import styles from './styles';
 import SuggestionListItem from './SuggestionListItem';
 import { useStationSelectionScreenLogic } from './useStationSelectionScreenLogic';
-import { RecentRoute } from '@/app/redux/features/recentRoutes/recentRoutes';
-import { Colors } from '@/app/constants/colors/colors';
 
 const StationSelectionScreen = () => {
     const {
@@ -19,21 +16,14 @@ const StationSelectionScreen = () => {
         handleShowRoute,
         isButtonDisabled,
         buttonText,
-        setFromStation,
-        setToStation
+        recentRoutes,
+        handleSuggestionPress,
     } = useStationSelectionScreenLogic();
-
-    const recentRoutes = useAppSelector(state => state.recentRoutes.routes);
-
-    const handleSuggestionPress = (recentRoute: RecentRoute) => {
-        setFromStation(recentRoute.from);
-        setToStation(recentRoute.to);
-    };
 
     return (
         <ScreenWrapper
             screenName={route.name}
-            backgroundColor={Colors.background.secondary}
+            backgroundColor={"#F5F5F5"}
             bottomButtonProps={{
                 title: buttonText,
                 onPress: handleShowRoute,
@@ -55,25 +45,25 @@ const StationSelectionScreen = () => {
 
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
-                    <TouchableOpacity onPress={() => navigateToStationPicker('from')}>
+                    <Pressable onPress={() => navigateToStationPicker('from')}>
                         <AppTextInput
                             value={fromStation?.stop_name || ''}
                             onChangeText={() => { }}
                             placeholder="Select departure station"
                             editable={false}
                         />
-                    </TouchableOpacity>
+                    </Pressable>
                 </View>
 
                 <View style={styles.inputContainer}>
-                    <TouchableOpacity onPress={() => navigateToStationPicker('to')}>
+                    <Pressable onPress={() => navigateToStationPicker('to')}>
                         <AppTextInput
                             value={toStation?.stop_name || ''}
                             onChangeText={() => { }}
                             placeholder="Select destination station"
                             editable={false}
                         />
-                    </TouchableOpacity>
+                    </Pressable>
                 </View>
             </View>
 

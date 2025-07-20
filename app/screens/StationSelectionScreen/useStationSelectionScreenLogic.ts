@@ -1,10 +1,13 @@
+import { RecentRoute } from '@/app/redux/features/recentRoutes/recentRoutes';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
 import { RootStackParamList } from "../../navigation/types";
 import { addRecentRoute } from '../../redux/features/recentRoutes/recentRoutes';
-import { useAppDispatch } from '../../redux/hook';
+import { useAppDispatch, useAppSelector } from '../../redux/hook';
 import { Stop } from "../../types/gtfs.types";
+
+// Move all business logic from StationSelectionScreen.tsx here
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -15,6 +18,9 @@ export function useStationSelectionScreenLogic() {
     const [toStation, setToStation] = useState<Stop | null>(null);
     const [loading, setLoading] = useState(false);
     const dispatch = useAppDispatch();
+
+    // Get recent routes from redux
+    const recentRoutes = useAppSelector(state => state.recentRoutes.routes);
 
     const handleFromStationSelect = (station: Stop) => {
         setFromStation(station);
@@ -50,6 +56,12 @@ export function useStationSelectionScreenLogic() {
         ? 'Select Destination Station' 
         : 'Show Route';
 
+    // Handler for suggestion press
+    const handleSuggestionPress = (recentRoute: RecentRoute) => {
+        setFromStation(recentRoute.from);
+        setToStation(recentRoute.to);
+    };
+
     return {
         route,
         loading,
@@ -61,5 +73,7 @@ export function useStationSelectionScreenLogic() {
         buttonText,
         setFromStation,
         setToStation,
+        recentRoutes,
+        handleSuggestionPress,
     };
 }

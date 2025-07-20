@@ -15,10 +15,31 @@ const styles = StyleSheet.create({
   },
   container1_2: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
+    marginHorizontal: Dimensions.MARGIN.sm,
+    marginVertical: Dimensions.PADDING.md
+
   },
   stationName: {
     fontFamily: Fonts.light
+  },
+  dot: {
+    height: Dimensions.MARGIN.xxs,
+    width: Dimensions.MARGIN.xxs,
+    backgroundColor: Colors.border.divider,
+    borderRadius: Dimensions.BORDER_RADIUS.circle
+  },
+  relative: {
+    position: 'relative',
+  },
+  line: {
+    position: 'absolute',
+    left: Dimensions.MARGIN.xxs / 2,
+    top: '50%',
+    height: 2,
+    backgroundColor: '#263238',
+    zIndex: 0,
+    transform: [{ translateY: -1 }],
   },
 });
 
