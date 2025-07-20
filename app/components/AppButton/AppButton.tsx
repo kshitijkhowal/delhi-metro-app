@@ -13,12 +13,12 @@ import { styles } from './styles';
 import { ElevationConfig, useAppButtonLogic } from './useAppButtonLogic';
   
   type AppButtonProps = {
-    title: string;
+    title?: string;
     onPress?: () => void;
     disabled?: boolean;
     style?: ViewStyle;
     textStyle?: object;
-    type?: 'primary' | 'secondary';
+    type?: 'primary' | 'secondary' | 'icon';
     loading?: boolean;
     loadingText?: string;
     elevation?: ElevationConfig;

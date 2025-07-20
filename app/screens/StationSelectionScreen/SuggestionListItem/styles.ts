@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
   dot: {
     height: Dimensions.MARGIN.xxs,
     width: Dimensions.MARGIN.xxs,
-    backgroundColor: Colors.border.divider,
-    borderRadius: Dimensions.BORDER_RADIUS.circle
+    backgroundColor: Colors.theme.secondary,
+    borderRadius: Dimensions.BORDER_RADIUS.circle,
   },
   relative: {
     position: 'relative',
@@ -37,10 +37,27 @@ const styles = StyleSheet.create({
     left: Dimensions.MARGIN.xxs / 2,
     top: '50%',
     height: 2,
-    backgroundColor: '#263238',
+    backgroundColor: Colors.theme.secondary,
     zIndex: 0,
     transform: [{ translateY: -1 }],
   },
+  iconButtonRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:'space-between'
+
+
+  },
+  iconButton: {
+    marginLeft: Dimensions.MARGIN.xs,
+    padding: Dimensions.PADDING.xs,
+    borderRadius: Dimensions.BORDER_RADIUS.circle,
+    width: 'auto',
+    backgroundColor: 'transparent',
+  },
+  switchHeartContainer: {
+    flexDirection: 'row',
+  }
 });
 
 export default styles;
