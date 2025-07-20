@@ -1,5 +1,5 @@
-import { RouteListScreenParams } from '../screens/RouteListScreen/types';
-import { StationPickerScreenParams } from '../screens/StationPickerScreen/types';
+import { RouteListScreenParams } from '../screens/RouteListScreen/RouteListScreen.Types';
+import { StationPickerScreenParams } from '../screens/StationPickerScreen/StationPickerScreen.Types';
 
 export type RootStackParamList = {
   SplashScreen: undefined;

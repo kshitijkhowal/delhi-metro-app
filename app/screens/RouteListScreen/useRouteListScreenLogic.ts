@@ -5,7 +5,7 @@ import { RootStackParamList } from '../../navigation/types';
 import { useAppSelector } from '../../redux/hook';
 import { Stop } from '../../types/gtfs.types';
 import { bfs } from '../../utils/Algorithms/bfs';
-import { RouteListScreenParams } from './types';
+import { RouteListScreenParams } from './RouteListScreen.Types';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 

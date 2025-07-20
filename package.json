@@ -2,13 +2,27 @@
   "name": "delhi-metro-app",
   "main": "index.js",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "build:android-debug": "expo run:android",
+    "build:android-preview": "eas build --profile preview --platform android",
+    "build:android-production": "eas build --profile production --platform android",
+    "build:ios-debug": "expo run:ios",
+    "build:ios-preview": "eas build --profile preview --platform ios",
+    "build:ios-production": "eas build --profile production --platform ios",
+    "build:all-debug": "eas build --profile development --platform all",
+    "build:all-preview": "eas build --profile preview --platform all",
+    "build:all-production": "eas build --profile production --platform all",
+    "submit:android": "eas submit --platform android",
+    "submit:ios": "eas submit --platform ios",
+    "submit:all": "eas submit --platform all",
+    "build": "node scripts/buildScripts/buildScripts.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
@@ -43,17 +57,19 @@
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
     "react-native-size-matters": "^0.4.2",
+    "react-native-svg": "15.11.2",
     "react-native-web": "~0.20.0",
     "react-native-webview": "13.13.5",
     "react-redux": "^9.2.0",
-    "redux-persist": "^6.0.0",
-    "react-native-svg": "15.11.2"
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/react": "~19.0.10",
+    "@types/inquirer": "^9.0.7",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~9.2.0",
+    "inquirer": "^9.3.7",
     "typescript": "~5.8.3"
   },
   "private": true

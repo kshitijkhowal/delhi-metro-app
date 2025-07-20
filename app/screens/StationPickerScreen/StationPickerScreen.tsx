@@ -9,8 +9,8 @@ import {
 import { HeaderComponent } from '../../components/headerComponent';
 import { Stop } from '../../types/gtfs.types';
 import StationListItem from './StationListItem';
+import { StationPickerScreenProps } from './StationPickerScreen.Types';
 import { styles } from './styles';
-import { StationPickerScreenProps } from './types';
 import { useStationPickerScreenLogic } from './useStationPickerScreenLogic';
 
 const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {

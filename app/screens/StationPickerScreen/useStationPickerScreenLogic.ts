@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from '../../redux/hook';
 import { Stop } from '../../types/gtfs.types';
-import { StationPickerScreenParams } from './types';
+import { StationPickerScreenParams } from './StationPickerScreen.Types';
 
 export function useStationPickerScreenLogic(route: { params: StationPickerScreenParams }) {
   const navigation = useNavigation();

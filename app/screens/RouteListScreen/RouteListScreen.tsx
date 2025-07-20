@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import { HeaderComponent } from '../../components/headerComponent';
 import { Stop } from '../../types/gtfs.types';
+import { RouteListScreenProps } from './RouteListScreen.Types';
 import { styles } from './styles';
-import { RouteListScreenProps } from './types';
 import { useRouteListScreenLogic } from './useRouteListScreenLogic';
 
 const RouteListScreen: React.FC<RouteListScreenProps> = ({ route }) => {
