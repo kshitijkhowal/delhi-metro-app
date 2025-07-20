@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Dimensions.PADDING.lg,
     paddingTop: Dimensions.PADDING.md,
-    flex: 1,
   },
   inputContainer: {
     marginBottom: Dimensions.MARGIN.lg,

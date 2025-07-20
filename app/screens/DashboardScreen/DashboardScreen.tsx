@@ -23,6 +23,12 @@ const DashboardScreen = () => {
                 //@ts-ignore
                 onPress={() => navigation.navigate('StationSelectionScreen')}
             />
+            <Button
+                title="Go to Test Screen"
+                //@ts-ignore
+                onPress={() => navigation.navigate('TestScreen')}
+            />
+            
         </ScreenWrapper>
     );
 };

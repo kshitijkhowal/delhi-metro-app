@@ -2,11 +2,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import generatedGraphsReducer from '../features/generatedGraphs/generatedGraphs';
+import recentRoutesReducer from '../features/recentRoutes/recentRoutes';
 import stopsReducer from '../features/stops/stops';
 
 const rootReducer = combineReducers({
   stops: stopsReducer,
   generatedGraphs: generatedGraphsReducer,
+  recentRoutes: recentRoutesReducer,
 });
 
 const persistConfig = {

@@ -30,7 +30,6 @@ const graphGeneration = () => {
       synonyms: station?.synonyms || [],
       hindi_name: station?.name?.hindi || '',
     };
-    console.log('Adding stop to stopMap:',station);
     stopMap.set(String(stop.stop_id), stopObj);
   });
 

@@ -5,6 +5,7 @@ import RouteListScreen from '../screens/RouteListScreen';
 import SplashScreen from '../screens/SplashScreen';
 import StationPickerScreen from '../screens/StationPickerScreen';
 import StationSelectionScreen from '../screens/StationSelectionScreen';
+import TestScreen from '../screens/TestScreen/TestScreen';
 import type { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -35,6 +36,11 @@ const AppNavigator = () => (
         <Stack.Screen
             name="RouteListScreen"
             component={RouteListScreen}
+            options={{ headerShown: false }}
+        />
+        <Stack.Screen
+            name="TestScreen"
+            component={TestScreen}
             options={{ headerShown: false }}
         />
         {/* Add more screens here */}

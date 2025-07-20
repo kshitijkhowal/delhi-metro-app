@@ -9,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useScreenWrapperLogic } from './useScreenWrapperLogic';
 
 interface ScreenWrapperProps {
+  backgroundColor?: string;
   statusBarColor?: string;
   statusBarTheme?: 'light-content' | 'dark-content';
   loading?: boolean;
@@ -18,6 +19,7 @@ interface ScreenWrapperProps {
 }
 
 const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
+  backgroundColor = Colors.background.primary,
   statusBarColor = Colors.background.primary,
   statusBarTheme = 'dark-content',
   loading = false,
@@ -31,13 +33,12 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: statusBarColor,
+        backgroundColor: backgroundColor,
       }}
     >
       <StatusBar
         backgroundColor={statusBarColor}
         barStyle={statusBarTheme}
-        // translucent={Platform.OS === 'android'}
       />
       
       {loading ? (
