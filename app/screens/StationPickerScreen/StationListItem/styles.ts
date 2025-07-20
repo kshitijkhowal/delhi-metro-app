@@ -1,22 +1,17 @@
+import { Dimensions } from '@/app/constants/dimensions/dimensions';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     padding: 16,
-    marginVertical: 6,
-    marginHorizontal: 12,
     backgroundColor: '#fff',
     borderRadius: 12,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 4,
+    gap: Dimensions.MARGIN.xxxs
   },
   infoContainer: {
     flex: 1,
+
   },
   stationName: {
     fontSize: 18,
@@ -26,7 +21,6 @@ export const styles = StyleSheet.create({
   hindiName: {
     fontSize: 14,
     color: '#666',
-    marginTop: 2,
   },
   stationCode: {
     fontSize: 12,
@@ -36,7 +30,6 @@ export const styles = StyleSheet.create({
   linesContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: 8,
   },
   lineChip: {
     borderRadius: 8,

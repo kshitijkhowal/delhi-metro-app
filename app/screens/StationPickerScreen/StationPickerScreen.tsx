@@ -1,3 +1,4 @@
+import { Dimensions } from '@/app/constants/dimensions/dimensions';
 import ScreenWrapper from '@/app/wrapper/ScreenWrapper/ScreenWrapper';
 import React from 'react';
 import {
@@ -68,6 +69,7 @@ const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
         ListEmptyComponent={renderEmptyList}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        ItemSeparatorComponent={() => <View style={{ height: Dimensions.MARGIN.xs }} />}
       />
     </View>
     </ScreenWrapper>

@@ -6,7 +6,7 @@ import { ElevationConfig, useAppViewLogic } from './useAppViewLogic';
 export type AppViewProps = {
     onPress?: () => void;
     disabled?: boolean;
-    style?: ViewStyle;
+    style?: ViewStyle | ViewStyle[];
     elevation?: ElevationConfig;
     children?: React.ReactNode;
 } & PressableProps;

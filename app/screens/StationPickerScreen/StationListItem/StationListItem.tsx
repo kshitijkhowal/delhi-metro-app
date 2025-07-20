@@ -1,8 +1,10 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { metroLineColorsMap } from '../../../constants/colors/colors';
+import { FlatList, Text, View } from 'react-native';
+import AppView from '../../../components/AppView';
+import LineColorChip from '../../../components/LineColorChip/LineColorChip';
 import { Stop } from '../../../types/gtfs.types';
 import * as styles from './styles';
+import { Dimensions } from '@/app/constants/dimensions/dimensions';
 
 export interface StationListItemProps {
   stop: Stop;
@@ -11,23 +13,20 @@ export interface StationListItemProps {
 
 const StationListItem: React.FC<StationListItemProps> = ({ stop, onPress }) => {
   return (
-    <TouchableOpacity style={styles.styles.container} onPress={() => onPress(stop)} activeOpacity={0.7}>
-      <View style={styles.styles.infoContainer}>
-        <Text style={styles.styles.stationName}>{stop.stop_name}</Text>
-        {stop.hindi_name && <Text style={styles.styles.hindiName}>{stop.hindi_name}</Text>}
-        {stop.stop_id && <Text style={styles.styles.stationCode}>Code: {stop.stop_id}</Text>}
-      </View>
+    <AppView style={styles.styles.container} onPress={() => onPress(stop)} elevation={{ enabled: true }}>
+      <Text style={styles.styles.stationName}>{stop.stop_name}</Text>
+      {stop.hindi_name && <Text style={styles.styles.hindiName}>{stop.hindi_name}</Text>}
       <View style={styles.styles.linesContainer}>
-        {stop.lines?.map((line) => {
-          const lineColor = metroLineColorsMap[line];
-          return (
-            <View key={line} style={[styles.styles.lineChip, { backgroundColor: lineColor?.color ?? 'black' }]}> 
-              <Text style={styles.styles.lineChipText}>{lineColor?.displayName ?? 'helloooo'}</Text>
-            </View>
-          );
-        })}
+        <FlatList
+          data={stop.lines}
+          keyExtractor={(item) => item}
+          renderItem={({ item }) => <LineColorChip line={item} />}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          ItemSeparatorComponent={() => <View style={{ width: Dimensions.MARGIN.xxs }} />}
+        />
       </View>
-    </TouchableOpacity>
+    </AppView>
   );
 };
 
