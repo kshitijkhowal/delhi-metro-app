@@ -1,50 +1,30 @@
+import { Colors } from '@/app/constants/colors/colors';
 import { Dimensions } from '@/app/constants/dimensions/dimensions';
+import { Fonts } from '@/app/constants/fonts/fonts';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
     alignItems: 'flex-start',
-    padding: 16,
-    backgroundColor: '#fff',
-    borderRadius: 12,
+    padding: Dimensions.PADDING.md,
+    backgroundColor: Colors.background.primary,
+    borderRadius: Dimensions.BORDER_RADIUS.xxl,
     gap: Dimensions.MARGIN.xxxs
   },
   infoContainer: {
     flex: 1,
-
   },
   stationName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#222',
+    fontSize: Dimensions.TEXT.lg,
+    fontFamily: Fonts.medium,
+    color: Colors.text.primary,
   },
   hindiName: {
-    fontSize: 14,
-    color: '#666',
-  },
-  stationCode: {
-    fontSize: 12,
-    color: '#999',
-    marginTop: 2,
+    fontSize: Dimensions.TEXT.sm,
+    color: Colors.text.secondary,
   },
   linesContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  lineChip: {
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    marginLeft: 4,
-    marginRight: 0,
-    marginVertical: 2,
-    minWidth: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  lineChipText: {
-    color: '#fff',
-    fontWeight: '600',
-    fontSize: 12,
   },
 });

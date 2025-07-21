@@ -20,7 +20,7 @@ const StationListItem: React.FC<StationListItemProps> = ({ stop, onPress }) => {
         <FlatList
           data={stop.lines}
           keyExtractor={(item) => item}
-          renderItem={({ item }) => <LineColorChip line={item} />}
+          renderItem={({ item }) => <LineColorChip line={item}/>}
           horizontal
           showsHorizontalScrollIndicator={false}
           ItemSeparatorComponent={() => <View style={{ width: Dimensions.MARGIN.xxs }} />}

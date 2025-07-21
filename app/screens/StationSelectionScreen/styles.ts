@@ -1,5 +1,6 @@
 import { Colors } from '@/app/constants/colors/colors';
 import { Dimensions } from '@/app/constants/dimensions/dimensions';
+import { Fonts } from '@/app/constants/fonts/fonts';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -11,12 +12,6 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width:'100%'
-  },
-  label: {
-    fontSize: Dimensions.TEXT.sm,
-    fontWeight: '500',
-    marginBottom: Dimensions.MARGIN.xs,
-    color: '#000000',
   },
   suggestionList: {
     paddingHorizontal: Dimensions.PADDING.md,
@@ -31,6 +26,22 @@ const styles = StyleSheet.create({
     borderWidth: Dimensions.BORDER_WIDTH.thin,
     borderColor: Colors.border.primary
   },
+  headerContainer: {
+    backgroundColor: Colors.background.earn,
+    width: 'auto',
+    borderRadius: Dimensions.BORDER_RADIUS.lg,
+    alignItems: 'center',
+    borderWidth: Dimensions.BORDER_WIDTH.regular,
+    borderColor: Colors.status.pending,
+    padding: Dimensions.PADDING.xs,
+  },
+  headerText: {
+    fontFamily: Fonts.regular,
+    
+  },
+  headerComponentStyle: {
+    paddingVertical: Dimensions.PADDING.sm,
+  }
 });
 
 export default styles;

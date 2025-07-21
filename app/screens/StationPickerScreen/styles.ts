@@ -18,6 +18,7 @@ export const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     paddingHorizontal: Dimensions.PADDING.md,
+    paddingVertical: Dimensions.PADDING.sm
   },
   stationItem: {
     padding: Dimensions.PADDING.md,

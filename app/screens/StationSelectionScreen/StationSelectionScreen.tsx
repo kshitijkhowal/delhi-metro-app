@@ -4,15 +4,15 @@ import AppView from '@/app/components/AppView';
 import { HeaderComponent } from '@/app/components/headerComponent';
 import { Dimensions } from '@/app/constants/dimensions/dimensions';
 import ScreenWrapper from '@/app/wrapper/ScreenWrapper/ScreenWrapper';
-import React from 'react';
-import { FlatList, Pressable, View } from 'react-native';
+import React,{FC} from 'react';
+import { FlatList, Pressable, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import styles from './styles';
 import SuggestionListItem from './SuggestionListItem';
 import { useStationSelectionScreenLogic } from './useStationSelectionScreenLogic';
 
 
-const StationSelectionScreen = () => {
+const StationSelectionScreen : FC = () => {
     const {
         route,
         fromStation,
@@ -27,6 +27,15 @@ const StationSelectionScreen = () => {
         animatedSwitchStyle,
     } = useStationSelectionScreenLogic();
 
+    const renderSuggestionsHeader : FC = () => {
+        return(
+            <View style={styles.headerContainer}>
+                <Text style={styles.headerText}>
+                    Suggested Routes :
+                </Text>
+            </View>
+        )
+    }
     return (
         <ScreenWrapper
             screenName={route.name}
@@ -94,6 +103,8 @@ const StationSelectionScreen = () => {
                     )}
                     style={styles.suggestionList}
                     ItemSeparatorComponent={() => <View style={{ height: Dimensions.MARGIN.xs }} />}
+                    ListHeaderComponent={renderSuggestionsHeader}
+                    ListHeaderComponentStyle={styles.headerComponentStyle}
                 />
             )}
 
