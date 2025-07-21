@@ -8,6 +8,8 @@ const styles = StyleSheet.create({
     padding: Dimensions.PADDING.md,
     backgroundColor: Colors.background.primary,
     borderRadius: Dimensions.BORDER_RADIUS.md,
+    borderWidth: Dimensions.BORDER_WIDTH.thin,
+    borderColor: Colors.border.primary
   },
   container1_1: {
     flexDirection: 'row',
@@ -45,15 +47,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent:'space-between'
-
-
   },
   iconButton: {
     marginLeft: Dimensions.MARGIN.xs,
     padding: Dimensions.PADDING.xs,
+    paddingHorizontal: Dimensions.PADDING.md,
     borderRadius: Dimensions.BORDER_RADIUS.circle,
     width: 'auto',
     backgroundColor: 'transparent',
+    borderWidth: Dimensions.BORDER_WIDTH.thin,
+    borderColor: Colors.border.primary
   },
   switchHeartContainer: {
     flexDirection: 'row',

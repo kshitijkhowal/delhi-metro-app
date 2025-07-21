@@ -1,11 +1,16 @@
+import DoubleSwitchArrow from '@/app/assets/icons/arrowIcons/doubleSwitchArrow';
 import AppTextInput from '@/app/components/AppTextInput';
+import AppView from '@/app/components/AppView';
 import { HeaderComponent } from '@/app/components/headerComponent';
+import { Dimensions } from '@/app/constants/dimensions/dimensions';
 import ScreenWrapper from '@/app/wrapper/ScreenWrapper/ScreenWrapper';
 import React from 'react';
 import { FlatList, Pressable, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 import styles from './styles';
 import SuggestionListItem from './SuggestionListItem';
 import { useStationSelectionScreenLogic } from './useStationSelectionScreenLogic';
+
 
 const StationSelectionScreen = () => {
     const {
@@ -18,6 +23,8 @@ const StationSelectionScreen = () => {
         buttonText,
         recentRoutes,
         handleSuggestionPress,
+        onSwitch,
+        animatedSwitchStyle,
     } = useStationSelectionScreenLogic();
 
     return (
@@ -55,6 +62,16 @@ const StationSelectionScreen = () => {
                     </Pressable>
                 </View>
 
+                <AppView
+                    onPress={onSwitch}
+                    style={styles.iconButton}
+                    elevation={{ enabled: true }}
+                >
+                    <Animated.View style={animatedSwitchStyle}>
+                        <DoubleSwitchArrow size={22} strokeWidth={1.2} />
+                    </Animated.View>
+                </AppView>
+
                 <View style={styles.inputContainer}>
                     <Pressable onPress={() => navigateToStationPicker('to')}>
                         <AppTextInput
@@ -75,7 +92,8 @@ const StationSelectionScreen = () => {
                     renderItem={({ item }) => (
                         <SuggestionListItem route={item} onPress={handleSuggestionPress} />
                     )}
-                    style={{ marginBottom: 16 }}
+                    style={styles.suggestionList}
+                    ItemSeparatorComponent={() => <View style={{ height: Dimensions.MARGIN.xs }} />}
                 />
             )}
 
