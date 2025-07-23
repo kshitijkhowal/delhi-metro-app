@@ -1,0 +1,665 @@
+[
+    {
+        "stop": {
+            "stop_id": "21",
+            "stop_code": null,
+            "stop_name": "Rithala",
+            "stop_desc": null,
+            "stop_lat": 28.720821,
+            "stop_lon": 77.105042,
+            "lines": [
+                "Red"
+            ],
+            "synonyms": [
+                "Rithala"
+            ],
+            "hindi_name": "रिठाला"
+        },
+        "timeToReach": 0,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "20",
+            "stop_code": null,
+            "stop_name": "Rohini West",
+            "stop_desc": null,
+            "stop_lat": 28.715008,
+            "stop_lon": 77.115746,
+            "lines": [
+                "Red"
+            ],
+            "synonyms": [
+                "Rohini West"
+            ],
+            "hindi_name": "रोहिणी पश्चिम"
+        },
+        "timeToReach": 150,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "19",
+            "stop_code": null,
+            "stop_name": "Rohini East",
+            "stop_desc": null,
+            "stop_lat": 28.707941,
+            "stop_lon": 77.125732,
+            "lines": [
+                "Red"
+            ],
+            "synonyms": [
+                "Rohini East"
+            ],
+            "hindi_name": "रोहिणी पूर्व"
+        },
+        "timeToReach": 280,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "18",
+            "stop_code": null,
+            "stop_name": "Pitampura",
+            "stop_desc": null,
+            "stop_lat": 28.70318,
+            "stop_lon": 77.132355,
+            "lines": [
+                "Red"
+            ],
+            "synonyms": [
+                "Pitam Pura",
+                "Pitampura"
+            ],
+            "hindi_name": "पीतमपुरा"
+        },
+        "timeToReach": 385,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "17",
+            "stop_code": null,
+            "stop_name": "Kohat Enclave",
+            "stop_desc": null,
+            "stop_lat": 28.697943,
+            "stop_lon": 77.140465,
+            "lines": [
+                "Red"
+            ],
+            "synonyms": [
+                "Kohat Enclave"
+            ],
+            "hindi_name": "कोहाट एन्क्लेव"
+        },
+        "timeToReach": 505,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "16",
+            "stop_code": null,
+            "stop_name": "Netaji Subash Place",
+            "stop_desc": null,
+            "stop_lat": 28.695637,
+            "stop_lon": 77.152428,
+            "lines": [
+                "Pink",
+                "Red"
+            ],
+            "synonyms": [
+                "Netaji Subhash Place",
+                "NSP",
+                "N.S.P."
+            ],
+            "hindi_name": "नेताजी सुभाष प्लेस"
+        },
+        "timeToReach": 635,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "175",
+            "stop_code": null,
+            "stop_name": "Shakurpur",
+            "stop_desc": null,
+            "stop_lat": 28.685781,
+            "stop_lon": 77.149651,
+            "lines": [
+                "Pink"
+            ],
+            "synonyms": [
+                "Shakurpur"
+            ],
+            "hindi_name": "शकूरपुर"
+        },
+        "timeToReach": 777,
+        "isTransfer": true,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "176",
+            "stop_code": null,
+            "stop_name": "Punjabi Bagh West",
+            "stop_desc": null,
+            "stop_lat": 28.672747,
+            "stop_lon": 77.139183,
+            "lines": [
+                "Pink"
+            ],
+            "synonyms": [
+                "Punjabi Bagh West"
+            ],
+            "hindi_name": "पंजाबी बाग पश्चिम"
+        },
+        "timeToReach": 988,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "177",
+            "stop_code": null,
+            "stop_name": "ESI Basai Darapur",
+            "stop_desc": null,
+            "stop_lat": 28.658159,
+            "stop_lon": 77.127319,
+            "lines": [
+                "Pink"
+            ],
+            "synonyms": [
+                "ESI Hospital",
+                "ESI Basaidarpur",
+                "ESI"
+            ],
+            "hindi_name": "ईएसआई अस्पताल"
+        },
+        "timeToReach": 1158,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "103",
+            "stop_code": null,
+            "stop_name": "Rajouri Garden",
+            "stop_desc": null,
+            "stop_lat": 28.649157,
+            "stop_lon": 77.122749,
+            "lines": [
+                "Blue",
+                "Pink"
+            ],
+            "synonyms": [
+                "Rajouri Garden"
+            ],
+            "hindi_name": "राजौरी गार्डन"
+        },
+        "timeToReach": 1273,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "178",
+            "stop_code": null,
+            "stop_name": "Mayapuri",
+            "stop_desc": null,
+            "stop_lat": 28.637098,
+            "stop_lon": 77.129738,
+            "lines": [
+                "Pink"
+            ],
+            "synonyms": [
+                "Mayapuri"
+            ],
+            "hindi_name": "माया पुरी"
+        },
+        "timeToReach": 1446,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "179",
+            "stop_code": null,
+            "stop_name": "Naraina Vihar",
+            "stop_desc": null,
+            "stop_lat": 28.624121,
+            "stop_lon": 77.136482,
+            "lines": [
+                "Pink"
+            ],
+            "synonyms": [
+                "Naraina Vihar",
+                "Naraina"
+            ],
+            "hindi_name": "नारायणा विहार"
+        },
+        "timeToReach": 1624,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "180",
+            "stop_code": null,
+            "stop_name": "Delhi Cantt.",
+            "stop_desc": null,
+            "stop_lat": 28.608641,
+            "stop_lon": 77.140373,
+            "lines": [
+                "Pink"
+            ],
+            "synonyms": [
+                "Delhi Cantonment",
+                "Delhi Cantt",
+                "Cantonment",
+                "Cantt"
+            ],
+            "hindi_name": "दिल्ली छावनी"
+        },
+        "timeToReach": 1803,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "181",
+            "stop_code": null,
+            "stop_name": "Durgabai Deshmukh South Campus",
+            "stop_desc": null,
+            "stop_lat": 28.589376,
+            "stop_lon": 77.169518,
+            "lines": [
+                "Pink"
+            ],
+            "synonyms": [
+                "Durgabai Deshmukh South Campus",
+                "Durgabai Dekhmukh",
+                "South Campus"
+            ],
+            "hindi_name": "दुर्गाबाई देशमुख साउथ कैम्पस"
+        },
+        "timeToReach": 2108,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "203",
+            "stop_code": null,
+            "stop_name": "Sir Vishweshwaraiah Moti Bagh",
+            "stop_desc": null,
+            "stop_lat": 28.578529,
+            "stop_lon": 77.175713,
+            "lines": [
+                "Pink"
+            ],
+            "synonyms": [
+                "Sir Vishweshwaraiah Moti Bagh",
+                "Moti Bagh"
+            ],
+            "hindi_name": "सर विश्वेश्वरय्या मोती बाग"
+        },
+        "timeToReach": 2247,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "204",
+            "stop_code": null,
+            "stop_name": "Bhikaji Cama Place",
+            "stop_desc": null,
+            "stop_lat": 28.570208,
+            "stop_lon": 77.187866,
+            "lines": [
+                "Pink"
+            ],
+            "synonyms": [
+                "Bhikaji Cama Place",
+                "Bhikaji Cama"
+            ],
+            "hindi_name": "भीकाजी कामा प्लेस"
+        },
+        "timeToReach": 2402,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "205",
+            "stop_code": null,
+            "stop_name": "Sarojini Nagar",
+            "stop_desc": null,
+            "stop_lat": 28.570208,
+            "stop_lon": 77.187866,
+            "lines": [
+                "Pink"
+            ],
+            "synonyms": [
+                "Sarojini Nagar",
+                "Sarojini"
+            ],
+            "hindi_name": "सरोजिनी नगर"
+        },
+        "timeToReach": 2535,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "56",
+            "stop_code": null,
+            "stop_name": "Dilli Haat - INA",
+            "stop_desc": null,
+            "stop_lat": 28.575195,
+            "stop_lon": 77.209473,
+            "lines": [
+                "Yellow",
+                "Pink"
+            ],
+            "synonyms": [
+                "INA",
+                "I.N.A."
+            ],
+            "hindi_name": "आई.एन.ए"
+        },
+        "timeToReach": 2658,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "57",
+            "stop_code": null,
+            "stop_name": "AIIMS",
+            "stop_desc": null,
+            "stop_lat": 28.568199,
+            "stop_lon": 77.207947,
+            "lines": [
+                "Yellow"
+            ],
+            "synonyms": [
+                "AIIMS",
+                "All India Medical Institute"
+            ],
+            "hindi_name": "एम्स"
+        },
+        "timeToReach": 2771,
+        "isTransfer": true,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "58",
+            "stop_code": null,
+            "stop_name": "Green Park",
+            "stop_desc": null,
+            "stop_lat": 28.559853,
+            "stop_lon": 77.206902,
+            "lines": [
+                "Yellow"
+            ],
+            "synonyms": [
+                "Green Park"
+            ],
+            "hindi_name": "ग्रीन पार्क"
+        },
+        "timeToReach": 2891,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "59",
+            "stop_code": null,
+            "stop_name": "Hauz Khas",
+            "stop_desc": null,
+            "stop_lat": 28.543346,
+            "stop_lon": 77.206673,
+            "lines": [
+                "Magenta",
+                "Yellow"
+            ],
+            "synonyms": [
+                "Hauz Khas"
+            ],
+            "hindi_name": "हौज़ खास"
+        },
+        "timeToReach": 3055,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "60",
+            "stop_code": null,
+            "stop_name": "Malviya Nagar",
+            "stop_desc": null,
+            "stop_lat": 28.52817,
+            "stop_lon": 77.205612,
+            "lines": [
+                "Yellow"
+            ],
+            "synonyms": [
+                "Malviya Nagar"
+            ],
+            "hindi_name": "मालवीय नगर"
+        },
+        "timeToReach": 3221,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "61",
+            "stop_code": null,
+            "stop_name": "Saket",
+            "stop_desc": null,
+            "stop_lat": 28.520638,
+            "stop_lon": 77.199379,
+            "lines": [
+                "Yellow"
+            ],
+            "synonyms": [
+                "Saket"
+            ],
+            "hindi_name": "साकेत"
+        },
+        "timeToReach": 3408,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "62",
+            "stop_code": null,
+            "stop_name": "Qutab Minar",
+            "stop_desc": null,
+            "stop_lat": 28.512714,
+            "stop_lon": 77.185791,
+            "lines": [
+                "Yellow"
+            ],
+            "synonyms": [
+                "Qutub Minar"
+            ],
+            "hindi_name": "क़ुतुब मीनार"
+        },
+        "timeToReach": 3578,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "63",
+            "stop_code": null,
+            "stop_name": "Chhattarpur",
+            "stop_desc": null,
+            "stop_lat": 28.506584,
+            "stop_lon": 77.174866,
+            "lines": [
+                "Yellow"
+            ],
+            "synonyms": [
+                "Chhatarpur"
+            ],
+            "hindi_name": "छत्तरपुर"
+        },
+        "timeToReach": 3716,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "64",
+            "stop_code": null,
+            "stop_name": "Sultanpur",
+            "stop_desc": null,
+            "stop_lat": 28.499214,
+            "stop_lon": 77.161362,
+            "lines": [
+                "Yellow"
+            ],
+            "synonyms": [
+                "Sultanpur"
+            ],
+            "hindi_name": "सुल्तानपुर"
+        },
+        "timeToReach": 3867,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "65",
+            "stop_code": null,
+            "stop_name": "Ghitorni",
+            "stop_desc": null,
+            "stop_lat": 28.49383,
+            "stop_lon": 77.149071,
+            "lines": [
+                "Yellow"
+            ],
+            "synonyms": [
+                "Ghitorni"
+            ],
+            "hindi_name": "घिटोरनी"
+        },
+        "timeToReach": 3994,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "66",
+            "stop_code": null,
+            "stop_name": "Arjan Garh",
+            "stop_desc": null,
+            "stop_lat": 28.48082,
+            "stop_lon": 77.12587,
+            "lines": [
+                "Yellow"
+            ],
+            "synonyms": [
+                "Arjan Garh"
+            ],
+            "hindi_name": "अर्जन गढ़"
+        },
+        "timeToReach": 4188,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "67",
+            "stop_code": null,
+            "stop_name": "Gurudronacharya",
+            "stop_desc": null,
+            "stop_lat": 28.482075,
+            "stop_lon": 77.102219,
+            "lines": [
+                "Yellow"
+            ],
+            "synonyms": [
+                "Guru Dronacharya",
+                "Dronacharya"
+            ],
+            "hindi_name": "गुरु द्रोणाचार्य"
+        },
+        "timeToReach": 4384,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "68",
+            "stop_code": null,
+            "stop_name": "Sikanderpur",
+            "stop_desc": null,
+            "stop_lat": 28.481352,
+            "stop_lon": 77.092995,
+            "lines": [
+                "Yellow"
+            ],
+            "synonyms": [
+                "Sikandarpur"
+            ],
+            "hindi_name": "सिकन्दरपुर"
+        },
+        "timeToReach": 4490,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "69",
+            "stop_code": null,
+            "stop_name": "MG Road",
+            "stop_desc": null,
+            "stop_lat": 28.47967,
+            "stop_lon": 77.080444,
+            "lines": [
+                "Yellow"
+            ],
+            "synonyms": [
+                "MG Road",
+                "Mahatma Gandhi Road"
+            ],
+            "hindi_name": "एम जी रोड"
+        },
+        "timeToReach": 4617,
+        "isTransfer": false,
+        "towards": null
+    },
+    {
+        "stop": {
+            "stop_id": "70",
+            "stop_code": null,
+            "stop_name": "IFFCO Chowk",
+            "stop_desc": null,
+            "stop_lat": 28.472137,
+            "stop_lon": 77.072502,
+            "lines": [
+                "Yellow"
+            ],
+            "synonyms": [
+                "IFFCO Chowk",
+                "IFFCO"
+            ],
+            "hindi_name": "इफ़्को चौक"
+        },
+        "timeToReach": 4757,
+        "isTransfer": false,
+        "towards": null
+    }
+]

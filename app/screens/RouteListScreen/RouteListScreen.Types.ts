@@ -6,10 +6,10 @@ export interface RouteListScreenParams {
 }
 
 export interface RouteSegment {
-  fromStop: Stop;
-  toStop: Stop;
-  lineColors: string[];
-  duration: number; // in seconds
+  stop: Stop;              // The stop at this segment
+  timeToReach: Number;     // Cumulative time to reach this stop
+  isTransfer: boolean;     // True if this stop is a transfer from previous segment
+  towards: string | null;  // TODO: direction/towards info
 }
 
 export interface RouteListScreenProps {
