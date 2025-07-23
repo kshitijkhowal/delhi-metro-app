@@ -26,27 +26,21 @@ function generateSegments(path: Stop[], distance: number[]): RouteSegment[] {
     const stop = path[i];
     let isTransfer = false;
 
-    if (i >= 2) {
+    // Only check transfer for stations that are not at the ends
+    if (i > 0 && i < path.length - 1) {
       const prevStop = path[i - 1];
-      const prevPrevStop = path[i - 2];
+      const nextStop = path[i + 1];
 
-      const prevLines = prevPrevStop.lines ?? [];
-      const currLines = prevStop.lines ?? [];
-      const nextLines = stop.lines ?? [];
+      const linesFromPrev = prevStop.lines ?? [];
+      const linesCurrent = stop.lines ?? [];
+      const linesNext = nextStop.lines ?? [];
 
-      // Get shared lines between prevPrev and prev
-      const continuingLines = currLines.filter(line => prevLines.includes(line));
+      const sharedWithPrev = linesFromPrev.filter(line => linesCurrent.includes(line));
+      const sharedWithNext = linesNext.filter(line => linesCurrent.includes(line));
 
-      // Check if current stop shares any of those continuing lines
-      const continuesOnSameLine = continuingLines.some(line => nextLines.includes(line));
+      const continuesOnSameLine = sharedWithPrev.some(line => sharedWithNext.includes(line));
 
       isTransfer = !continuesOnSameLine;
-    } else if (i === 1) {
-      // Compare stop[0] and stop[1] for initial transfer check
-      const sharedLines = (path[0].lines ?? []).filter(line =>
-        (stop.lines ?? []).includes(line)
-      );
-      isTransfer = sharedLines.length === 0;
     }
 
     const segment: RouteSegment = {

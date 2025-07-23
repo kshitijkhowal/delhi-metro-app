@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     fontSize: Dimensions.TEXT.lg,
     color: Colors.text.primary,
-    marginBottom: Dimensions.MARGIN.xs,
+    marginBottom: Dimensions.MARGIN.xs, 
   },
   routeSubtitle: {
     fontFamily: Fonts.regular,
@@ -88,5 +88,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  
 });
 

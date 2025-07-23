@@ -6,10 +6,10 @@ import {
   View,
 } from 'react-native';
 import { HeaderComponent } from '../../components/headerComponent';
-import { Stop } from '../../types/gtfs.types';
 import { RouteListScreenProps } from './RouteListScreen.Types';
 import { styles } from './styles';
 import { useRouteListScreenLogic } from './useRouteListScreenLogic';
+import { MaterialIcons } from '@expo/vector-icons'; // for icons
 
 const RouteListScreen: React.FC<RouteListScreenProps> = ({ route }) => {
   const {
@@ -23,25 +23,43 @@ const RouteListScreen: React.FC<RouteListScreenProps> = ({ route }) => {
     toStation,
   } = useRouteListScreenLogic(route);
 
-  const renderRouteStop = ({ item, index }: { item: Stop; index: number }) => (
-    <View style={styles.segmentItem}>
-      <View style={styles.segmentHeader}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
-          <View style={styles.lineIndicator} />
-          <Text style={styles.stationName}>
-            {item.stop_name}
-          </Text>
+  const renderRouteStop = ({ item, index }: any) => {
+    const isLast = index === routeSegments.length - 1;
+    const nextStop = routeSegments[index + 1]?.stop;
+    const isTransfer = item.isTransfer;
+
+    return (
+      <View style={styles.segmentItem}>
+        {/* Top connector line */}
+        {index > 0 && <View style={styles.verticalLine} />}
+
+        <View style={styles.stopRow}>
+          <View style={styles.iconWrapper}>
+            {isTransfer ? (
+              <MaterialIcons name="swap-horiz" size={24} color="#ff6f61" />
+            ) : (
+              <View style={styles.stopDot} />
+            )}
+          </View>
+
+          <View style={styles.stopDetails}>
+            <Text style={styles.stationName}>
+              {item.stop.stop_name}
+            </Text>
+            <Text style={styles.timeText}>
+              Time to reach: {formatDuration(item.timeToReach)}
+            </Text>
+            {isTransfer && (
+              <Text style={styles.transferNote}>Transfer here</Text>
+            )}
+            {!isLast && nextStop && (
+              <Text style={styles.towardsText}>→ {nextStop.stop_name}</Text>
+            )}
+          </View>
         </View>
-        {/* No duration for BFS/Stop */}
       </View>
-      {/* Show next stop if not last */}
-      {index < routeSegments.length - 1 && (
-        <Text style={styles.routeSubtitle}>
-          to {routeSegments[index + 1].stop_name}
-        </Text>
-      )}
-    </View>
-  );
+    );
+  };
 
   const renderEmptyList = () => (
     <View style={styles.emptyContainer}>
@@ -67,7 +85,7 @@ const RouteListScreen: React.FC<RouteListScreenProps> = ({ route }) => {
         noBackButton={false}
         actions={{ onLeftPress: handleBackPress }}
       />
-      
+
       <View style={styles.headerContainer}>
         <View style={styles.routeInfo}>
           <Text style={styles.routeTitle}>
@@ -77,7 +95,7 @@ const RouteListScreen: React.FC<RouteListScreenProps> = ({ route }) => {
             Total Stops: {totalStops}
           </Text>
         </View>
-        
+
         <View style={styles.durationContainer}>
           <Text style={styles.durationText}>
             Total Time: {formatDuration(totalDuration)}
@@ -92,7 +110,7 @@ const RouteListScreen: React.FC<RouteListScreenProps> = ({ route }) => {
           style={styles.listContainer}
           data={routeSegments}
           renderItem={renderRouteStop}
-          keyExtractor={(item, index) => `${item.stop_id}-${index}`}
+          keyExtractor={(item, index) => `${item.stop.stop_id}-${index}`}
           ListEmptyComponent={renderEmptyList}
           showsVerticalScrollIndicator={false}
         />
@@ -102,4 +120,3 @@ const RouteListScreen: React.FC<RouteListScreenProps> = ({ route }) => {
 };
 
 export default RouteListScreen;
-
