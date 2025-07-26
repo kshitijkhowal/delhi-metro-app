@@ -24,6 +24,11 @@ const DashboardScreen = () => {
                 onPress={() => navigation.navigate('StationSelectionScreen')}
             />
             <Button
+                title="Go to interactive map Selection"
+                //@ts-ignore
+                onPress={() => navigation.navigate('InteractiveMapScreen')}
+            />
+            <Button
                 title="Go to Test Screen"
                 //@ts-ignore
                 onPress={() => navigation.navigate('TestScreen')}

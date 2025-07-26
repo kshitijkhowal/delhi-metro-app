@@ -17,3 +17,15 @@ export interface RouteListScreenProps {
     params: RouteListScreenParams;
   };
 } 
+
+export interface RouteHeaderData {
+  fromStation: Stop;
+  toStation: Stop;
+  totalDuration: number;
+  totalSegments: number;
+  totalInterchanges: number;
+}
+
+export interface RouteHeaderComponentProps {
+  data: RouteHeaderData;
+}

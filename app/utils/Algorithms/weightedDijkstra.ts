@@ -4,6 +4,7 @@ import { Stop } from '../../types/gtfs.types';
 export interface WeightedDijkstraResult {
   path: Stop[];
   totalDuration: number;
+  totalInterchanges: number;
   segments: RouteSegment[];
 }
 
@@ -19,8 +20,15 @@ function reconstructPath(parent: number[], startIdx: number, endIdx: number): nu
   return pathIndices;
 }
 
-function generateSegments(path: Stop[], distance: number[]): RouteSegment[] {
+function generateSegments(
+  path: Stop[], 
+  distance: number[]
+):{
+  segments: RouteSegment[],
+  totalInterchanges: number
+} {
   const segments: RouteSegment[] = [];
+  let totalInterchanges: number = 0;
 
   for (let i = 0; i < path.length; i++) {
     const stop = path[i];
@@ -41,6 +49,7 @@ function generateSegments(path: Stop[], distance: number[]): RouteSegment[] {
       const continuesOnSameLine = sharedWithPrev.some(line => sharedWithNext.includes(line));
 
       isTransfer = !continuesOnSameLine;
+      if(isTransfer) totalInterchanges++;
     }
 
     const segment: RouteSegment = {
@@ -53,7 +62,10 @@ function generateSegments(path: Stop[], distance: number[]): RouteSegment[] {
     segments.push(segment);
   }
 
-  return segments;
+  return {
+    segments,
+    totalInterchanges
+  };
 }
 
 
@@ -118,10 +130,10 @@ export function weightedDijkstra(
   // Map path to Stop objects
   const path: Stop[] = pathIndices.map(index => stops[index - 1]);
   const totalDuration = distance[dest];
-  const segments = generateSegments(path, distance);
+  const {segments, totalInterchanges} = generateSegments(path, distance);
 
   console.log(JSON.stringify(segments))
 
-  return { path, totalDuration, segments };
+  return { path, totalDuration, segments, totalInterchanges };
 }
 

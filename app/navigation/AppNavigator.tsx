@@ -7,6 +7,7 @@ import StationPickerScreen from '../screens/StationPickerScreen';
 import StationSelectionScreen from '../screens/StationSelectionScreen';
 import TestScreen from '../screens/TestScreen/TestScreen';
 import type { RootStackParamList } from './types';
+import InteractiveMapScreen from '../screens/InteractiveMapScreen/InteractiveMapScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -36,6 +37,11 @@ const AppNavigator = () => (
         <Stack.Screen
             name="RouteListScreen"
             component={RouteListScreen}
+            options={{ headerShown: false }}
+        />
+        <Stack.Screen
+            name="InteractiveMapScreen"
+            component={InteractiveMapScreen}
             options={{ headerShown: false }}
         />
         <Stack.Screen

@@ -3,8 +3,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useMemo, useState } from 'react';
 import { RootStackParamList } from '../../navigation/types';
 import { useAppSelector } from '../../redux/hook';
-import { weightedDijkstra } from '../../utils/Algorithms/weightedDijkstra';
-import { RouteListScreenParams, RouteSegment } from './RouteListScreen.Types';
+import { weightedDijkstra, WeightedDijkstraResult } from '../../utils/Algorithms/weightedDijkstra';
+import { RouteHeaderComponentProps, RouteHeaderData, RouteListScreenParams, RouteSegment } from './RouteListScreen.Types';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -13,8 +13,7 @@ export function useRouteListScreenLogic(route: { params: RouteListScreenParams }
   const { weightedGraph } = useAppSelector(state => state.generatedGraphs);
   const { stops } = useAppSelector(state => state.stops);
   const [routeSegments, setRouteSegments] = useState<RouteSegment[]>([]);
-  const [totalDuration, setTotalDuration] = useState<number>(0);
-  const [totalStops, setTotalStops] = useState<number>(0);
+  const [headerData, setHeaderData] = useState<RouteHeaderData | null>(null);
   const [loading, setLoading] = useState(true);
 
 
@@ -43,7 +42,7 @@ export function useRouteListScreenLogic(route: { params: RouteListScreenParams }
     setLoading(true);
 
     try {
-      const result = weightedDijkstra(
+      const result: WeightedDijkstraResult | null = weightedDijkstra(
         graphMap,
         stops,
         String(fromStation.stop_id),
@@ -52,17 +51,19 @@ export function useRouteListScreenLogic(route: { params: RouteListScreenParams }
 
       if (result) {
         setRouteSegments(result.segments);
-        setTotalDuration(result.totalDuration);
-        setTotalStops(result.path.length);
+        setHeaderData({
+          fromStation,
+          toStation,
+          totalDuration: result.totalDuration,
+          totalSegments: result.path.length,
+          totalInterchanges: result.totalInterchanges
+        }) 
       } else {
         setRouteSegments([]);
-        setTotalDuration(0);
-        setTotalStops(0);
       }
     } catch (error) {
       console.error('Error finding route:', error);
       setRouteSegments([]);
-      setTotalDuration(0);
     } finally {
       setLoading(false);
     }
@@ -72,24 +73,10 @@ export function useRouteListScreenLogic(route: { params: RouteListScreenParams }
     navigation.goBack();
   };
 
-  const formatDuration = (seconds: number): string => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-
-    if (hours > 0) {
-      return `${hours}h ${minutes}m`;
-    }
-    return `${minutes}m`;
-  };
-
   return {
     routeSegments,
-    totalDuration,
-    totalStops,
     loading,
     handleBackPress,
-    formatDuration,
-    fromStation,
-    toStation,
+    headerData,
   };
 }
