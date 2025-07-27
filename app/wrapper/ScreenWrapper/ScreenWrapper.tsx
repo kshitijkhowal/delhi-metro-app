@@ -1,69 +1,62 @@
-import AppButton from '@/app/components/AppButton';
-import { AppButtonProps } from '@/app/components/AppButton/AppButton';
-import { LoadingComponent } from '@/app/components/loadingComponent';
-import { Colors } from '@/app/constants/colors/colors';
-import { Dimensions } from '@/app/constants/dimensions/dimensions';
+import { useAppSelector } from '@/app/redux/hook';
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { StatusBar, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useScreenWrapperLogic } from './useScreenWrapperLogic';
-
-interface ScreenWrapperProps {
-  backgroundColor?: string;
-  statusBarColor?: string;
-  statusBarTheme?: 'light-content' | 'dark-content';
-  loading?: boolean;
-  screenName?: string;
-  children: React.ReactNode;
-  bottomButtonProps?: AppButtonProps;
-}
+import { View } from 'react-native';
+import { SystemBars } from 'react-native-edge-to-edge';
+import type { ScreenWrapperProps } from './screenWrapperTypes';
+import { getScreenWrapperLogic } from './useScreenWrapperLogic';
 
 const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
-  backgroundColor = Colors.background.primary,
-  statusBarColor = Colors.background.primary,
-  statusBarTheme = 'dark-content',
-  loading = false,
   screenName,
+  backgroundColor,
+  statusBarStyle,
   children,
-  bottomButtonProps,
+  loading = false,
+  avoidStatusBar = true,
+  avoidBottomInset = true,
+  avoidScreenCutout = true,
+  fullScreen = false,
 }) => {
-  useScreenWrapperLogic(screenName);
+  const theme = useAppSelector((state) => state.uiPreferences.theme);
+  const effectiveStatusBarStyle = statusBarStyle || (theme === 'dark' ? 'light' : 'dark');
+  const effectiveBackgroundColor = backgroundColor;
 
+  const {
+    isGradient,
+    wrapperStyle,
+    linearGradientColors,
+    systemBarsStyle,
+    systemBarsHidden,
+  } = getScreenWrapperLogic({
+    backgroundColor: effectiveBackgroundColor,
+    statusBarStyle: effectiveStatusBarStyle,
+    avoidStatusBar,
+    avoidBottomInset,
+    avoidScreenCutout,
+    fullScreen,
+  });
+
+  const renderContent = () => (
+    <View style={[wrapperStyle]}>
+      <SystemBars style={systemBarsStyle.statusBarStyle ?? 'dark'} hidden={systemBarsHidden} />
+      {children}
+      {/* {loading && <LoadingComponent />} */}
+    </View>
+  );
+
+  if (isGradient && linearGradientColors) {
+    return (
+      <LinearGradient colors={linearGradientColors as any} style={{flex:1}}>
+        {renderContent()}
+      </LinearGradient>
+    );
+  }
+
+  // Only use backgroundColor if it's a string
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: backgroundColor,
-      }}
-    >
-      <StatusBar
-        backgroundColor={statusBarColor}
-        barStyle={statusBarTheme}
-      />
-      
-      {loading ? (
-        <LoadingComponent message="Loading Metro Data..." />
-      ) : (
-        children
-      )}
-      {bottomButtonProps && (
-        <View
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: Colors.background.secondary,
-            paddingVertical: Dimensions.PADDING.lg,
-            paddingHorizontal: Dimensions.PADDING.lg,
-            borderTopWidth: Dimensions.BORDER_WIDTH.regular,
-            borderColor: Colors.border.primary,
-            zIndex: 100,
-          }}>
-          <AppButton {...bottomButtonProps} />
-        </View>
-      )}
-    </SafeAreaView>
+    <View style={[typeof effectiveBackgroundColor === 'string' ? {backgroundColor: effectiveBackgroundColor} : undefined,{flex:1}]}> 
+      {renderContent()}
+    </View>
   );
 };
 

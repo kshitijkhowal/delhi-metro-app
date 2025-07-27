@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type Theme = 'light' | 'dark' | 'system';
+type Theme = 'light' | 'dark';
 type FontSize = 'small' | 'medium' | 'large';
 
 interface UiPreferencesState {
@@ -11,7 +11,7 @@ interface UiPreferencesState {
 }
 
 const initialState: UiPreferencesState = {
-  theme: 'system',
+  theme: 'dark',
   fontSize: 'medium',
   animationsEnabled: true,
   hapticsEnabled: true,

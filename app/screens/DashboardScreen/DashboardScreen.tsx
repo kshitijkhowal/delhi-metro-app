@@ -33,6 +33,11 @@ const DashboardScreen = () => {
                 //@ts-ignore
                 onPress={() => navigation.navigate('TestScreen')}
             />
+            <Button
+                title="Go to Device Config Screen"
+                //@ts-ignore
+                onPress={() => navigation.navigate('ConfigSettingsScreen')}
+            />
             
         </ScreenWrapper>
     );

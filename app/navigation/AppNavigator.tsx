@@ -1,13 +1,14 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import ConfigSettingsScreen from '../screens/ConfigSettingsScreen';
 import DashboardScreen from '../screens/DashboardScreen';
+import InteractiveMapScreen from '../screens/InteractiveMapScreen/InteractiveMapScreen';
 import RouteListScreen from '../screens/RouteListScreen';
 import SplashScreen from '../screens/SplashScreen';
 import StationPickerScreen from '../screens/StationPickerScreen';
 import StationSelectionScreen from '../screens/StationSelectionScreen';
 import TestScreen from '../screens/TestScreen/TestScreen';
 import type { RootStackParamList } from './types';
-import InteractiveMapScreen from '../screens/InteractiveMapScreen/InteractiveMapScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -48,6 +49,11 @@ const AppNavigator = () => (
             name="TestScreen"
             component={TestScreen}
             options={{ headerShown: false }}
+        />
+        <Stack.Screen
+            name="ConfigSettingsScreen"
+            component={ConfigSettingsScreen}
+            options={{ headerShown: false}}
         />
         {/* Add more screens here */}
     </Stack.Navigator>

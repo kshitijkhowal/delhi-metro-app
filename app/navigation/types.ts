@@ -7,4 +7,7 @@ export type RootStackParamList = {
   StationSelectionScreen: undefined;
   StationPickerScreen: StationPickerScreenParams;
   RouteListScreen: RouteListScreenParams;
+  ConfigSettingsScreen: undefined;
+  InteractiveMapScreen: undefined;
+  TestScreen: undefined; 
 }; 

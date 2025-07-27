@@ -1,5 +1,4 @@
 import {moderateScale} from 'react-native-size-matters';
-import {ThemeColors} from '../colors/colors';
 
 export const Dimensions = {
   // Border Radius

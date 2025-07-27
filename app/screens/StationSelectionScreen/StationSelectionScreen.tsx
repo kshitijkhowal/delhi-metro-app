@@ -40,18 +40,6 @@ const StationSelectionScreen : FC = () => {
         <ScreenWrapper
             screenName={route.name}
             backgroundColor={"#F5F5F5"}
-            bottomButtonProps={{
-                title: buttonText,
-                onPress: handleShowRoute,
-                disabled: isButtonDisabled,
-                type: 'primary',
-                elevation: {
-                    enabled: true,
-                },
-                haptic: {
-                    enabled: true,
-                }
-            }}
         >
             <HeaderComponent
                 values={{ title: 'Select Stations' }}
