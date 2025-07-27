@@ -4,17 +4,19 @@ import { persistReducer, persistStore } from 'redux-persist';
 import generatedGraphsReducer from '../features/generatedGraphs/generatedGraphs';
 import recentRoutesReducer from '../features/recentRoutes/recentRoutes';
 import stopsReducer from '../features/stops/stops';
+import uiPreferencesReducer from '../features/deviceConfig/uiPreferences';
 
 const rootReducer = combineReducers({
   stops: stopsReducer,
   generatedGraphs: generatedGraphsReducer,
   recentRoutes: recentRoutesReducer,
+  uiPreferences: uiPreferencesReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['stops', 'generatedGraphs'],
+  whitelist: ['stops', 'generatedGraphs', 'recentRoutes', 'uiPreferences'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
