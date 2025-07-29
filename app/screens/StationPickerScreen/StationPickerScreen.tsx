@@ -46,7 +46,9 @@ const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
   );
 
   return (
-    <ScreenWrapper>
+    <ScreenWrapper
+      screenName='StationSelectionScreen'
+    >
 
     <View style={styles.container}>
       <HeaderComponent

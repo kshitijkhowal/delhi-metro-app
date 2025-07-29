@@ -39,7 +39,6 @@ const StationSelectionScreen : FC = () => {
     return (
         <ScreenWrapper
             screenName={route.name}
-            backgroundColor={"#F5F5F5"}
         >
             <HeaderComponent
                 values={{ title: 'Select Stations' }}

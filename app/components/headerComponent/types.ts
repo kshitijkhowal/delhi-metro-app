@@ -18,11 +18,11 @@ export interface HeaderComponentProps {
     onLeftPress?: () => void;
   };
   iconMap: HeaderIconMapItem[];
+  leftIcon?: HeaderIconMapItem;
   style?: object;
   transparent?: boolean;
   onLayout?: () => void;
   noBackButton?: boolean;
-  theme?: 'white' | 'primary';
   // Search bar props
   enableSearch?: boolean;
   onSearchChange?: (text: string) => void;

@@ -1,3 +1,4 @@
+import { useThemeColors } from '@/app/hooks/useThemeColors';
 import { useAppSelector } from '@/app/redux/hook';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
@@ -18,8 +19,9 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
   fullScreen = false,
 }) => {
   const theme = useAppSelector((state) => state.uiPreferences.theme);
+  const Colors = useThemeColors();
   const effectiveStatusBarStyle = statusBarStyle || (theme === 'dark' ? 'light' : 'dark');
-  const effectiveBackgroundColor = backgroundColor;
+  const effectiveBackgroundColor = backgroundColor || Colors.background.primary;
 
   const {
     isGradient,

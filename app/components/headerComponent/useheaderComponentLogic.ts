@@ -3,28 +3,28 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import type { LayoutChangeEvent } from 'react-native';
 import { TextInput } from 'react-native';
 import { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { Colors } from '../../constants/colors/colors';
 
-export function useHeaderComponentLogic({
-  theme = 'white',
-  enableSearch = false,
-  onSearchOpen,
-  onSearchClose,
-  onLayout,
-}: {
+interface UseHeaderComponentLogicProps {
   actions?: { onLeftPress?: () => void };
-  theme?: 'white' | 'primary';
   LeftIcon?: React.ComponentType;
   enableSearch?: boolean;
   onSearchOpen?: () => void;
   onSearchClose?: () => void;
   onLayout?: (event: LayoutChangeEvent) => void;
-}) {
+  Colors: any;
+}
+
+export function useHeaderComponentLogic({
+  enableSearch = false,
+  onSearchOpen,
+  onSearchClose,
+  onLayout,
+  Colors,
+}: UseHeaderComponentLogicProps) {
   const navigation = useNavigation();
-  const isPrimary = theme === 'primary';
-  const backgroundColor = isPrimary ? Colors.theme.primary.default : Colors.background.primary;
-  const titleColor = isPrimary ? Colors.text.inverse : Colors.text.primary;
-  const subTitleColor = isPrimary ? Colors.text.inverse : Colors.text.secondary;
+  const backgroundColor = Colors.background.primary;
+  const titleColor = Colors.text.primary;
+  const subTitleColor = Colors.text.secondary;
 
   const handleOnBack = () => {
     navigation.goBack();
@@ -94,7 +94,6 @@ export function useHeaderComponentLogic({
   }, [onLayout, searchActive]);
 
   return {
-    isPrimary,
     backgroundColor,
     titleColor,
     subTitleColor,
