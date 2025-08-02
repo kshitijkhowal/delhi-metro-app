@@ -1,3 +1,4 @@
+import { useColors } from '@/app/contexts/ThemeContext';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import type { LayoutChangeEvent } from 'react-native';
@@ -11,7 +12,6 @@ interface UseHeaderComponentLogicProps {
   onSearchOpen?: () => void;
   onSearchClose?: () => void;
   onLayout?: (event: LayoutChangeEvent) => void;
-  Colors: any;
 }
 
 export function useHeaderComponentLogic({
@@ -19,12 +19,12 @@ export function useHeaderComponentLogic({
   onSearchOpen,
   onSearchClose,
   onLayout,
-  Colors,
 }: UseHeaderComponentLogicProps) {
   const navigation = useNavigation();
-  const backgroundColor = Colors.background.primary;
-  const titleColor = Colors.text.primary;
-  const subTitleColor = Colors.text.secondary;
+  const colors = useColors();
+  const backgroundColor = colors.background.primary;
+  const titleColor = colors.text.primary;
+  const subTitleColor = colors.text.secondary;
 
   const handleOnBack = () => {
     navigation.goBack();

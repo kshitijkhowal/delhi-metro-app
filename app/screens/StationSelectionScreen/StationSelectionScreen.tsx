@@ -3,8 +3,9 @@ import AppTextInput from '@/app/components/AppTextInput';
 import AppView from '@/app/components/AppView';
 import { HeaderComponent } from '@/app/components/headerComponent';
 import { Dimensions } from '@/app/constants/dimensions/dimensions';
+import { useColors } from '@/app/contexts/ThemeContext';
 import ScreenWrapper from '@/app/wrapper/ScreenWrapper/ScreenWrapper';
-import React,{FC} from 'react';
+import React, { FC } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import styles from './styles';
@@ -13,6 +14,7 @@ import { useStationSelectionScreenLogic } from './useStationSelectionScreenLogic
 
 
 const StationSelectionScreen : FC = () => {
+    const colors = useColors();
     const {
         route,
         fromStation,
@@ -29,8 +31,11 @@ const StationSelectionScreen : FC = () => {
 
     const renderSuggestionsHeader : FC = () => {
         return(
-            <View style={styles.headerContainer}>
-                <Text style={styles.headerText}>
+            <View style={[styles.headerContainer, { 
+                backgroundColor: colors.background.secondary,
+                borderColor: colors.status.pending 
+            }]}>
+                <Text style={[styles.headerText, { color: colors.text.primary }]}>
                     Suggested Routes :
                 </Text>
             </View>
@@ -59,7 +64,7 @@ const StationSelectionScreen : FC = () => {
 
                 <AppView
                     onPress={onSwitch}
-                    style={styles.iconButton}
+                    style={[styles.iconButton, { borderColor: colors.border.primary }]}
                     elevation={{ enabled: true }}
                 >
                     <Animated.View style={animatedSwitchStyle}>
@@ -93,6 +98,28 @@ const StationSelectionScreen : FC = () => {
                     ListHeaderComponentStyle={styles.headerComponentStyle}
                 />
             )}
+
+            {/* Bottom Button */}
+            <View style={styles.bottomContainer}>
+                <AppView
+                    onPress={handleShowRoute}
+                    disabled={isButtonDisabled}
+                    style={[
+                        styles.showRouteButton,
+                        { 
+                            backgroundColor: isButtonDisabled ? colors.border.primary : colors.theme.primary,
+                        }
+                    ]}
+                    elevation={{ enabled: true }}
+                >
+                    <Text style={[
+                        styles.showRouteButtonText,
+                        { color: isButtonDisabled ? colors.text.secondary : '#FFFFFF' }
+                    ]}>
+                        {buttonText}
+                    </Text>
+                </AppView>
+            </View>
 
         </ScreenWrapper>
     );

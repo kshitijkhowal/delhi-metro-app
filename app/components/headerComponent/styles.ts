@@ -1,6 +1,5 @@
 import { Fonts } from '@/app/constants/fonts/fonts';
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../constants/colors/colors';
 import { Dimensions } from '../../constants/dimensions/dimensions';
 
 const styles = StyleSheet.create({
@@ -75,7 +74,6 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     fontSize: 9,
-    color: Colors.text.inverse,
     fontWeight: 'bold',
   },
   // Animated search bar overlay
@@ -87,7 +85,6 @@ const styles = StyleSheet.create({
     height: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.background.primary,
     zIndex: 10,
     paddingLeft: Dimensions.PADDING.lg,
     paddingRight: Dimensions.PADDING.lg,
@@ -96,7 +93,6 @@ const styles = StyleSheet.create({
     marginLeft: Dimensions.MARGIN.xs,
     borderWidth: Dimensions.BORDER_WIDTH.thin,
     borderRadius: Dimensions.BORDER_RADIUS.sm,
-
   },
   searchBackButton: {
     paddingVertical: Dimensions.PADDING.sm,

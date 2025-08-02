@@ -1,4 +1,4 @@
-import { Colors } from '@/app/constants/colors/colors';
+import { Colors } from '@/app/constants/betterColors/betterColors';
 import { Dimensions } from '@/app/constants/dimensions/dimensions';
 import { RecentRoute, addRecentRoute, removeRecentRoute } from '@/app/redux/features/recentRoutes/recentRoutes';
 import { useAppDispatch } from '@/app/redux/hook';
@@ -40,7 +40,7 @@ export function useSuggestionListItemLogic(route: RecentRoute) {
     position: 'absolute',
     left: 0,
     top: -Dimensions.MARGIN.xxxs * 1.7,
-    backgroundColor: Colors.background.primary,
+    backgroundColor: Colors.light.background.primary,
     borderRadius: Dimensions.BORDER_RADIUS.sm,
     paddingHorizontal: Dimensions.PADDING.xs,
   }));

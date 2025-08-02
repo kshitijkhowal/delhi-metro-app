@@ -3,8 +3,8 @@ import BinIcon from '@/app/assets/icons/gestureIcons/bin';
 import HeartIcon from '@/app/assets/icons/gestureIcons/heartIcon';
 import MetroSideViewAnimated from '@/app/assets/icons/metroIcons/metroSideViewAnimated';
 import AppView from '@/app/components/AppView';
-import { Colors } from '@/app/constants/colors/colors';
 import { Dimensions } from '@/app/constants/dimensions/dimensions';
+import { useColors } from '@/app/contexts/ThemeContext';
 import { RecentRoute } from '@/app/redux/features/recentRoutes/recentRoutes';
 import React from 'react';
 import { Text, View } from 'react-native';
@@ -18,26 +18,27 @@ interface SuggestionListItemProps {
 }
 
 const SuggestionListItem: React.FC<SuggestionListItemProps> = ({ route, onPress }) => {
+  const colors = useColors();
   const { fromName, toName, animatedIconStyle, handleLayout, containerWidth, onHeart, onSwitch, onDelete, isFavourite, animatedSwitchStyle } = useSuggestionListItemLogic(route);
 
   return (
     <AppView
-      style={styles.container1}
+      style={styles.container1(colors)}
       onPress={() => onPress(route)}
       elevation={{ enabled: true }}
     >
       <View style={styles.container1_1}>
-        <Text style={styles.stationName}>{fromName}</Text>
-        <Text style={styles.stationName}>{toName}</Text>
+        <Text style={styles.stationName(colors)}>{fromName}</Text>
+        <Text style={styles.stationName(colors)}>{toName}</Text>
       </View>
       <View style={[styles.container1_2, styles.relative]} onLayout={handleLayout}>
         {containerWidth > 0 && (
-          <View style={[styles.line, { width: containerWidth - styles.dot.width }]} />
+          <View style={styles.line(colors, containerWidth)} />
         )}
-        <View style={styles.dot} />
-        <View style={styles.dot} />
+        <View style={styles.dot(colors)} />
+        <View style={styles.dot(colors)} />
         {/* Animated Icon */}
-        <Animated.View style={[animatedIconStyle]}>
+        <Animated.View style={[animatedIconStyle, styles.animatedIcon(colors)]}>
           <MetroSideViewAnimated size={Dimensions.MARGIN.lg} />
         </Animated.View>
         {/* Icon Buttons */}
@@ -45,7 +46,7 @@ const SuggestionListItem: React.FC<SuggestionListItemProps> = ({ route, onPress 
       <View style={styles.iconButtonRow}>
         <AppView
           onPress={onDelete}
-          style={styles.iconButton}
+          style={styles.iconButton(colors)}
           elevation={{ enabled: true }}
         >
           <BinIcon size={22} strokeWidth={1.5} />
@@ -53,14 +54,14 @@ const SuggestionListItem: React.FC<SuggestionListItemProps> = ({ route, onPress 
         <View style={styles.switchHeartContainer}>
           <AppView
             onPress={onHeart}
-            style={styles.iconButton}
+            style={styles.iconButton(colors)}
             elevation={{ enabled: true }}
           >
-            <HeartIcon size={20} strokeWidth={2} fillColor={isFavourite ? 'red' : Colors.background.primary} />
+            <HeartIcon size={20} strokeWidth={2} fillColor={isFavourite ? 'red' : colors.background.primary} />
           </AppView>
           <AppView
             onPress={onSwitch}
-            style={styles.iconButton}
+            style={styles.iconButton(colors)}
             elevation={{ enabled: true }}
           >
             <Animated.View style={animatedSwitchStyle}>

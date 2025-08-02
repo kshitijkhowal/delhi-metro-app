@@ -1,7 +1,7 @@
 import BackArrowIcon from '@/app/assets/icons/arrowIcons/backArrowIcon';
 import MagnifineGlassIcon from '@/app/assets/icons/searchIcons/magnifineGlassIcon';
 import AppTextInput from '@/app/components/AppTextInput';
-import { useThemeColors } from '@/app/hooks/useThemeColors';
+import { useColors } from '@/app/contexts/ThemeContext';
 import React from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
@@ -22,7 +22,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
   onSearchClose,
   searchPlaceholder = 'Search...',
 }) => {
-  const Colors = useThemeColors();
+  const colors = useColors();
   const {
     backgroundColor,
     titleColor,
@@ -34,7 +34,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
     inputRef,
     animatedSearchStyle,
     HeaderOnLayout,
-  } = useHeaderComponentLogic({ enableSearch, onSearchOpen, onSearchClose, onLayout, Colors });
+  } = useHeaderComponentLogic({ enableSearch, onSearchOpen, onSearchClose, onLayout });
 
   const renderIcon = (iconItem: HeaderIconMapItem, index?: number) => (
     <Pressable
@@ -71,7 +71,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
           renderIcon(leftIcon)
         ) : !noBackButton ? (
           <Pressable onPress={handleOnBack} style={styles.backButton}>
-            <BackArrowIcon strokeColor={Colors.text.primary} size={22}/>
+            <BackArrowIcon strokeColor={colors.text.primary} size={22}/>
           </Pressable>
         ) : (
           <View style={styles.backButton} />
@@ -90,7 +90,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
         {/* Search icon */}
         {enableSearch && (
           <Pressable style={styles.iconButton} onPress={openSearch}>
-            <MagnifineGlassIcon strokeColor={Colors.text.primary} size={22} rotation={270}/>
+            <MagnifineGlassIcon strokeColor={colors.text.primary} size={22} rotation={270}/>
           </Pressable>
         )}
       </View>
@@ -98,19 +98,17 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
       {enableSearch && searchActive && (
         <Animated.View style={[styles.searchOverlay, animatedSearchStyle, {backgroundColor}]}> 
           <Pressable style={styles.searchBackButton} onPress={closeSearch}>
-            <BackArrowIcon strokeColor={Colors.text.primary} size={22} rotation={180}/>
+            <BackArrowIcon strokeColor={colors.text.primary} size={22} rotation={180}/>
           </Pressable>
           <AppTextInput
-            ref={inputRef}
             onChangeText={onSearchChange}
             placeholder={searchPlaceholder}
-            placeholderTextColor={Colors.text.secondary}
             returnKeyType="search"
             style={[
               styles.searchInput,
               {
-                borderColor: Colors.border.primary,
-                color: Colors.text.primary,
+                borderColor: colors.border.primary,
+                color: colors.text.primary,
               },
             ]}
           />

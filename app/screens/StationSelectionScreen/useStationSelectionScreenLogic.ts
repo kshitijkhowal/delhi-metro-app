@@ -1,3 +1,4 @@
+import { useThemeColors } from '@/app/hooks/useThemeColors';
 import { RecentRoute } from '@/app/redux/features/recentRoutes/recentRoutes';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -15,6 +16,7 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 export function useStationSelectionScreenLogic() {
     const route = useRoute();
     const navigation = useNavigation<NavigationProp>();
+    const colors = useThemeColors();
     const [fromStation, setFromStation] = useState<Stop | null>(null);
     const [toStation, setToStation] = useState<Stop | null>(null);
     const [loading, setLoading] = useState(false);
@@ -87,6 +89,7 @@ export function useStationSelectionScreenLogic() {
     }));
 
     return {
+        colors,
         route,
         loading,
         fromStation,

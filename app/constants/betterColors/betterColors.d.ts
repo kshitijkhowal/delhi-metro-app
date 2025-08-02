@@ -1,9 +1,9 @@
 import {
-    BackgroundColors,
-    BorderColors,
-    StatusColors,
-    TextColors,
-    ThemeColors
+  BackgroundColors,
+  BorderColors,
+  StatusColors,
+  TextColors,
+  ThemeColors
 } from './betterColors';
   
   type ValueOf<T> = T[keyof T];
@@ -15,11 +15,34 @@ import {
   export type BorderColorType = ValueOf<typeof BorderColors>;
   
   export type ThemePaletteType = {
-    theme: typeof ThemeColors;
-    status: typeof StatusColors;
-    text: typeof TextColors;
-    background: typeof BackgroundColors;
-    border: typeof BorderColors;
+    theme: {
+      primary: string;
+      secondary: string;
+    };
+    status: {
+      success: string;
+      warning: string;
+      error: string;
+      inactive: string;
+      pending: string;
+    };
+    text: {
+      primary: string;
+      secondary: string;
+    };
+    background: {
+      primary: string;
+      secondary: string;
+    };
+    View: {
+      primary: string;
+      secondary: string;
+      tertiary: string;
+    };
+    border: {
+      primary: string;
+      secondary: string;
+    };
   };
   
   export type ColorsType = {

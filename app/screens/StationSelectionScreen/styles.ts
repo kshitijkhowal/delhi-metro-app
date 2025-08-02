@@ -1,4 +1,3 @@
-import { Colors } from '@/app/constants/colors/colors';
 import { Dimensions } from '@/app/constants/dimensions/dimensions';
 import { Fonts } from '@/app/constants/fonts/fonts';
 import { StyleSheet } from 'react-native';
@@ -24,24 +23,39 @@ const styles = StyleSheet.create({
     width: 'auto',
     backgroundColor: 'transparent',
     borderWidth: Dimensions.BORDER_WIDTH.thin,
-    borderColor: Colors.border.primary
   },
   headerContainer: {
-    backgroundColor: Colors.background.earn,
     width: 'auto',
     borderRadius: Dimensions.BORDER_RADIUS.lg,
     alignItems: 'center',
     borderWidth: Dimensions.BORDER_WIDTH.regular,
-    borderColor: Colors.status.pending,
     padding: Dimensions.PADDING.xs,
   },
   headerText: {
     fontFamily: Fonts.regular,
-    
   },
   headerComponentStyle: {
     paddingVertical: Dimensions.PADDING.sm,
-  }
+  },
+  bottomContainer: {
+    paddingHorizontal: Dimensions.PADDING.lg,
+    paddingVertical: Dimensions.PADDING.md,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  showRouteButton: {
+    paddingVertical: Dimensions.PADDING.md,
+    paddingHorizontal: Dimensions.PADDING.lg,
+    borderRadius: Dimensions.BORDER_RADIUS.lg,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  showRouteButtonText: {
+    fontFamily: Fonts.medium,
+    fontSize: Dimensions.TEXT.md,
+  },
 });
 
 export default styles;

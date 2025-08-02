@@ -1,94 +1,129 @@
-import React, { forwardRef, useEffect, useRef } from 'react';
-import { Animated, Text, TextInput, View } from 'react-native';
+import { useColors } from '@/app/contexts/ThemeContext';
+import React from 'react';
+import { Text, TextInput, View } from 'react-native';
+import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated';
 import { styles } from './styles';
-import { AppTextInputProps } from './types';
 import { useAppTextInputLogic } from './useAppTextInputLogic';
 
-const AppTextInput = forwardRef<TextInput, AppTextInputProps>(
-  ({ error, placeholder, value, ...props }, ref) => {
-    const { isFocused, handleFocus, handleBlur, colors } = useAppTextInputLogic();
-    
-    // Animation values
-    const animatedValue = useRef(new Animated.Value(value ? 1 : 0)).current;
-    const labelPosition = useRef(new Animated.Value(value ? 1 : 0)).current;
-    
-    // Determine if label should be floating
-    const shouldFloat = isFocused || !!value;
-    
-    useEffect(() => {
-      Animated.timing(animatedValue, {
-        toValue: shouldFloat ? 1 : 0,
-        duration: 200,
-        useNativeDriver: false,
-      }).start();
-    }, [shouldFloat, animatedValue]);
-    
-    useEffect(() => {
-      Animated.timing(labelPosition, {
-        toValue: shouldFloat ? 1 : 0,
-        duration: 200,
-        useNativeDriver: false,
-      }).start();
-    }, [shouldFloat, labelPosition]);
+interface AppTextInputProps {
+  placeholder?: string;
+  value?: string;
+  onChangeText?: (text: string) => void;
+  secureTextEntry?: boolean;
+  keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad';
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
+  error?: string;
+  multiline?: boolean;
+  numberOfLines?: number;
+  maxLength?: number;
+  editable?: boolean;
+  onFocus?: () => void;
+  onBlur?: () => void;
+  onSubmitEditing?: () => void;
+  returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send';
+  autoCorrect?: boolean;
+  autoComplete?: 'off' | 'username' | 'password' | 'email' | 'name' | 'tel' | 'street-address' | 'postal-code' | 'cc-number' | 'cc-csc' | 'cc-exp' | 'cc-name';
+  textContentType?: 'none' | 'URL' | 'addressCity' | 'addressCityAndState' | 'addressState' | 'countryName' | 'creditCardNumber' | 'emailAddress' | 'familyName' | 'fullStreetAddress' | 'givenName' | 'jobTitle' | 'location' | 'middleName' | 'name' | 'namePrefix' | 'nameSuffix' | 'nickname' | 'organizationName' | 'postalCode' | 'streetAddressLine1' | 'streetAddressLine2' | 'sublocality' | 'telephoneNumber' | 'username' | 'password';
+  style?: any;
+  testID?: string;
+}
 
-    const labelStyle = {
-      position: 'absolute' as const,
-      left: 12,
-      top: labelPosition.interpolate({
-        inputRange: [0, 1],
-        outputRange: [16, 8],
-      }),
-      fontSize: labelPosition.interpolate({
-        inputRange: [0, 1],
-        outputRange: [16, 12],
-      }),
-      color: animatedValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: [colors.text.placeholder, colors.theme.primary.default],
-      }),
-      zIndex: 1,
-    };
+const AppTextInput: React.FC<AppTextInputProps> = ({
+  placeholder,
+  value = '',
+  onChangeText,
+  secureTextEntry = false,
+  keyboardType = 'default',
+  autoCapitalize = 'sentences',
+  error,
+  multiline = false,
+  numberOfLines = 1,
+  maxLength,
+  editable = true,
+  onFocus,
+  onBlur,
+  onSubmitEditing,
+  returnKeyType = 'done',
+  autoCorrect = true,
+  autoComplete = 'off',
+  textContentType = 'none',
+  style,
+  testID,
+}) => {
+  const colors = useColors();
+  const { shouldFloat, animatedValue, handleFocus, handleBlur, handleTextChange } = useAppTextInputLogic(value, onFocus, onBlur, onChangeText);
 
-    const containerStyle = {
-      backgroundColor: colors.background.primary,
-      borderColor: animatedValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: [colors.border.input, colors.theme.primary.default],
-      }),
-    };
-
-    return (
-      <View style={[styles.container]}>
-        <Animated.View style={[styles.inputContainer, containerStyle]}>
-          {placeholder && (
-            <Animated.Text style={[styles.floatingLabel, labelStyle]}>
-              {placeholder}
-            </Animated.Text>
-          )}
-          <TextInput
-            ref={ref}
-            style={[
-              styles.input,
-              {
-                color: colors.text.primary,
-                paddingTop: shouldFloat ? 24 : 8,
-                paddingBottom: 8,
-              },
-            ]}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            value={value}
-            {...props}
-          />
-        </Animated.View>
-        {!!error && (
-          <Text style={[styles.errorText, { color: colors.status.error.default }]}>
-            {error}
-          </Text>
-        )}
-      </View>
+  const animatedStyle = useAnimatedStyle(() => {
+    const translateY = interpolate(
+      animatedValue.value,
+      [0, 1],
+      [0, -20]
     );
-  }
-);
+
+    const translateX = interpolate(
+      animatedValue.value,
+      [0, 1],
+      [0, 10]
+    );
+
+    const scale = interpolate(
+      animatedValue.value,
+      [0, 1],
+      [1, 0.8]
+    );
+
+    return {
+      transform: [
+        { translateY },
+        { translateX },
+        { scale }
+      ],
+    };
+  });
+
+  return (
+    <View style={styles.inputContainer}>
+      <Animated.View style={[styles.floatingLabel, animatedStyle]}>
+        <Text style={{ color: colors.theme.primary, fontSize: 12 }}>
+          {placeholder}
+        </Text>
+      </Animated.View>
+      <TextInput
+        style={[
+          styles.input,
+          {
+            color: colors.text.primary,
+            paddingTop: shouldFloat ? 20 : 0,
+          },
+          style
+        ]}
+        placeholder={shouldFloat ? '' : placeholder}
+        placeholderTextColor={colors.text.secondary}
+        value={value}
+        onChangeText={handleTextChange}
+        secureTextEntry={secureTextEntry}
+        keyboardType={keyboardType}
+        autoCapitalize={autoCapitalize}
+        multiline={multiline}
+        numberOfLines={numberOfLines}
+        maxLength={maxLength}
+        editable={editable}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onSubmitEditing={onSubmitEditing}
+        returnKeyType={returnKeyType}
+        autoCorrect={autoCorrect}
+        autoComplete={autoComplete}
+        textContentType={textContentType}
+        testID={testID}
+      />
+      {error && (
+        <Text style={{ color: colors.status.error, fontSize: 12, marginTop: 4 }}>
+          {error}
+        </Text>
+      )}
+    </View>
+  );
+};
 
 export default AppTextInput;
