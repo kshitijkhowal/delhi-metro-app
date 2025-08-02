@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container1: {
     padding: Dimensions.PADDING.md,
-    backgroundColor: Colors.background.primary,
+    backgroundColor: Colors.theme.primary+'10',
     borderRadius: Dimensions.BORDER_RADIUS.md,
     borderWidth: Dimensions.BORDER_WIDTH.thin,
     borderColor: Colors.border.primary

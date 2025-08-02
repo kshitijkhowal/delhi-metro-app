@@ -1,10 +1,11 @@
-import { useThemeColors } from '@/app/hooks/useThemeColors';
+import { Colors } from '@/app/constants/betterColors/betterColors';
 import { useAppSelector } from '@/app/redux/hook';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { View } from 'react-native';
 import { SystemBars } from 'react-native-edge-to-edge';
 import type { ScreenWrapperProps } from './screenWrapperTypes';
+import styles from './styles';
 import { getScreenWrapperLogic } from './useScreenWrapperLogic';
 
 const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
@@ -19,9 +20,10 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
   fullScreen = false,
 }) => {
   const theme = useAppSelector((state) => state.uiPreferences.theme);
-  const Colors = useThemeColors();
+  const resolvedTheme = theme === 'dark' ? 'dark' : 'light';
+  const colors = Colors[resolvedTheme];
   const effectiveStatusBarStyle = statusBarStyle || (theme === 'dark' ? 'light' : 'dark');
-  const effectiveBackgroundColor = backgroundColor || Colors.background.primary;
+  const effectiveBackgroundColor = backgroundColor || colors.background.primary;
 
   const {
     isGradient,
@@ -36,11 +38,19 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
     avoidBottomInset,
     avoidScreenCutout,
     fullScreen,
+    colors,
   });
 
   const renderContent = () => (
-    <View style={[wrapperStyle]}>
-      <SystemBars style={systemBarsStyle.statusBarStyle ?? 'dark'} hidden={systemBarsHidden} />
+    <View style={[
+      styles.content, 
+      wrapperStyle,
+      { backgroundColor: colors.background.primary }
+    ]}>
+      <SystemBars 
+        style={systemBarsStyle.statusBarStyle ?? 'dark'} 
+        hidden={systemBarsHidden} 
+      />
       {children}
       {/* {loading && <LoadingComponent />} */}
     </View>
@@ -48,15 +58,21 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
 
   if (isGradient && linearGradientColors) {
     return (
-      <LinearGradient colors={linearGradientColors as any} style={{flex:1}}>
+      <LinearGradient 
+        colors={linearGradientColors as any} 
+        style={[styles.container, { backgroundColor: colors.background.primary }]}
+      >
         {renderContent()}
       </LinearGradient>
     );
   }
 
-  // Only use backgroundColor if it's a string
+  // Use theme-aware background color
   return (
-    <View style={[typeof effectiveBackgroundColor === 'string' ? {backgroundColor: effectiveBackgroundColor} : undefined,{flex:1}]}> 
+    <View style={[
+      styles.container,
+      { backgroundColor: typeof effectiveBackgroundColor === 'string' ? effectiveBackgroundColor : colors.background.primary }
+    ]}> 
       {renderContent()}
     </View>
   );

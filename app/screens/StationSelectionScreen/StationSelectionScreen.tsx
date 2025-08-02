@@ -43,7 +43,6 @@ const StationSelectionScreen : FC = () => {
             <HeaderComponent
                 values={{ title: 'Select Stations' }}
                 iconMap={[]}
-                theme='primary'
             />
 
             <View style={styles.container}>

@@ -54,7 +54,6 @@ const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
       <HeaderComponent
         values={{ title }}
         iconMap={[]}
-        theme="primary"
         noBackButton={false}
         actions={{ onLeftPress: handleBackPress }}
         enableSearch={true}

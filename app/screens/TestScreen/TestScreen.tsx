@@ -1,6 +1,11 @@
-import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { useThemeColors } from '@/app/hooks/useThemeColors';
+import { setTheme } from '@/app/redux/features/deviceConfig/uiPreferences';
+import { useAppDispatch, useAppSelector } from '@/app/redux/hook';
+import React, { useState } from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import MetroSideViewAnimated from '../../assets/icons/metroIcons/metroSideViewAnimated';
+import AppTextInput from '../../components/AppTextInput';
+
 const fontFamilies = [
   'Roboto-Regular', 'Roboto-Bold', 'Roboto-Medium', 'Roboto-Light', 'Roboto-Thin', 'Roboto-Black',
   'Roboto-Italic', 'Roboto-BoldItalic', 'Roboto-MediumItalic', 'Roboto-LightItalic', 'Roboto-ThinItalic', 'Roboto-BlackItalic',
@@ -18,16 +23,106 @@ const fontFamilies = [
   'Roboto_SemiCondensed-ExtraLight', 'Roboto_SemiCondensed-ExtraLightItalic',
 ];
 
-const TestScreen = () => (
-  <ScrollView contentContainerStyle={{ padding: 24 }} style={{backgroundColor:'white'}}>
-    <MetroSideViewAnimated strokeWidth={1} size={300}/>
-    <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 16 }}>Font Family Visual Test</Text>
-    {fontFamilies.map((font) => (
-      <View key={font} style={{ marginBottom: 8 }}>
-        <Text style={{ fontFamily: font, fontSize: 18 }}>{font}</Text>
+const TestScreen = () => {
+  const dispatch = useAppDispatch();
+  const currentTheme = useAppSelector((state) => state.uiPreferences.theme);
+  const colors = useThemeColors();
+  const [inputValue, setInputValue] = useState('');
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+
+  const toggleTheme = () => {
+    dispatch(setTheme(currentTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  return (
+    <ScrollView 
+      contentContainerStyle={{ padding: 24 }} 
+      style={{ backgroundColor: colors.background.primary }}
+    >
+      <MetroSideViewAnimated strokeWidth={1} size={300}/>
+      
+      {/* Theme Testing Section */}
+      <View style={{ marginBottom: 24 }}>
+        <Text style={{ 
+          fontSize: 20, 
+          fontWeight: 'bold', 
+          marginBottom: 16,
+          color: colors.text.primary 
+        }}>
+          Animated Floating Label Inputs
+        </Text>
+        
+        <TouchableOpacity 
+          onPress={toggleTheme}
+          style={{
+            backgroundColor: colors.theme.primary.default,
+            padding: 12,
+            borderRadius: 8,
+            marginBottom: 16,
+          }}
+        >
+          <Text style={{ 
+            color: colors.text.inverse, 
+            textAlign: 'center',
+            fontWeight: 'bold'
+          }}>
+            Toggle Theme (Current: {currentTheme})
+          </Text>
+        </TouchableOpacity>
+
+        <View style={{ marginBottom: 16 }}>
+          <AppTextInput
+            placeholder="Enter your name"
+            value={inputValue}
+            onChangeText={setInputValue}
+            error={inputValue.length > 0 && inputValue.length < 3 ? "Name must be at least 3 characters" : undefined}
+          />
+        </View>
+
+        <View style={{ marginBottom: 16 }}>
+          <AppTextInput
+            placeholder="Enter your email"
+            value={emailValue}
+            onChangeText={setEmailValue}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+        </View>
+
+        <View style={{ marginBottom: 16 }}>
+          <AppTextInput
+            placeholder="Enter your password"
+            value={passwordValue}
+            onChangeText={setPasswordValue}
+            secureTextEntry
+            error={passwordValue.length > 0 && passwordValue.length < 6 ? "Password must be at least 6 characters" : undefined}
+          />
+        </View>
       </View>
-    ))}
-  </ScrollView>
-);
+
+      {/* Font Family Testing Section */}
+      <Text style={{ 
+        fontSize: 20, 
+        fontWeight: 'bold', 
+        marginBottom: 16,
+        color: colors.text.primary 
+      }}>
+        Font Family Visual Test
+      </Text>
+      {fontFamilies.map((font) => (
+        <View key={font} style={{ marginBottom: 8 }}>
+          <Text style={{ 
+            fontFamily: font, 
+            fontSize: 18,
+            color: colors.text.primary 
+          }}>
+            {font}
+          </Text>
+        </View>
+      ))}
+    </ScrollView>
+  );
+};
 
 export default TestScreen;

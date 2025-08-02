@@ -30,37 +30,66 @@ export const ThemeColors = {
     pending: '#FFB639',
   } as const;
   
-  // Text Colors
-  export const TextColors = {
-    primary: '#000000',
-    secondary: 'rgba(0, 0, 0, 0.6)',
-    tertiary: 'rgba(0, 0, 0, 0.4)',
-    disabled: 'rgba(0, 0, 0, 0.25)',
-    inverse: '#ffffff',
-    placeholder: '#bbbbbb',
-    error: '#C5270E',
+  // Light Theme Colors
+  export const LightThemeColors = {
+    text: {
+      primary: '#000000',
+      secondary: 'rgba(0, 0, 0, 0.6)',
+      tertiary: 'rgba(0, 0, 0, 0.4)',
+      disabled: 'rgba(0, 0, 0, 0.25)',
+      inverse: '#ffffff',
+      placeholder: '#bbbbbb',
+      error: '#C5270E',
+    },
+    background: {
+      primary: '#ffffff',
+      secondary: '#F5F5F5',
+      tertiary: '#EBF5FF',
+      card: '#ffffff',
+      search: '#EBF5FF',
+      profile: '#BAC9FF',
+      warning: '#FFF3F1',
+      earn: '#FBF5E0',
+      avatar: '#BAC9FF',
+      tag: '#EAE7FF',
+    },
+    border: {
+      primary: 'rgba(0, 0, 0, 0.12)',
+      secondary: '#ECECEC',
+      divider: 'rgba(0, 0, 0, 0.12)',
+      input: 'rgba(0, 0, 0, 0.12)',
+    },
   } as const;
-  
-  // Background Colors
-  export const BackgroundColors = {
-    primary: '#ffffff',
-    secondary: '#F5F5F5',
-    tertiary: '#EBF5FF',
-    card: '#ffffff',
-    search: '#EBF5FF',
-    profile: '#BAC9FF',
-    warning: '#FFF3F1',
-    earn: '#FBF5E0',
-    avatar: '#BAC9FF',
-    tag: '#EAE7FF',
-  } as const;
-  
-  // Border Colors
-  export const BorderColors = {
-    primary: 'rgba(0, 0, 0, 0.12)',
-    secondary: '#ECECEC',
-    divider: 'rgba(0, 0, 0, 0.12)',
-    input: 'rgba(0, 0, 0, 0.12)',
+
+  // Dark Theme Colors
+  export const DarkThemeColors = {
+    text: {
+      primary: '#ffffff',
+      secondary: 'rgba(255, 255, 255, 0.8)',
+      tertiary: 'rgba(255, 255, 255, 0.6)',
+      disabled: 'rgba(255, 255, 255, 0.4)',
+      inverse: '#000000',
+      placeholder: '#888888',
+      error: '#FF6461',
+    },
+    background: {
+      primary: '#121212',
+      secondary: '#1E1E1E',
+      tertiary: '#2D2D2D',
+      card: '#1E1E1E',
+      search: '#2D2D2D',
+      profile: '#2D2D2D',
+      warning: '#2D2D2D',
+      earn: '#2D2D2D',
+      avatar: '#2D2D2D',
+      tag: '#2D2D2D',
+    },
+    border: {
+      primary: 'rgba(255, 255, 255, 0.12)',
+      secondary: '#2D2D2D',
+      divider: 'rgba(255, 255, 255, 0.12)',
+      input: 'rgba(255, 255, 255, 0.12)',
+    },
   } as const;
   
   // Overlay Colors
@@ -105,13 +134,29 @@ export const ThemeColors = {
   export const Colors = {
     theme: ThemeColors,
     status: StatusColors,
-    text: TextColors,
-    background: BackgroundColors,
-    border: BorderColors,
+    text: LightThemeColors.text, // Default to light theme
+    background: LightThemeColors.background, // Default to light theme
+    border: LightThemeColors.border, // Default to light theme
     overlay: OverlayColors,
     accent: AccentColors,
     metro: MetroLineColors,
 } as const;
+
+// Theme-aware colors function
+export const getThemeColors = (theme: 'light' | 'dark') => {
+  const themeColors = theme === 'dark' ? DarkThemeColors : LightThemeColors;
+  
+  return {
+    theme: ThemeColors,
+    status: StatusColors,
+    text: themeColors.text,
+    background: themeColors.background,
+    border: themeColors.border,
+    overlay: OverlayColors,
+    accent: AccentColors,
+    metro: MetroLineColors,
+  } as const;
+};
 
 export const metroLineColorsMap: MetroLineColorsMap = {
   Red: { id: 'Red', displayName: 'Red Line', color: '#D32F2F' },

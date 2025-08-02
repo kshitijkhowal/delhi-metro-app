@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   container: {
     alignItems: 'flex-start',
     padding: Dimensions.PADDING.md,
-    backgroundColor: Colors.background.primary,
+    backgroundColor: Colors.theme.primary.default,
     borderRadius: Dimensions.BORDER_RADIUS.xxl,
     gap: Dimensions.MARGIN.xxxs
   },

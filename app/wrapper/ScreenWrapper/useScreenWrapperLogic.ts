@@ -1,6 +1,7 @@
-import { Platform, StatusBarStyle } from 'react-native';
+import { Platform } from 'react-native';
+import { SystemBarStyle } from 'react-native-edge-to-edge';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { SystemBars, SystemBarStyle } from 'react-native-edge-to-edge';
+import { ThemeColors } from './screenWrapperTypes';
 
 // Map statusBarStyle to SystemBars style prop
 export function mapStatusBarStyleToSystemBarsStyle(statusBarStyle?: SystemBarStyle) {
@@ -19,6 +20,7 @@ export function getScreenWrapperLogic({
   avoidBottomInset = true,
   avoidScreenCutout = true,
   fullScreen = false,
+  colors,
 }: {
   backgroundColor?: string | string[];
   statusBarStyle?: SystemBarStyle;
@@ -26,6 +28,7 @@ export function getScreenWrapperLogic({
   avoidBottomInset?: boolean;
   avoidScreenCutout?: boolean;
   fullScreen?: boolean;
+  colors?: ThemeColors;
 }) {
   const insets = useSafeAreaInsets();
 

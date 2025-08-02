@@ -40,14 +40,28 @@ export const TextColorsDark = {
 
 // Background Colors
 export const BackgroundColors = {
-  primary: '#ffffff',
-  secondary: '#F5F5F5',
+  primary: '#F8F8F8', // Darker shade of white
+  secondary: '#F0F0F0', // Even darker shade of white
 } as const;
 
 export const BackgroundColorsLight = BackgroundColors;
 export const BackgroundColorsDark = {
-  primary: '#181818',
-  secondary: '#232323',
+  primary: '#2A2A2A', // Lighter shade of dark
+  secondary: '#333333', // Even lighter shade of dark
+} as const;
+
+// View Colors
+export const ViewColors = {
+  primary: '#E8E8E8', // Darker white
+  secondary: '#F0F0F0',
+  tertiary: '#E0E0E0',
+} as const;
+
+export const ViewColorsLight = ViewColors;
+export const ViewColorsDark = {
+  primary: '#2A2A2A', // Lighter black
+  secondary: '#333333',
+  tertiary: '#404040',
 } as const;
 
 // Border Colors
@@ -69,6 +83,7 @@ export const Colors = {
     status: StatusColorsLight,
     text: TextColorsLight,
     background: BackgroundColorsLight,
+    View: ViewColorsLight,
     border: BorderColorsLight,
   },
   dark: {
@@ -76,6 +91,7 @@ export const Colors = {
     status: StatusColorsDark,
     text: TextColorsDark,
     background: BackgroundColorsDark,
+    View: ViewColorsDark,
     border: BorderColorsDark,
   },
   getThemeColors: (theme: 'light' | 'dark') =>

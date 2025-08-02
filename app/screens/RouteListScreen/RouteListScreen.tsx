@@ -37,7 +37,6 @@ const RouteListScreen: React.FC<RouteListScreenProps> = ({ route }) => {
       <HeaderComponent
         values={{ title: 'Route Details' }}
         iconMap={[]}
-        theme="primary"
         noBackButton={false}
         actions={{ onLeftPress: handleBackPress }}
       />

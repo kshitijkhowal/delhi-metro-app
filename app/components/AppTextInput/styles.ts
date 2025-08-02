@@ -1,4 +1,3 @@
-import { Colors } from '@/app/constants/colors/colors';
 import { Dimensions } from '@/app/constants/dimensions/dimensions';
 import { Fonts } from '@/app/constants/fonts/fonts';
 import { StyleSheet } from 'react-native';
@@ -7,22 +6,31 @@ export const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  input: {
+  inputContainer: {
     width: '100%',
     borderRadius: Dimensions.BORDER_RADIUS.md,
     borderWidth: Dimensions.BORDER_WIDTH.regular,
-    borderColor: Colors.border.input,
-    backgroundColor: Colors.background.primary,
-    color: Colors.text.primary,
+    position: 'relative',
+  },
+  input: {
+    width: '100%',
+    borderRadius: Dimensions.BORDER_RADIUS.md,
+    borderWidth: 0, // Remove border from input since it's on container
     fontFamily: Fonts.regular,
     fontSize: Dimensions.TEXT.md,
+    paddingHorizontal: 12,
+  },
+  floatingLabel: {
+    fontFamily: Fonts.regular,
+    backgroundColor: 'transparent',
   },
   inputFocused: {
-    borderColor: Colors.theme.primary.default,
+    // Border color will be applied dynamically
   },
   errorText: {
-    color: Colors.status.error.default,
     fontFamily: Fonts.regular,
     fontSize: Dimensions.TEXT.xs,
+    marginTop: 4,
+    marginLeft: 4,
   },
 });

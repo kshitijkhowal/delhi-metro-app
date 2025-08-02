@@ -14,7 +14,6 @@ const DashboardScreen = () => {
             <HeaderComponent
                 values={{ title: 'Home' }}
                 iconMap={[]}
-                theme='primary'
                 noBackButton={true}
             />
             <Text>Dashboard Screen</Text>
