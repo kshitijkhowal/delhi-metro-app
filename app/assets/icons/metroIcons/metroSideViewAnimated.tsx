@@ -1,3 +1,4 @@
+import { useThemeColors } from "@/app/hooks/useThemeColors";
 import * as React from "react";
 import { useEffect } from "react";
 import Animated, {
@@ -25,11 +26,13 @@ interface MetroSideViewAnimatedProps extends SvgProps {
 const SVGComponent = ({
   size = 32,
   strokeWidth = 1.5,
-  strokeColor = '#263238',
+  strokeColor,
   flipped = false,
   style,
   ...props
 }: MetroSideViewAnimatedProps) => {
+  const colors = useThemeColors();
+
   const viewBoxWidth = 32;
   const startX = viewBoxWidth + 45;
   const endX = -5;
@@ -95,6 +98,8 @@ const SVGComponent = ({
     transform: [{ translateX: shake.value }],
   }));
 
+  const finalStrokeColor = strokeColor || colors.text.primary;
+
   return (
     <Svg
       width={size}
@@ -109,7 +114,7 @@ const SVGComponent = ({
           <Path
             d="M2,17.5h4c0.28,0,0.5-0.221,0.5-0.5v-4c0-0.28-0.22-0.5-0.5-0.5H2c-0.28,0-0.5,0.22-0.5,0.5v4C1.5,17.279,1.72,17.5,2,17.5z"
             fill="none"
-            stroke={strokeColor}
+            stroke={finalStrokeColor}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -117,7 +122,7 @@ const SVGComponent = ({
           />
           <Line
             fill="none"
-            stroke={strokeColor}
+            stroke={finalStrokeColor}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -129,7 +134,7 @@ const SVGComponent = ({
           />
           <Line
             fill="none"
-            stroke={strokeColor}
+            stroke={finalStrokeColor}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -142,7 +147,7 @@ const SVGComponent = ({
           <Path
             d="M22.776,11.5H19.5c-0.55,0-1,0.45-1,1v3c0,1.66,1.34,3,3,3h6.586"
             fill="none"
-            stroke={strokeColor}
+            stroke={finalStrokeColor}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -151,7 +156,7 @@ const SVGComponent = ({
           <Path
             d="M1.5,8.5h15.52c2.19,0,4.261,1.02,5.58,2.77l7.32,9.65c0.9,1.19,0.79,2.87-0.27,3.93c-0.42,0.42-0.98,0.65-1.57,0.65H1.5"
             fill="none"
-            stroke={strokeColor}
+            stroke={finalStrokeColor}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -160,7 +165,7 @@ const SVGComponent = ({
           <Path
             d="M9,17.5h4c0.28,0,0.5-0.221,0.5-0.5v-4c0-0.28-0.22-0.5-0.5-0.5H9c-0.28,0-0.5,0.22-0.5,0.5v4C8.5,17.279,8.72,17.5,9,17.5z"
             fill="none"
-            stroke={strokeColor}
+            stroke={finalStrokeColor}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -173,7 +178,7 @@ const SVGComponent = ({
           animatedProps={animatedPropsLine1}
           y1={6.5}
           y2={6.5}
-          stroke={strokeColor}
+          stroke={finalStrokeColor}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -183,7 +188,7 @@ const SVGComponent = ({
           animatedProps={animatedPropsLine2}
           y1={29.5}
           y2={29.5}
-          stroke={strokeColor}
+          stroke={finalStrokeColor}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -193,7 +198,7 @@ const SVGComponent = ({
           animatedProps={animatedPropsLine3}
           y1={27.5}
           y2={27.5}
-          stroke={strokeColor}
+          stroke={finalStrokeColor}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"

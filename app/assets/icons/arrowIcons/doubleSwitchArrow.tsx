@@ -1,3 +1,4 @@
+import { useThemeColors } from "@/app/hooks/useThemeColors";
 import * as React from "react";
 import Svg, { Path, SvgProps } from "react-native-svg";
 
@@ -10,22 +11,27 @@ interface DoubleSwitchArrowProps extends SvgProps {
 const SVGComponent = ({
   size = 24,
   strokeWidth = 3,
-  strokeColor = "black",
+  strokeColor,
   ...props
-}: DoubleSwitchArrowProps) => (
-  <Svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    {...props}
-  >
-    <Path
-      d="M14.293 2.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414-1.414L16.586 8H5a1 1 0 0 1 0-2h11.586l-2.293-2.293a1 1 0 0 1 0-1.414zm-4.586 10a1 1 0 0 1 0 1.414L7.414 16H19a1 1 0 1 1 0 2H7.414l2.293 2.293a1 1 0 0 1-1.414 1.414l-4-4a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 0z"
+}: DoubleSwitchArrowProps) => {
+  const colors = useThemeColors();
+
+  return (
+    <Svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
       fill="none"
-      stroke={strokeColor}
-      strokeWidth={strokeWidth}
-    />
-  </Svg>
-);
+      {...props}
+    >
+      <Path
+        d="M14.293 2.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414-1.414L16.586 8H5a1 1 0 0 1 0-2h11.586l-2.293-2.293a1 1 0 0 1 0-1.414zm-4.586 10a1 1 0 0 1 0 1.414L7.414 16H19a1 1 0 1 1 0 2H7.414l2.293 2.293a1 1 0 0 1-1.414 1.414l-4-4a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 0z"
+        fill="none"
+        stroke={strokeColor || colors.text.primary}
+        strokeWidth={strokeWidth}
+      />
+    </Svg>
+  );
+};
+
 export default SVGComponent;
