@@ -1,3 +1,9 @@
+import { useThemeColors } from '@/app/hooks/useThemeColors';
+
 export const useStationListItemLogic = () => {
-  return {};
+  const colors = useThemeColors();
+  
+  return {
+    colors,
+  };
 };

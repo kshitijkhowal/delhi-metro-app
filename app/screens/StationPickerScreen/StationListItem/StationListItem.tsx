@@ -1,10 +1,11 @@
+import { Dimensions } from '@/app/constants/dimensions/dimensions';
+import { useThemeColors } from '@/app/hooks/useThemeColors';
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 import AppView from '../../../components/AppView';
 import LineColorChip from '../../../components/LineColorChip/LineColorChip';
 import { Stop } from '../../../types/gtfs.types';
 import * as styles from './styles';
-import { Dimensions } from '@/app/constants/dimensions/dimensions';
 
 export interface StationListItemProps {
   stop: Stop;
@@ -12,10 +13,27 @@ export interface StationListItemProps {
 }
 
 const StationListItem: React.FC<StationListItemProps> = ({ stop, onPress }) => {
+  const colors = useThemeColors();
+
   return (
-    <AppView style={styles.styles.container} onPress={() => onPress(stop)} elevation={{ enabled: true }}>
-      <Text style={styles.styles.stationName}>{stop.stop_name}</Text>
-      {stop.hindi_name && <Text style={styles.styles.hindiName}>{stop.hindi_name}</Text>}
+    <AppView 
+      style={[
+        styles.styles.container, 
+        { 
+          backgroundColor: colors.View.primary,
+        }
+      ]} 
+      onPress={() => onPress(stop)} 
+      elevation={{ enabled: true }}
+    >
+      <Text style={[styles.styles.stationName, { color: colors.text.primary }]}>
+        {stop.stop_name}
+      </Text>
+      {stop.hindi_name && (
+        <Text style={[styles.styles.hindiName, { color: colors.text.secondary }]}>
+          {stop.hindi_name}
+        </Text>
+      )}
       <View style={styles.styles.linesContainer}>
         <FlatList
           data={stop.lines}

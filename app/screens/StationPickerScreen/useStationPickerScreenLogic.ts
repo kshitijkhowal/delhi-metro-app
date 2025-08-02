@@ -1,3 +1,4 @@
+import { useThemeColors } from '@/app/hooks/useThemeColors';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from '../../redux/hook';
@@ -6,6 +7,7 @@ import { StationPickerScreenParams } from './StationPickerScreen.Types';
 
 export function useStationPickerScreenLogic(route: { params: StationPickerScreenParams }) {
   const navigation = useNavigation();
+  const colors = useThemeColors();
   const { stops } = useAppSelector(state => state.stops);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -36,6 +38,7 @@ export function useStationPickerScreenLogic(route: { params: StationPickerScreen
   },[])
 
   return {
+    colors,
     searchQuery,
     setSearchQuery,
     filteredStops,

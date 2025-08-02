@@ -40,16 +40,16 @@ export const TextColorsDark = {
 
 // Background Colors
 export const BackgroundColors = {
-  primary: '#F8F8F8', // Darker shade of white
-  secondary: '#F0F0F0', // Even darker shade of white
+  primary: '#FFFFFF', // Whitest white
+  secondary: '#F0F0F0', // Slightly darker than white
 } as const;
 
 export const BackgroundColorsLight = BackgroundColors;
-export const BackgroundColorsDark = {
-  primary: '#2A2A2A', // Lighter shade of dark
-  secondary: '#333333', // Even lighter shade of dark
-} as const;
 
+export const BackgroundColorsDark = {
+  primary: '#000000', // Blackest black
+  secondary: '#1A1A1A', // Slightly lighter than black
+} as const;
 // View Colors
 export const ViewColors = {
   primary: '#E8E8E8', // Darker white

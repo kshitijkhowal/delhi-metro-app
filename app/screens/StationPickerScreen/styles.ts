@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../constants/colors/colors';
 import { Dimensions } from '../../constants/dimensions/dimensions';
 import { Fonts } from '../../constants/fonts/fonts';
 
@@ -9,34 +8,28 @@ export const styles = StyleSheet.create({
   },
   searchContainer: {
     padding: Dimensions.PADDING.md,
-    backgroundColor: Colors.background.primary,
     borderBottomWidth: Dimensions.BORDER_WIDTH.thin,
-    borderBottomColor: Colors.border.divider,
   },
   listContainer: {
     flex: 1,
-    paddingHorizontal: Dimensions.PADDING.md,
-    paddingVertical: Dimensions.PADDING.sm
+    marginHorizontal: Dimensions.PADDING.md,
+    marginVertical: Dimensions.PADDING.sm,
+    borderRadius: Dimensions.BORDER_RADIUS.xxl
   },
   stationItem: {
     padding: Dimensions.PADDING.md,
     borderBottomWidth: Dimensions.BORDER_WIDTH.thin,
-    borderBottomColor: Colors.border.divider,
-    backgroundColor: Colors.background.primary,
   },
   stationItemPressed: {
-    backgroundColor: Colors.background.secondary,
   },
   stationName: {
     fontFamily: Fonts.medium,
     fontSize: Dimensions.TEXT.md,
-    color: Colors.text.primary,
     marginBottom: Dimensions.MARGIN.xxs,
   },
   stationCode: {
     fontFamily: Fonts.regular,
     fontSize: Dimensions.TEXT.sm,
-    color: Colors.text.secondary,
   },
   emptyContainer: {
     flex: 1,
@@ -47,7 +40,6 @@ export const styles = StyleSheet.create({
   emptyText: {
     fontFamily: Fonts.regular,
     fontSize: Dimensions.TEXT.md,
-    color: Colors.text.secondary,
     textAlign: 'center',
   },
   loadingContainer: {

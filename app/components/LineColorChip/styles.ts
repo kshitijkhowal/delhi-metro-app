@@ -1,7 +1,6 @@
+import { Fonts } from '@/app/constants/fonts/fonts';
 import { StyleSheet } from 'react-native';
 import { Dimensions } from '../../constants/dimensions/dimensions';
-import { Fonts } from '@/app/constants/fonts/fonts';
-import { Colors } from '@/app/constants/colors/colors';
 
 export const styles = StyleSheet.create({
   chip: {
@@ -17,6 +16,5 @@ export const styles = StyleSheet.create({
   chipText: {
     fontFamily: Fonts.medium,
     fontSize: Dimensions.TEXT.sm,
-    color: Colors.text.primary,
   },
 });

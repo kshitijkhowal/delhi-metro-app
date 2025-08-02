@@ -1,4 +1,4 @@
-import { metroLineColorsMap } from '../../constants/colors/colors';
+import { metroLineColorsMap } from '../../constants/betterColors/betterColors';
 
 function hexToRgba(hex: string, alpha = 0.12) {
   let color = hex.replace('#', '');

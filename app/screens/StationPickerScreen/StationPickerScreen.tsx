@@ -1,4 +1,5 @@
 import { Dimensions } from '@/app/constants/dimensions/dimensions';
+import { useThemeColors } from '@/app/hooks/useThemeColors';
 import ScreenWrapper from '@/app/wrapper/ScreenWrapper/ScreenWrapper';
 import React from 'react';
 import {
@@ -15,6 +16,7 @@ import { styles } from './styles';
 import { useStationPickerScreenLogic } from './useStationPickerScreenLogic';
 
 const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
+  const colors = useThemeColors();
   const {
     searchQuery,
     setSearchQuery,
@@ -30,7 +32,7 @@ const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
 
   const renderEmptyList = () => (
     <View style={styles.emptyContainer}>
-      <Text style={styles.emptyText}>
+      <Text style={[styles.emptyText, { color: colors.text.secondary }]}>
         {searchQuery.trim() 
           ? 'No stations found matching your search'
           : 'No stations available'
@@ -41,7 +43,7 @@ const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
 
   const renderLoading = () => (
     <View style={styles.loadingContainer}>
-      <ActivityIndicator size="large" color="#473391" />
+      <ActivityIndicator size="large" color={colors.theme.primary} />
     </View>
   );
 
