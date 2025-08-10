@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: Dimensions.PADDING.lg,
+    paddingHorizontal: Dimensions.PADDING.md,
     paddingTop: Dimensions.PADDING.md,
     alignItems:'center',
     gap: Dimensions.MARGIN.sm,
@@ -31,8 +31,18 @@ const styles = StyleSheet.create({
     borderWidth: Dimensions.BORDER_WIDTH.regular,
     padding: Dimensions.PADDING.xs,
   },
+  headerContent: {
+    alignItems: 'center',
+    paddingVertical: Dimensions.PADDING.xs,
+  },
   headerText: {
+    fontFamily: Fonts.medium,
+    fontSize: Dimensions.TEXT.md,
+  },
+  headerSubtext: {
     fontFamily: Fonts.regular,
+    fontSize: Dimensions.TEXT.sm,
+    opacity: 0.8,
   },
   headerComponentStyle: {
     paddingVertical: Dimensions.PADDING.sm,

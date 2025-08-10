@@ -33,11 +33,16 @@ const StationSelectionScreen : FC = () => {
         return(
             <View style={[styles.headerContainer, { 
                 backgroundColor: colors.background.secondary,
-                borderColor: colors.status.pending 
+                borderColor: colors.border.primary
             }]}>
-                <Text style={[styles.headerText, { color: colors.text.primary }]}>
-                    Suggested Routes :
-                </Text>
+                <View style={styles.headerContent}>
+                    <Text style={[styles.headerText, { color: colors.text.primary }]}>
+                        Suggested Routes
+                    </Text>
+                    <Text style={[styles.headerSubtext, { color: colors.text.secondary }]}>
+                        {recentRoutes.length} route{recentRoutes.length !== 1 ? 's' : ''} available
+                    </Text>
+                </View>
             </View>
         )
     }

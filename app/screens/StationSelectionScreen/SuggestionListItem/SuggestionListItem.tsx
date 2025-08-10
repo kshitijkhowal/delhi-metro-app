@@ -53,11 +53,11 @@ const SuggestionListItem: React.FC<SuggestionListItemProps> = ({ route, onPress 
         {/* Icon Buttons */}
       </View>
       <View style={styles.iconButtonRow}>
-        <AppView
-          onPress={onDelete}
-          style={[styles.iconButton, { borderColor: colors.border.primary, backgroundColor: colors.View.secondary }]}
-          elevation={{ enabled: true }}
-        >
+      <AppView
+            onPress={onHeart}
+            style={[styles.iconButton, { borderColor: colors.border.primary }]}
+            elevation={{ enabled: true }}
+          >
           <BinIcon size={22} strokeWidth={1.5} />
         </AppView>
         <View style={styles.switchHeartContainer}>
