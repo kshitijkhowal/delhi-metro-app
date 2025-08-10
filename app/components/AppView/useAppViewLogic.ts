@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useColors } from '@/app/contexts/ThemeContext';
+import { useRef, useState } from 'react';
 import { runOnJS, useAnimatedReaction, useSharedValue, withTiming } from 'react-native-reanimated';
 
 export interface ElevationConfig {
@@ -10,17 +11,19 @@ export interface ElevationConfig {
   shadowAlpha?: number;
   duration?: number;
   scale?: number;
+  shadowColor?: 'primary' | 'secondary' | 'tertiary';
 }
 
 const DEFAULT_ELEVATION_CONFIG = {
   enabled: false,
-  shadowX: 2,
-  shadowY: 2,
-  shadowBlur: 2,
-  shadowSpread: 1,
+  shadowX: 1,
+  shadowY: 1,
+  shadowBlur: 5,
+  shadowSpread: 2,
   shadowAlpha: 0.15,
   duration: 250,
   scale: 0.98,
+  shadowColor: 'primary' as const,
 };
 
 export const useAppViewLogic = (
@@ -28,6 +31,7 @@ export const useAppViewLogic = (
   onPress: (() => void) | undefined,
   elevationConfig?: ElevationConfig
 ) => {
+  const colors = useColors();
   const config = {
     ...DEFAULT_ELEVATION_CONFIG,
     ...elevationConfig,
@@ -40,8 +44,20 @@ export const useAppViewLogic = (
   const shadowAlpha = useSharedValue(config.shadowAlpha);
   const scale = useSharedValue(1);
 
+  // Get the appropriate shadow color from theme and store it in a ref
+  const shadowColorRef = useRef<string>('');
+  const getShadowColor = () => {
+    const shadowColorKey = config.shadowColor || 'primary';
+    const color = colors.shadow[shadowColorKey];
+    shadowColorRef.current = color;
+    return color;
+  };
+
+  // Initialize shadow color
+  const currentShadowColor = getShadowColor();
+
   const [boxShadow, setBoxShadow] = useState(
-    `${config.shadowX}px ${config.shadowY}px ${config.shadowBlur}px ${config.shadowSpread}px rgba(0,0,0,${config.shadowAlpha})`
+    `${config.shadowX}px ${config.shadowY}px ${config.shadowBlur}px ${config.shadowSpread}px ${currentShadowColor}`
   );
 
   const handlePressIn = () => {
@@ -67,7 +83,7 @@ export const useAppViewLogic = (
   useAnimatedReaction(
     () => [shadowX.value, shadowY.value, shadowBlur.value, shadowSpread.value, shadowAlpha.value],
     ([x, y, blur, spread, alpha]) => {
-      const shadow = `${x.toFixed(0)}px ${y.toFixed(0)}px ${blur.toFixed(0)}px ${spread.toFixed(0)}px rgba(0,0,0,${alpha})`;
+      const shadow = `${x.toFixed(0)}px ${y.toFixed(0)}px ${blur.toFixed(0)}px ${spread.toFixed(0)}px ${shadowColorRef.current}`;
       runOnJS(setBoxShadow)(shadow);
     },
     []

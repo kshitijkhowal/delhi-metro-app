@@ -1,14 +1,14 @@
+import { useColors } from '@/app/contexts/ThemeContext';
 import React from 'react';
 import {
-    ActivityIndicator,
-    Pressable,
-    PressableProps,
-    Text,
-    View,
-    ViewStyle,
+  ActivityIndicator,
+  Pressable,
+  PressableProps,
+  Text,
+  View,
+  ViewStyle,
 } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { Colors } from '../../constants/colors/colors';
 import { styles } from './styles';
 import { ElevationConfig, useAppButtonLogic } from './useAppButtonLogic';
   
@@ -45,15 +45,45 @@ import { ElevationConfig, useAppButtonLogic } from './useAppButtonLogic';
     children,
     ...rest
   }: AppButtonProps) => {
+    const colors = useColors();
     const {handleOnClick, handlePressIn, handlePressOut, boxShadow, scale} = useAppButtonLogic(
       disabled,
       onPress,
       elevation,
       haptic,
     );
+
+    const getContainerStyle = () => {
+      if (type === 'primary') {
+        return {
+          ...styles.primaryContainer,
+          backgroundColor: colors.button.primary,
+        };
+      } else {
+        return {
+          ...styles.secondaryContainer,
+          backgroundColor: colors.background.primary,
+          borderColor: colors.button.primary,
+        };
+      }
+    };
+
+    const getTextStyle = () => {
+      if (type === 'primary') {
+        return {
+          ...styles.primaryText,
+          color: colors.background.primary, // White text on dark button
+        };
+      } else {
+        return {
+          ...styles.secondaryText,
+          color: colors.button.primary, // Dark text on light button
+        };
+      }
+    };
   
     const buttonStyle = [
-      type === 'primary' ? styles.primaryContainer : styles.secondaryContainer,
+      getContainerStyle(),
       loading && {alignItems: 'flex-start' as const},
       disabled ? styles.disabledContainer : null,
       elevation?.enabled && {boxShadow},
@@ -65,7 +95,7 @@ import { ElevationConfig, useAppButtonLogic } from './useAppButtonLogic';
     };
   
     return (
-      <Animated.View style={[animatedStyle,buttonStyle]}>
+      <Animated.View style={[animatedStyle, buttonStyle]}>
         <Pressable 
           onPress={handleOnClick}
           onPressIn={handlePressIn}
@@ -77,7 +107,7 @@ import { ElevationConfig, useAppButtonLogic } from './useAppButtonLogic';
           ) : (
             <Text
               style={[
-                type === 'primary' ? styles.primaryText : styles.secondaryText,
+                getTextStyle(),
                 textStyle,
               ]}>
               {loading && loadingText ? loadingText : title}
@@ -85,7 +115,7 @@ import { ElevationConfig, useAppButtonLogic } from './useAppButtonLogic';
           )}
           {loading && (
             <View style={styles.loadingContainer}>
-              <ActivityIndicator color={Colors.text.inverse} />
+              <ActivityIndicator color={colors.button.primary} />
             </View>
           )}
         </Pressable>

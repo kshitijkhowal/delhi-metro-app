@@ -50,6 +50,7 @@ export const BackgroundColorsDark = {
   primary: '#000000', // Blackest black
   secondary: '#1A1A1A', // Slightly lighter than black
 } as const;
+
 // View Colors
 export const ViewColors = {
   primary: '#E8E8E8', // Darker white
@@ -76,6 +77,33 @@ export const BorderColorsDark = {
   secondary: '#444444',
 } as const;
 
+// Shadow Colors
+export const ShadowColors = {
+  primary: 'rgba(0, 0, 0, 0.15)',
+  secondary: 'rgba(0, 0, 0, 0.1)',
+  tertiary: 'rgba(0, 0, 0, 0.05)',
+} as const;
+
+export const ShadowColorsLight = ShadowColors;
+
+export const ShadowColorsDark = {
+  primary: 'rgba(255, 255, 255, 0.2)',  // Adjusted opacity for lighter shadow
+  secondary: 'rgba(255, 255, 255, 0.15)', // Adjusted opacity for lighter shadow
+  tertiary: 'rgba(255, 255, 255, 0.1)',  // Adjusted opacity for lighter shadow
+} as const;
+
+// Button Colors
+export const ButtonColors = {
+  primary: '#000000', // Black for light theme
+  secondary: '#333333', // Darker gray for light theme
+} as const;
+
+export const ButtonColorsLight = ButtonColors;
+export const ButtonColorsDark = {
+  primary: '#FFFFFF', // White for dark theme
+  secondary: '#CCCCCC', // Light gray for dark theme
+} as const;
+
 // Master Export
 export const Colors = {
   light: {
@@ -85,6 +113,8 @@ export const Colors = {
     background: BackgroundColorsLight,
     View: ViewColorsLight,
     border: BorderColorsLight,
+    shadow: ShadowColorsLight,
+    button: ButtonColorsLight,
   },
   dark: {
     theme: ThemeColorsDark,
@@ -93,6 +123,8 @@ export const Colors = {
     background: BackgroundColorsDark,
     View: ViewColorsDark,
     border: BorderColorsDark,
+    shadow: ShadowColorsDark,
+    button: ButtonColorsDark,
   },
   getThemeColors: (theme: 'light' | 'dark') =>
     theme === 'dark' ? Colors.dark : Colors.light,

@@ -1,18 +1,35 @@
 # AppButton Component
 
-A customizable, animated, and accessible button for React Native apps.
+A customizable, animated, and accessible button for React Native apps with full theme support.
 
 ## Features
-- Animated elevation (shadow) and scale on press
-- Optional haptic feedback on press using Expo Haptics
-- Supports loading state
-- Customizable styles and text
-- Can render custom children (e.g., icons)
+- **Theme-Aware**: Automatically adapts to light and dark themes
+- **Animated elevation**: Shadow and scale animations on press
+- **Theme-aware shadows**: Shadows automatically adapt to light/dark themes
+- **Button colors**: Black buttons for light theme, white buttons for dark theme
+- **Optional haptic feedback** on press using Expo Haptics
+- **Supports loading state** with customizable loading text
+- **Customizable styles** and text
+- **Can render custom children** (e.g., icons)
+
+## Theme Support
+
+The AppButton automatically adapts to your app's theme:
+
+### Light Theme
+- **Primary Button**: Black background (`#000000`)
+- **Secondary Button**: White background with black border
+- **Shadows**: Dark shadows for depth
+
+### Dark Theme  
+- **Primary Button**: White background (`#FFFFFF`)
+- **Secondary Button**: Dark background with white border
+- **Shadows**: Light shadows for visibility
 
 ## Usage
 
 ```tsx
-import AppButton from '../../theme/AppButton';
+import AppButton from '@/app/components/AppButton';
 
 <AppButton
   title="Submit"
@@ -28,6 +45,7 @@ import AppButton from '../../theme/AppButton';
     shadowAlpha: 0.15,
     duration: 250,
     scale: 0.98,
+    shadowColor: 'primary', // 'primary', 'secondary', or 'tertiary'
   }}
   haptic={{ enabled: true, type: 'light' }}
   style={{ marginTop: 16 }}
@@ -63,17 +81,22 @@ interface ElevationConfig {
   shadowAlpha?: number;
   duration?: number;
   scale?: number;
+  shadowColor?: 'primary' | 'secondary' | 'tertiary'; // Theme-aware shadow color
   haptic?: {
     enabled: boolean;
     type?: HapticType;
   };
 }
 ```
-- `enabled`: Enable elevation/scale animation
-- `shadowX`, `shadowY`, `shadowBlur`, `shadowSpread`, `shadowAlpha`: Shadow properties
-- `duration`: Animation duration (ms)
-- `scale`: Scale factor when pressed (default: 0.98)
-- `haptic`: Optional haptic feedback configuration within elevation config
+
+### Shadow Colors
+- `primary`: Strongest shadow intensity
+- `secondary`: Medium shadow intensity  
+- `tertiary`: Subtle shadow intensity
+
+Shadows automatically adapt to your theme:
+- **Light theme**: Dark shadows (black with opacity)
+- **Dark theme**: Light shadows (white with opacity)
 
 ## Haptic Feedback
 The component uses Expo Haptics for haptic feedback. You can configure haptics in two ways:
@@ -103,21 +126,6 @@ The component uses Expo Haptics for haptic feedback. You can configure haptics i
 - **Impact Feedback**: `'light'`, `'medium'`, `'heavy'`, `'soft'`, `'rigid'`
 - **Notification Feedback**: `'success'`, `'warning'`, `'error'`
 
-### Examples:
-```tsx
-// Light impact feedback
-<AppButton haptic={{ enabled: true, type: 'light' }} />
-
-// Success notification feedback
-<AppButton haptic={{ enabled: true, type: 'success' }} />
-
-// Error notification feedback
-<AppButton haptic={{ enabled: true, type: 'error' }} />
-
-// Heavy impact feedback
-<AppButton haptic={{ enabled: true, type: 'heavy' }} />
-```
-
 ## Custom Content
 - If you pass `children`, the button will render them instead of the text. Useful for icon-only buttons:
 
@@ -127,18 +135,7 @@ The component uses Expo Haptics for haptic feedback. You can configure haptics i
 </AppButton>
 ```
 
-## Example: Icon Button with Haptics
-```tsx
-<AppButton
-  onPress={...}
-  elevation={{ enabled: true }}
-  haptic={{ enabled: true, type: 'heavy' }}
->
-  <Image source={plusIcon} />
-</AppButton>
-```
-
-## Example: Button with Elevation and Haptics
+## Example: Theme-Aware Button with Elevation
 ```tsx
 <AppButton
   title="Submit Form"
@@ -152,15 +149,30 @@ The component uses Expo Haptics for haptic feedback. You can configure haptics i
     shadowAlpha: 0.3,
     duration: 200,
     scale: 0.95,
+    shadowColor: 'primary', // Automatically adapts to theme
     haptic: { enabled: true, type: 'success' }
   }}
   type="primary"
 />
 ```
 
+## Example: Secondary Button
+```tsx
+<AppButton
+  title="Cancel"
+  onPress={handleCancel}
+  type="secondary"
+  elevation={{
+    enabled: true,
+    shadowColor: 'secondary', // Lighter shadow
+  }}
+/>
+```
+
 ## Accessibility
 - The button uses a `Pressable` for accessibility and keyboard support.
 - You can pass additional accessibility props as needed.
+- Theme-aware colors ensure proper contrast ratios.
 
 ---
 

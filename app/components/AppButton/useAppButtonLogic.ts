@@ -1,7 +1,8 @@
-import {Keyboard} from "react-native";
-import { useRef, useEffect, useState } from 'react';
-import Animated, { useSharedValue, withTiming, useAnimatedReaction, runOnJS } from 'react-native-reanimated';
+import { useColors } from '@/app/contexts/ThemeContext';
 import * as Haptics from 'expo-haptics';
+import { useRef, useState } from 'react';
+import { Keyboard } from "react-native";
+import { runOnJS, useAnimatedReaction, useSharedValue, withTiming } from 'react-native-reanimated';
 
 export interface ElevationConfig {
   enabled: boolean;
@@ -12,6 +13,7 @@ export interface ElevationConfig {
   shadowAlpha?: number;
   duration?: number;
   scale?: number;
+  shadowColor?: 'primary' | 'secondary' | 'tertiary';
   haptic?: {
     enabled: boolean;
     type?: 'light' | 'medium' | 'heavy' | 'soft' | 'rigid' | 'success' | 'warning' | 'error';
@@ -27,6 +29,7 @@ const DEFAULT_ELEVATION_CONFIG = {
   shadowAlpha: 0.15,
   duration: 250,
   scale: 0.98,
+  shadowColor: 'primary' as const,
   haptic: {
     enabled: false,
     type: 'light' as const,
@@ -42,6 +45,8 @@ export const useAppButtonLogic = (
         type?: 'light' | 'medium' | 'heavy' | 'soft' | 'rigid' | 'success' | 'warning' | 'error';
     },
 ) => {
+    const colors = useColors();
+    
     // Merge provided config with defaults
     const config = {
       ...DEFAULT_ELEVATION_CONFIG,
@@ -53,6 +58,18 @@ export const useAppButtonLogic = (
       },
     };
 
+    // Get the appropriate shadow color from theme
+    const shadowColorRef = useRef<string>('');
+    const getShadowColor = () => {
+      const shadowColorKey = config.shadowColor || 'primary';
+      const color = colors.shadow[shadowColorKey];
+      shadowColorRef.current = color;
+      return color;
+    };
+
+    // Initialize shadow color
+    const currentShadowColor = getShadowColor();
+
     // Animated shadow values for elevation
     const shadowX = useSharedValue(config.shadowX);
     const shadowY = useSharedValue(config.shadowY);
@@ -62,7 +79,7 @@ export const useAppButtonLogic = (
     const scale = useSharedValue(1);
     
     const [boxShadow, setBoxShadow] = useState(
-        `${config.shadowX}px ${config.shadowY}px ${config.shadowBlur}px ${config.shadowSpread}px rgba(0,0,0,${config.shadowAlpha})`
+        `${config.shadowX}px ${config.shadowY}px ${config.shadowBlur}px ${config.shadowSpread}px ${currentShadowColor}`
     );
 
     const handlePressIn = () => {
@@ -133,7 +150,7 @@ export const useAppButtonLogic = (
     useAnimatedReaction(
         () => [shadowX.value, shadowY.value, shadowBlur.value, shadowSpread.value, shadowAlpha.value],
         ([x, y, blur, spread, alpha]) => {
-            const shadow = `${x.toFixed(0)}px ${y.toFixed(0)}px ${blur.toFixed(0)}px ${spread.toFixed(0)}px rgba(0,0,0,${alpha})`;
+            const shadow = `${x.toFixed(0)}px ${y.toFixed(0)}px ${blur.toFixed(0)}px ${spread.toFixed(0)}px ${shadowColorRef.current}`;
             runOnJS(setBoxShadow)(shadow);
         },
         []

@@ -1,7 +1,11 @@
 import { useColors } from '@/app/contexts/ThemeContext';
 import React from 'react';
 import { Text, TextInput, View } from 'react-native';
-import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated';
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
 import { styles } from './styles';
 import { useAppTextInputLogic } from './useAppTextInputLogic';
 
@@ -23,7 +27,7 @@ interface AppTextInputProps {
   returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send';
   autoCorrect?: boolean;
   autoComplete?: 'off' | 'username' | 'password' | 'email' | 'name' | 'tel' | 'street-address' | 'postal-code' | 'cc-number' | 'cc-csc' | 'cc-exp' | 'cc-name';
-  textContentType?: 'none' | 'URL' | 'addressCity' | 'addressCityAndState' | 'addressState' | 'countryName' | 'creditCardNumber' | 'emailAddress' | 'familyName' | 'fullStreetAddress' | 'givenName' | 'jobTitle' | 'location' | 'middleName' | 'name' | 'namePrefix' | 'nameSuffix' | 'nickname' | 'organizationName' | 'postalCode' | 'streetAddressLine1' | 'streetAddressLine2' | 'sublocality' | 'telephoneNumber' | 'username' | 'password';
+  textContentType?: any;
   style?: any;
   testID?: string;
 }
@@ -51,54 +55,38 @@ const AppTextInput: React.FC<AppTextInputProps> = ({
   testID,
 }) => {
   const colors = useColors();
-  const { shouldFloat, animatedValue, handleFocus, handleBlur, handleTextChange } = useAppTextInputLogic(value, onFocus, onBlur, onChangeText);
+  const { shouldFloat, animatedValue, handleFocus, handleBlur, handleTextChange } =
+    useAppTextInputLogic(value, onFocus, onBlur, onChangeText);
 
-  const animatedStyle = useAnimatedStyle(() => {
-    const translateY = interpolate(
-      animatedValue.value,
-      [0, 1],
-      [0, -20]
-    );
-
-    const translateX = interpolate(
-      animatedValue.value,
-      [0, 1],
-      [0, 10]
-    );
-
-    const scale = interpolate(
-      animatedValue.value,
-      [0, 1],
-      [1, 0.8]
-    );
+  const labelStyle = useAnimatedStyle(() => {
+    const translateY = interpolate(animatedValue.value, [0, 1], [16, -8]);
+    const fontSize = interpolate(animatedValue.value, [0, 1], [16, 12]);
+    const color = animatedValue.value
+      ? colors.theme.primary
+      : colors.text.secondary;
 
     return {
-      transform: [
-        { translateY },
-        { translateX },
-        { scale }
-      ],
+      transform: [{ translateY }],
+      fontSize,
+      color,
     };
   });
 
   return (
-    <View style={styles.inputContainer}>
-      <Animated.View style={[styles.floatingLabel, animatedStyle]}>
-        <Text style={{ color: colors.theme.primary, fontSize: 12 }}>
-          {placeholder}
-        </Text>
-      </Animated.View>
+    <View style={[styles.inputContainer, { borderColor: shouldFloat ? colors.theme.primary : colors.border.primary }]}>
+      <Animated.Text style={[styles.floatingLabel, labelStyle]}>
+        {placeholder}
+      </Animated.Text>
       <TextInput
         style={[
           styles.input,
           {
             color: colors.text.primary,
-            paddingTop: shouldFloat ? 20 : 0,
+            paddingTop: 20,
           },
-          style
+          style,
         ]}
-        placeholder={shouldFloat ? '' : placeholder}
-        placeholderTextColor={colors.text.secondary}
+        placeholder={''}
         value={value}
         onChangeText={handleTextChange}
         secureTextEntry={secureTextEntry}

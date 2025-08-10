@@ -1,6 +1,8 @@
 import {
   BackgroundColors,
   BorderColors,
+  ButtonColors,
+  ShadowColors,
   StatusColors,
   TextColors,
   ThemeColors
@@ -13,6 +15,8 @@ import {
   export type TextColorType = ValueOf<typeof TextColors>;
   export type BackgroundColorType = ValueOf<typeof BackgroundColors>;
   export type BorderColorType = ValueOf<typeof BorderColors>;
+  export type ShadowColorType = ValueOf<typeof ShadowColors>;
+  export type ButtonColorType = ValueOf<typeof ButtonColors>;
   
   export type ThemePaletteType = {
     theme: {
@@ -43,6 +47,15 @@ import {
       primary: string;
       secondary: string;
     };
+    shadow: {
+      primary: string;
+      secondary: string;
+      tertiary: string;
+    };
+    button: {
+      primary: string;
+      secondary: string;
+    };
   };
   
   export type ColorsType = {
@@ -56,4 +69,6 @@ import {
     | StatusColorType
     | TextColorType
     | BackgroundColorType
-    | BorderColorType;  
+    | BorderColorType
+    | ShadowColorType
+    | ButtonColorType;  

@@ -1,2 +1,1 @@
-import SuggestionListItem from './SuggestionListItem';
-export default SuggestionListItem;
+export { default } from './SuggestionListItem';
