@@ -76,31 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 9,
     fontWeight: 'bold',
   },
-  // Animated search bar overlay
-  searchOverlay: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    width: '100%',
-    height: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    zIndex: 10,
-    paddingLeft: Dimensions.PADDING.lg,
-    paddingRight: Dimensions.PADDING.lg,
-  },
-  searchInput: {
-    marginLeft: Dimensions.MARGIN.xs,
-    borderWidth: Dimensions.BORDER_WIDTH.thin,
-    borderRadius: Dimensions.BORDER_RADIUS.sm,
-  },
-  searchBackButton: {
-    paddingVertical: Dimensions.PADDING.sm,
-  },
-  searchIcon: {
-    marginLeft: Dimensions.MARGIN.xs,
-    padding: Dimensions.PADDING.sm,
-  },
+
 });
 
 export default styles;

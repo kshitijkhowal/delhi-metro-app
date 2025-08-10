@@ -1,10 +1,7 @@
 import BackArrowIcon from '@/app/assets/icons/arrowIcons/backArrowIcon';
-import MagnifineGlassIcon from '@/app/assets/icons/searchIcons/magnifineGlassIcon';
-import AppTextInput from '@/app/components/AppTextInput';
 import { useColors } from '@/app/contexts/ThemeContext';
 import React from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
-import Animated from 'react-native-reanimated';
 import { Dimensions } from '../../constants/dimensions/dimensions';
 import styles from './styles';
 import type { HeaderComponentProps, HeaderIconMapItem } from './types';
@@ -16,11 +13,6 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
   leftIcon,
   onLayout,
   noBackButton = false,
-  enableSearch = false,
-  onSearchChange,
-  onSearchOpen,
-  onSearchClose,
-  searchPlaceholder = 'Search...',
 }) => {
   const colors = useColors();
   const {
@@ -28,18 +20,13 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
     titleColor,
     subTitleColor,
     handleOnBack,
-    searchActive,
-    openSearch,
-    closeSearch,
-    inputRef,
-    animatedSearchStyle,
     HeaderOnLayout,
-  } = useHeaderComponentLogic({ enableSearch, onSearchOpen, onSearchClose, onLayout });
+  } = useHeaderComponentLogic({ onLayout });
 
   const renderIcon = (iconItem: HeaderIconMapItem, index?: number) => (
     <Pressable
       key={index?.toString() || 'left-icon'}
-      style={[styles.iconButton, { marginRight: index !== undefined && index === iconMap.length - 1 && !enableSearch ? 0 : Dimensions.MARGIN.xs }]}
+      style={[styles.iconButton, { marginRight: index !== undefined && index === iconMap.length - 1 ? 0 : Dimensions.MARGIN.xs }]}
       onPress={iconItem.onPress}
     >
       {iconItem.imageFile ? (
@@ -87,33 +74,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
       </View>
       <View style={styles.rightSection}>
         {iconMap.map((item: HeaderIconMapItem, index) => renderIcon(item, index))}
-        {/* Search icon */}
-        {enableSearch && (
-          <Pressable style={styles.iconButton} onPress={openSearch}>
-            <MagnifineGlassIcon strokeColor={colors.text.primary} size={22} rotation={270}/>
-          </Pressable>
-        )}
       </View>
-      {/* Animated search bar overlay */}
-      {enableSearch && searchActive && (
-        <Animated.View style={[styles.searchOverlay, animatedSearchStyle, {backgroundColor}]}> 
-          <Pressable style={styles.searchBackButton} onPress={closeSearch}>
-            <BackArrowIcon strokeColor={colors.text.primary} size={22} rotation={180}/>
-          </Pressable>
-          <AppTextInput
-            onChangeText={onSearchChange}
-            placeholder={searchPlaceholder}
-            returnKeyType="search"
-            style={[
-              styles.searchInput,
-              {
-                borderColor: colors.border.primary,
-                color: colors.text.primary,
-              },
-            ]}
-          />
-        </Animated.View>
-      )}
     </View>
   );
 };

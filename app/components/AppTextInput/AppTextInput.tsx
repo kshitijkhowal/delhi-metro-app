@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { TextInput, TextInputProps } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { styles } from './styles';
@@ -18,7 +18,7 @@ const AppTextInput: React.FC<AppTextInputProps> = React.memo((props) => {
     handleBlur,
     handleTextChange,
     colors,
-  } = useAppTextInputLogic();
+  } = useAppTextInputLogic(props.value);
   
   // Memoize static styles to prevent recreation on every render
   const inputStyle = useMemo(() => [
@@ -43,6 +43,13 @@ const AppTextInput: React.FC<AppTextInputProps> = React.memo((props) => {
     handleTextChange(text);
     props.onChangeText?.(text);
   }, [handleTextChange, props.onChangeText]);
+
+  // Update hasText when value prop changes
+  useEffect(() => {
+    if (props.value !== undefined) {
+      handleTextChange(props.value);
+    }
+  }, [props.value, handleTextChange]);
   
   return (
     <Animated.View 

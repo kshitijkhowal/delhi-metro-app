@@ -58,10 +58,7 @@ const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
         iconMap={[]}
         noBackButton={false}
         actions={{ onLeftPress: handleBackPress }}
-        enableSearch={true}
-        searchValue={searchQuery}
-        onSearchChange={setSearchQuery}
-        searchPlaceholder="Search stations..."
+
       />
 
       <FlatList

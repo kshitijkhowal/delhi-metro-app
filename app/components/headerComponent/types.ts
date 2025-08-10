@@ -23,11 +23,4 @@ export interface HeaderComponentProps {
   transparent?: boolean;
   onLayout?: () => void;
   noBackButton?: boolean;
-  // Search bar props
-  enableSearch?: boolean;
-  onSearchChange?: (text: string) => void;
-  onSearchOpen?: () => void;
-  onSearchClose?: () => void;
-  searchPlaceholder?: string;
-  searchValue?: string;
 }

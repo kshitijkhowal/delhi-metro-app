@@ -6,7 +6,7 @@ import { Dimensions } from '@/app/constants/dimensions/dimensions';
 import { useColors } from '@/app/contexts/ThemeContext';
 import ScreenWrapper from '@/app/wrapper/ScreenWrapper/ScreenWrapper';
 import React, { FC } from 'react';
-import { FlatList, Pressable, Text, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import styles from './styles';
 import SuggestionListItem from './SuggestionListItem';
@@ -52,14 +52,15 @@ const StationSelectionScreen : FC = () => {
 
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
-                    <Pressable onPress={() => navigateToStationPicker('from')}>
-                        <AppTextInput
-                            value={fromStation?.stop_name || ''}
-                            onChangeText={() => { }}
-                            placeholder="Select departure station"
-                            editable={false}
-                        />
-                    </Pressable>
+                    <AppTextInput
+                        value={fromStation?.stop_name || ''}
+                        onChangeText={() => { }}
+                        placeholder="Select departure station"
+                        onFocus={() => navigateToStationPicker('from')}
+                        editable={true}
+                        selectTextOnFocus={false}
+                        caretHidden={true}
+                    />
                 </View>
 
                 <AppView
@@ -73,14 +74,15 @@ const StationSelectionScreen : FC = () => {
                 </AppView>
 
                 <View style={styles.inputContainer}>
-                    <Pressable onPress={() => navigateToStationPicker('to')}>
-                        <AppTextInput
-                            value={toStation?.stop_name || ''}
-                            onChangeText={() => { }}
-                            placeholder="Select destination station"
-                            editable={false}
-                        />
-                    </Pressable>
+                    <AppTextInput
+                        value={toStation?.stop_name || ''}
+                        onChangeText={() => { }}
+                        placeholder="Select destination station"
+                        onFocus={() => navigateToStationPicker('to')}
+                        editable={true}
+                        selectTextOnFocus={false}
+                        caretHidden={true}
+                    />
                 </View>
             </View>
 

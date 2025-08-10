@@ -20,10 +20,10 @@ interface LabelLayoutState {
   height: number;
 }
 
-export function useAppTextInputLogic() {
+export function useAppTextInputLogic(initialValue?: string) {
   const colors = useThemeColors();
   const [isFocused, setIsFocused] = useState(false);
-  const [hasText, setHasText] = useState(false);
+  const [hasText, setHasText] = useState(!!initialValue && initialValue.length > 0);
   const [layout, setLayout] = useState<LayoutState>({ x: 0, y: 0, width: 0, height: 0 });
   const [labelLayout, setLabelLayout] = useState<LabelLayoutState>({ width: 0, height: 0 });
   
@@ -35,6 +35,11 @@ export function useAppTextInputLogic() {
   useEffect(() => {
     animatedValue.value = withTiming(shouldFloat ? 1 : 0, { duration: 200 });
   }, [shouldFloat, animatedValue]);
+
+  // Update hasText when initialValue changes
+  useEffect(() => {
+    setHasText(!!initialValue && initialValue.length > 0);
+  }, [initialValue]);
   
   // Memoize layout calculations to avoid recalculation on every render
   const layoutCalculations = useMemo(() => {
@@ -72,12 +77,12 @@ export function useAppTextInputLogic() {
   }, [layoutCalculations, colors.theme.primary, colors.text.secondary, colors.background.primary]);
   
   const containerStyle = useAnimatedStyle(() => {
-    const borderColor = isFocused ? colors.border.focused : colors.border.unfocused;
+    const borderColor = animatedValue.value ? colors.border.secondary : colors.border.primary;
     
     return {
       borderColor,
     };
-  }, [isFocused, colors.border.focused, colors.border.unfocused]);
+  }, [colors.border.secondary, colors.border.primary]);
   
   const handleFocus = useCallback((event: any) => {
     setIsFocused(true);
