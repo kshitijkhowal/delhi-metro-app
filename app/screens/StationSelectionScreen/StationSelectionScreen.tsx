@@ -108,15 +108,18 @@ const StationSelectionScreen : FC = () => {
                     disabled={isButtonDisabled}
                     style={[
                         styles.showRouteButton,
-                        { 
-                            backgroundColor: isButtonDisabled ? colors.border.primary : colors.theme.primary,
+                        {
+                            borderWidth: Dimensions.BORDER_WIDTH.regular,
+                            borderColor: colors.border.primary,
                         }
                     ]}
                     elevation={{ enabled: true }}
                 >
                     <Text style={[
                         styles.showRouteButtonText,
-                        { color: isButtonDisabled ? colors.text.secondary : '#FFFFFF' }
+                        {
+                            color: isButtonDisabled ? colors.text.secondary : colors.text.primary,
+                        }
                     ]}>
                         {buttonText}
                     </Text>
