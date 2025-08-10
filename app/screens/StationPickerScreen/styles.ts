@@ -8,12 +8,12 @@ export const styles = StyleSheet.create({
   },
   searchContainer: {
     padding: Dimensions.PADDING.md,
-    borderBottomWidth: Dimensions.BORDER_WIDTH.thin,
+    backgroundColor: 'transparent',
   },
   listContainer: {
     flex: 1,
     marginHorizontal: Dimensions.PADDING.md,
-    marginVertical: Dimensions.PADDING.sm,
+    marginTop: Dimensions.PADDING.sm,
     borderRadius: Dimensions.BORDER_RADIUS.xxl
   },
   stationItem: {

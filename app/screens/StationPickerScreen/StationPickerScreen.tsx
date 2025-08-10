@@ -9,20 +9,25 @@ import {
   View
 } from 'react-native';
 import { HeaderComponent } from '../../components/headerComponent';
+import { SearchBar } from '../../components/SearchBar';
 import { Stop } from '../../types/gtfs.types';
 import StationListItem from './StationListItem';
 import { StationPickerScreenProps } from './StationPickerScreen.Types';
 import { styles } from './styles';
 import { useStationPickerScreenLogic } from './useStationPickerScreenLogic';
+import { AppKeyboardStickyView } from '@/app/components/AppKeyboardStickyView';
 
 const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
   const colors = useThemeColors();
   const {
     searchQuery,
-    setSearchQuery,
     filteredStops,
     handleStationSelect,
     handleBackPress,
+    handleSearchChange,
+    handleSearchSubmit,
+    handleSearchClear,
+    searchBarRef,
     title,
   } = useStationPickerScreenLogic(route);
 
@@ -52,13 +57,11 @@ const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
       screenName='StationSelectionScreen'
     >
 
-    <View style={styles.container}>
       <HeaderComponent
         values={{ title }}
         iconMap={[]}
         noBackButton={false}
         actions={{ onLeftPress: handleBackPress }}
-
       />
 
       <FlatList
@@ -71,7 +74,20 @@ const StationPickerScreen: React.FC<StationPickerScreenProps> = ({ route }) => {
         keyboardShouldPersistTaps="handled"
         ItemSeparatorComponent={() => <View style={{ height: Dimensions.MARGIN.xs }} />}
       />
-    </View>
+
+      {/* Search Bar */}
+      <AppKeyboardStickyView>
+      <View style={[styles.searchContainer]}>
+        <SearchBar
+          ref={searchBarRef}
+          placeholder="Search for stations..."
+          value={searchQuery}
+          onChangeText={handleSearchChange}
+          onSearch={handleSearchSubmit}
+          onClear={handleSearchClear}
+        />
+      </View>
+      </AppKeyboardStickyView>
     </ScreenWrapper>
 
   );

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { FontsFiles } from './app/constants/fonts/fonts';
 import { ThemeProvider } from './app/contexts/ThemeContext';
 import AppNavigator from './app/navigation/AppNavigator';
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import { store } from './app/redux/store';
 
 export default function App() {
@@ -16,11 +17,13 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <ThemeProvider>
-        <NavigationContainer>
-          <AppNavigator />
-        </NavigationContainer>
-      </ThemeProvider>
+      <KeyboardProvider>
+        <ThemeProvider>
+          <NavigationContainer>
+            <AppNavigator />
+          </NavigationContainer>
+        </ThemeProvider>
+      </KeyboardProvider>
     </Provider>
   );
 }

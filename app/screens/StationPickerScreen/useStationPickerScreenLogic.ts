@@ -1,6 +1,7 @@
 import { useThemeColors } from '@/app/hooks/useThemeColors';
 import { useNavigation } from '@react-navigation/native';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { SearchBarImperativeHandler } from '../../components/SearchBar';
 import { useAppSelector } from '../../redux/hook';
 import { Stop } from '../../types/gtfs.types';
 import { StationPickerScreenParams } from './StationPickerScreen.Types';
@@ -9,7 +10,10 @@ export function useStationPickerScreenLogic(route: { params: StationPickerScreen
   const navigation = useNavigation();
   const colors = useThemeColors();
   const { stops } = useAppSelector(state => state.stops);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(route.params.searchQuery || '');
+  
+  // SearchBar imperative handler ref
+  const searchBarRef = useRef<SearchBarImperativeHandler>(null);
 
   const filteredStops = useMemo(() => {
     if (!searchQuery.trim()) {
@@ -33,9 +37,30 @@ export function useStationPickerScreenLogic(route: { params: StationPickerScreen
     navigation.goBack();
   };
 
-  useEffect(() => {
+  const handleSearchChange = useCallback((text: string) => {
+    setSearchQuery(text);
+  }, []);
 
-  },[])
+  const handleSearchSubmit = useCallback((text: string) => {
+    setSearchQuery(text);
+    // Optionally focus the search bar after submission
+    searchBarRef.current?.focus();
+  }, []);
+
+  const handleSearchClear = useCallback(() => {
+    setSearchQuery('');
+    // Focus the search bar after clearing
+    searchBarRef.current?.focus();
+  }, []);
+
+  // Focus search bar when screen mounts
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      searchBarRef.current?.focus();
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   return {
     colors,
@@ -44,6 +69,10 @@ export function useStationPickerScreenLogic(route: { params: StationPickerScreen
     filteredStops,
     handleStationSelect,
     handleBackPress,
+    handleSearchChange,
+    handleSearchSubmit,
+    handleSearchClear,
+    searchBarRef,
     title: route.params.title || 'Select Station',
   };
 }

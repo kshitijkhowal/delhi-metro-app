@@ -1,10 +1,11 @@
 import { useThemeColors } from '@/app/hooks/useThemeColors';
 import { setTheme } from '@/app/redux/features/deviceConfig/uiPreferences';
 import { useAppDispatch, useAppSelector } from '@/app/redux/hook';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import MetroSideViewAnimated from '../../assets/icons/metroIcons/metroSideViewAnimated';
 import AppTextInput from '../../components/AppTextInput';
+import { SearchBar, type SearchBarImperativeHandler } from '../../components/SearchBar';
 
 const fontFamilies = [
   'Roboto-Regular', 'Roboto-Bold', 'Roboto-Medium', 'Roboto-Light', 'Roboto-Thin', 'Roboto-Black',
@@ -30,9 +31,40 @@ const TestScreen = () => {
   const [inputValue, setInputValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+  const [searchText, setSearchText] = useState('');
+  
+  // SearchBar imperative handler ref
+  const searchBarRef = useRef<SearchBarImperativeHandler>(null);
 
   const toggleTheme = () => {
     dispatch(setTheme(currentTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  const handleSearch = (text: string) => {
+    console.log('Search submitted:', text);
+    // Handle search logic here
+  };
+
+  // Imperative handler functions
+  const focusSearchBar = () => {
+    searchBarRef.current?.focus();
+  };
+
+  const clearSearchBar = () => {
+    searchBarRef.current?.clear();
+  };
+
+  const submitSearch = () => {
+    searchBarRef.current?.submit();
+  };
+
+  const getSearchValue = () => {
+    const value = searchBarRef.current?.getValue();
+    console.log('Current search value:', value);
+  };
+
+  const setSearchValue = () => {
+    searchBarRef.current?.setValue('Programmatic text');
   };
 
   return (
@@ -96,6 +128,95 @@ const TestScreen = () => {
             onChangeText={setPasswordValue}
             secureTextEntry
           />
+        </View>
+      </View>
+
+      {/* SearchBar Testing Section */}
+      <View style={{ marginBottom: 24 }}>
+        <Text style={{ 
+          fontSize: 20, 
+          fontWeight: 'bold', 
+          marginBottom: 16,
+          color: colors.text.primary 
+        }}>
+          SearchBar Component (with Imperative Handler)
+        </Text>
+        
+        <View style={{ marginBottom: 16 }}>
+          <SearchBar
+            ref={searchBarRef}
+            placeholder="Search for stations..."
+            value={searchText}
+            onChangeText={setSearchText}
+            onSearch={handleSearch}
+          />
+        </View>
+        
+        <Text style={{ 
+          fontSize: 16,
+          color: colors.text.secondary,
+          marginBottom: 16,
+          textAlign: 'center'
+        }}>
+          Current search: {searchText || 'None'}
+        </Text>
+
+        {/* Imperative Handler Controls */}
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
+          <TouchableOpacity 
+            onPress={focusSearchBar}
+            style={{
+              backgroundColor: colors.theme.primary,
+              padding: 8,
+              borderRadius: 6,
+            }}
+          >
+            <Text style={{ color: colors.text.primary, fontSize: 12 }}>Focus</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            onPress={clearSearchBar}
+            style={{
+              backgroundColor: colors.theme.primary,
+              padding: 8,
+              borderRadius: 6,
+            }}
+          >
+            <Text style={{ color: colors.text.primary, fontSize: 12 }}>Clear</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            onPress={submitSearch}
+            style={{
+              backgroundColor: colors.theme.primary,
+              padding: 8,
+              borderRadius: 6,
+            }}
+          >
+            <Text style={{ color: colors.text.primary, fontSize: 12 }}>Submit</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            onPress={getSearchValue}
+            style={{
+              backgroundColor: colors.theme.primary,
+              padding: 8,
+              borderRadius: 6,
+            }}
+          >
+            <Text style={{ color: colors.text.primary, fontSize: 12 }}>Get Value</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            onPress={setSearchValue}
+            style={{
+              backgroundColor: colors.theme.primary,
+              padding: 8,
+              borderRadius: 6,
+            }}
+          >
+            <Text style={{ color: colors.text.primary, fontSize: 12 }}>Set Value</Text>
+          </TouchableOpacity>
         </View>
       </View>
 
