@@ -1,117 +1,73 @@
-import { useColors } from '@/app/contexts/ThemeContext';
-import React from 'react';
-import { Text, TextInput, View } from 'react-native';
-import Animated, {
-  interpolate,
-  useAnimatedStyle,
-  withTiming,
-} from 'react-native-reanimated';
+import React, { useCallback, useMemo } from 'react';
+import { TextInput, TextInputProps } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { styles } from './styles';
 import { useAppTextInputLogic } from './useAppTextInputLogic';
 
-interface AppTextInputProps {
-  placeholder?: string;
-  value?: string;
-  onChangeText?: (text: string) => void;
-  secureTextEntry?: boolean;
-  keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad';
-  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
-  error?: string;
-  multiline?: boolean;
-  numberOfLines?: number;
-  maxLength?: number;
-  editable?: boolean;
-  onFocus?: () => void;
-  onBlur?: () => void;
-  onSubmitEditing?: () => void;
-  returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send';
-  autoCorrect?: boolean;
-  autoComplete?: 'off' | 'username' | 'password' | 'email' | 'name' | 'tel' | 'street-address' | 'postal-code' | 'cc-number' | 'cc-csc' | 'cc-exp' | 'cc-name';
-  textContentType?: any;
-  style?: any;
-  testID?: string;
+interface AppTextInputProps extends TextInputProps {
+  // No additional props needed - just extends TextInputProps
 }
 
-const AppTextInput: React.FC<AppTextInputProps> = ({
-  placeholder,
-  value = '',
-  onChangeText,
-  secureTextEntry = false,
-  keyboardType = 'default',
-  autoCapitalize = 'sentences',
-  error,
-  multiline = false,
-  numberOfLines = 1,
-  maxLength,
-  editable = true,
-  onFocus,
-  onBlur,
-  onSubmitEditing,
-  returnKeyType = 'done',
-  autoCorrect = true,
-  autoComplete = 'off',
-  textContentType = 'none',
-  style,
-  testID,
-}) => {
-  const colors = useColors();
-  const { shouldFloat, animatedValue, handleFocus, handleBlur, handleTextChange } =
-    useAppTextInputLogic(value, onFocus, onBlur, onChangeText);
-
-  const labelStyle = useAnimatedStyle(() => {
-    const translateY = interpolate(animatedValue.value, [0, 1], [16, -8]);
-    const fontSize = interpolate(animatedValue.value, [0, 1], [16, 12]);
-    const color = animatedValue.value
-      ? colors.theme.primary
-      : colors.text.secondary;
-
-    return {
-      transform: [{ translateY }],
-      fontSize,
-      color,
-    };
-  });
-
+const AppTextInput: React.FC<AppTextInputProps> = React.memo((props) => {
+  const {
+    labelStyle,
+    containerStyle,
+    handleLayout,
+    handleLabelLayout,
+    handleFocus,
+    handleBlur,
+    handleTextChange,
+    colors,
+  } = useAppTextInputLogic();
+  
+  // Memoize static styles to prevent recreation on every render
+  const inputStyle = useMemo(() => [
+    styles.input,
+    { 
+      color: colors.text.primary,
+    },
+    props.style
+  ], [colors.text.primary, props.style]);
+  
+  const handleInputFocus = useCallback((event: any) => {
+    handleFocus(event);
+    props.onFocus?.(event);
+  }, [handleFocus, props.onFocus]);
+  
+  const handleInputBlur = useCallback((event: any) => {
+    handleBlur(event);
+    props.onBlur?.(event);
+  }, [handleBlur, props.onBlur]);
+  
+  const handleInputTextChange = useCallback((text: string) => {
+    handleTextChange(text);
+    props.onChangeText?.(text);
+  }, [handleTextChange, props.onChangeText]);
+  
   return (
-    <View style={[styles.inputContainer, { borderColor: shouldFloat ? colors.theme.primary : colors.border.primary }]}>
-      <Animated.Text style={[styles.floatingLabel, labelStyle]}>
-        {placeholder}
+    <Animated.View 
+      style={[styles.container, containerStyle]}
+      onLayout={handleLayout}
+    >
+      <Animated.Text 
+        style={[styles.floatingLabel, labelStyle]}
+        onLayout={handleLabelLayout}
+      >
+        {props.placeholder}
       </Animated.Text>
-      <TextInput
-        style={[
-          styles.input,
-          {
-            color: colors.text.primary,
-            paddingTop: 20,
-          },
-          style,
-        ]}
-        placeholder={''}
-        value={value}
-        onChangeText={handleTextChange}
-        secureTextEntry={secureTextEntry}
-        keyboardType={keyboardType}
-        autoCapitalize={autoCapitalize}
-        multiline={multiline}
-        numberOfLines={numberOfLines}
-        maxLength={maxLength}
-        editable={editable}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onSubmitEditing={onSubmitEditing}
-        returnKeyType={returnKeyType}
-        autoCorrect={autoCorrect}
-        autoComplete={autoComplete}
-        textContentType={textContentType}
-        testID={testID}
+      <TextInput 
+        {...props}
+        style={inputStyle}
+        placeholderTextColor={colors.text.secondary}
+        placeholder=""
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+        onChangeText={handleInputTextChange}
       />
-      {error && (
-        <Text style={{ color: colors.status.error, fontSize: 12, marginTop: 4 }}>
-          {error}
-        </Text>
-      )}
-    </View>
+    </Animated.View>
   );
-};
+});
+
+AppTextInput.displayName = 'AppTextInput';
 
 export default AppTextInput;

@@ -56,14 +56,14 @@ const TestScreen = () => {
         <TouchableOpacity 
           onPress={toggleTheme}
           style={{
-            backgroundColor: colors.theme.primary.default,
+            backgroundColor: colors.theme.primary,
             padding: 12,
             borderRadius: 8,
             marginBottom: 16,
           }}
         >
           <Text style={{ 
-            color: colors.text.inverse, 
+            color: colors.text.primary, 
             textAlign: 'center',
             fontWeight: 'bold'
           }}>
@@ -76,7 +76,6 @@ const TestScreen = () => {
             placeholder="Enter your name"
             value={inputValue}
             onChangeText={setInputValue}
-            error={inputValue.length > 0 && inputValue.length < 3 ? "Name must be at least 3 characters" : undefined}
           />
         </View>
 
@@ -96,7 +95,6 @@ const TestScreen = () => {
             value={passwordValue}
             onChangeText={setPasswordValue}
             secureTextEntry
-            error={passwordValue.length > 0 && passwordValue.length < 6 ? "Password must be at least 6 characters" : undefined}
           />
         </View>
       </View>

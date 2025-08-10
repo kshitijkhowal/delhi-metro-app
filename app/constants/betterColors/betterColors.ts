@@ -56,26 +56,43 @@ export const ViewColors = {
   primary: '#E8E8E8', // Darker white
   secondary: '#F0F0F0',
   tertiary: '#E0E0E0',
+
+  focused: '#FFFFFF', // Pure white for strong focus highlight
+  unfocused: '#F5F5F5', // Soft light gray for inactive state
 } as const;
 
 export const ViewColorsLight = ViewColors;
+
 export const ViewColorsDark = {
   primary: '#2A2A2A', // Lighter black
   secondary: '#333333',
   tertiary: '#404040',
+
+  focused: '#3A3A3A', // Slightly brighter than primary for focus contrast
+  unfocused: '#262626', // Slightly darker for inactive state
 } as const;
+
 
 // Border Colors
 export const BorderColors = {
-  primary: 'rgba(0, 0, 0, 0.12)',
-  secondary: '#ECECEC',
+  primary: '#000000', // Strong black for primary emphasis
+  secondary: '#D1D1D1', // Light neutral gray for subtle separation
+
+  focused: '#1A1A1A', // Deep black for focus state
+  unfocused: '#B0B0B0', // Medium gray for unfocused state
 } as const;
 
 export const BorderColorsLight = BorderColors;
+
 export const BorderColorsDark = {
-  primary: 'rgba(255, 255, 255, 0.12)',
-  secondary: '#444444',
+  primary: '#FFFFFF', // Strong white for primary emphasis
+  secondary: '#888888', // Medium-light gray for subtle separation in dark mode
+
+  focused: '#E6E6E6', // Soft near-white for focus state
+  unfocused: '#666666', // Medium-dark gray for unfocused state
 } as const;
+
+
 
 // Shadow Colors
 export const ShadowColors = {

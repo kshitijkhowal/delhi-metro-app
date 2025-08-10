@@ -42,10 +42,14 @@ import {
       primary: string;
       secondary: string;
       tertiary: string;
+      focused: string;
+      unfocused: string;
     };
     border: {
       primary: string;
       secondary: string;
+      focused: string;
+      unfocused: string;
     };
     shadow: {
       primary: string;
